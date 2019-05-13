@@ -12,6 +12,12 @@ package dao;
 public class DAOFactory {
  private static UsuarioDAO usuarioDAO = new UsuarioDAO();
  private static final EditoraDAO editoraDAO = new EditoraDAO();
+ private static final FornecedorDAO fornecedorDAO = new FornecedorDAO();
+ private static final FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+ private static final ObraDAO obraDAO = new ObraDAO();
+ private static final DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+ private static final AutorDAO autorDAO = new AutorDAO();
+    
     
     public static UsuarioDAO getUsuarioDAO(){
         return usuarioDAO;
@@ -21,5 +27,27 @@ public class DAOFactory {
         return editoraDAO;
     }
     
-}   
+    public static FornecedorDAO getFornecedorDAO() {
+        return fornecedorDAO;
+    }
+    
+    public static FuncionarioDAO getFuncionarioDAO() {
+        return funcionarioDAO;
+    }
+
+    public static ObraDAO getObraDAO() {
+        return obraDAO;
+    }
+    
+    public static DepartamentoDAO getDepartamentoDAO() {
+        return departamentoDAO;
+    }
+    
+    public static AutorDAO getAutorDAO() {
+        return autorDAO;
+    }
+}    
+
+
+
 

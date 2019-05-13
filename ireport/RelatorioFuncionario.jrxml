@@ -9,14 +9,10 @@
 	<queryString>
 		<![CDATA[SELECT * FROM funcionario;]]>
 	</queryString>
-	<field name="id" class="java.lang.Integer"/>
-	<field name="bairro" class="java.lang.String"/>
-	<field name="cidades" class="java.lang.String"/>
-	<field name="endereco" class="java.lang.String"/>
-	<field name="endereco_nr" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.Integer"/>
 	<field name="nome" class="java.lang.String"/>
-	<field name="telefone" class="java.lang.String"/>
-	<field name="setor" class="java.lang.String"/>
+	<field name="nome_departamento" class="java.lang.String"/>
+	<field name="data" class="java.sql.Date"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -54,15 +50,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="200" y="0" width="100" height="20" uuid="a3384db6-28b6-4a0b-aca6-508e4a7f9051"/>
-				<text><![CDATA[Endereço]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="300" y="0" width="100" height="20" uuid="5e53121b-3496-431c-bcb3-f8f282ffebce"/>
-				<text><![CDATA[Cidade]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="400" y="0" width="80" height="20" uuid="924f53c6-a27c-4c47-8f09-16e4bd10f949"/>
-				<text><![CDATA[Telefone]]></text>
+				<text><![CDATA[Departamento]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="100" height="20" uuid="45404e06-bfba-4e2b-bbb2-625c135bbc6f"/>
@@ -77,20 +65,12 @@
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="0" width="100" height="20" uuid="44ab6fd5-caf9-49d9-8828-0419af718e71"/>
-				<textFieldExpression><![CDATA[$F{endereco}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="300" y="0" width="100" height="20" uuid="6b6ba374-f457-4d63-afa5-ac8ae6be53e7"/>
-				<textFieldExpression><![CDATA[$F{cidades}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="400" y="0" width="80" height="20" uuid="69e57be9-b382-48ab-92f1-72576b9033fc"/>
-				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+				<reportElement x="200" y="0" width="124" height="20" uuid="44ab6fd5-caf9-49d9-8828-0419af718e71"/>
+				<textFieldExpression><![CDATA[$F{nome_departamento}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="100" height="20" uuid="067eb8e4-0343-4806-be27-b7c479e80e47"/>
-				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

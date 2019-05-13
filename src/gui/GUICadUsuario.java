@@ -358,7 +358,8 @@ public class GUICadUsuario extends javax.swing.JFrame {
                 .addContainerGap(112, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(496, 568));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void fecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharActionPerformed
