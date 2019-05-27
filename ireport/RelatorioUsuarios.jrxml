@@ -10,7 +10,7 @@
 		<![CDATA[SELECT * FROM usuario;]]>
 	</queryString>
 	<field name="codigo" class="java.lang.Integer"/>
-	<field name="nome" class="java.lang.String"/>
+	<field name="nomeuser" class="java.lang.String"/>
 	<field name="endereco" class="java.lang.String"/>
 	<field name="endereco_nr" class="java.lang.String"/>
 	<field name="endereco_complemento" class="java.lang.String"/>
@@ -19,6 +19,10 @@
 	<field name="cep" class="java.lang.String"/>
 	<field name="telefone" class="java.lang.String"/>
 	<field name="celular" class="java.lang.String"/>
+	<field name="matriculauser" class="java.lang.String"/>
+	<field name="loginunico" class="java.lang.String"/>
+	<field name="senhauser" class="java.lang.String"/>
+	<field name="permissaouser" class="java.lang.String"/>
 	<field name="data" class="java.sql.Date"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -81,7 +85,7 @@
 		<band height="26" splitType="Stretch">
 			<textField>
 				<reportElement x="100" y="0" width="100" height="20" uuid="a4a88c53-e324-4f61-9a92-8a03c2af32d1"/>
-				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nomeuser}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="200" y="0" width="100" height="20" uuid="44ab6fd5-caf9-49d9-8828-0419af718e71"/>

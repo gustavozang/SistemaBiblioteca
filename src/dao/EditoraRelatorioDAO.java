@@ -26,7 +26,7 @@ public class EditoraRelatorioDAO {
     public JasperPrint gerar(){
         try{
             HashMap map = new HashMap();
-            String arquivo = "ireport/RelatorioEditoras.jasper";
+            String arquivo = "ireport/RelatorioEditora.jasper";
             relat = JasperFillManager.fillReport(arquivo, map, conn);
         }catch(Exception erro){
             throw new RuntimeException(erro);

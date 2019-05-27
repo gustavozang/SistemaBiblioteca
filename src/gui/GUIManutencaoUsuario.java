@@ -18,13 +18,14 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
      com o nome das colunas */
     DefaultTableModel dtm = new DefaultTableModel(
             new Object[][]{},
-            new Object[]{"Código", "Nome", "Endereco", "Numero", "Endereco_Complemento", "Bairro", "Cidades", "Cep", "Telefone", "Celular"});
+            new Object[]{"Código", "Nome", "Endereco", "Numero", "Endereco_Complemento", "Bairro", "Cidades", "Cep", "Telefone", "Celular", "Matricula", "Login","Permissao"});
 
     /**
      * Creates new form GUIManutencaoUsuario
      */
     public GUIManutencaoUsuario() {
         initComponents();
+        
         /* Chamando o método preencherTabela 
          no construtor */
         preencherTabela();
@@ -59,7 +60,15 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jtCelular = new javax.swing.JFormattedTextField();
         jLabel10 = new javax.swing.JLabel();
+        jtSenha = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
         jtNome = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jtMatricula = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jtLogin = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jtPermissao = new javax.swing.JComboBox<>();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableUsuario = new javax.swing.JTable();
@@ -70,8 +79,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         jAlterar = new javax.swing.JButton();
 
         jFAlterar.setTitle("Atualizar");
-        jFAlterar.setMinimumSize(new java.awt.Dimension(550, 450));
-        jFAlterar.setPreferredSize(new java.awt.Dimension(500, 400));
+        jFAlterar.setMinimumSize(new java.awt.Dimension(450, 700));
 
         jbAtualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jbAtualizar.setText("Atualizar");
@@ -151,8 +159,8 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         jPanel1.add(jtCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 251, 208, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Celular:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 317, -1, 24));
+        jLabel8.setText("Permissão:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, -1, 24));
 
         try {
             jtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("## ####-####")));
@@ -170,11 +178,27 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jtCelular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtCelularActionPerformed(evt);
+            }
+        });
         jPanel1.add(jtCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 317, 207, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Nome:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 49, -1, -1));
+
+        jtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtSenhaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 208, -1));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel11.setText("Celular:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 317, -1, 24));
 
         jtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -182,6 +206,35 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 49, 208, -1));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel12.setText("Matricula:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, 24));
+
+        jtMatricula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtMatriculaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 208, -1));
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel13.setText("Login:");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, 24));
+
+        jtLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtLoginActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jtLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 208, -1));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setText("Senha:");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, 24));
+
+        jtPermissao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALUNO", "PROFESSOR", "ADMINISTRADOR" }));
+        jPanel1.add(jtPermissao, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, -1, -1));
 
         javax.swing.GroupLayout jFAlterarLayout = new javax.swing.GroupLayout(jFAlterar.getContentPane());
         jFAlterar.getContentPane().setLayout(jFAlterarLayout);
@@ -200,7 +253,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
             jFAlterarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jFAlterarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
@@ -221,11 +274,11 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Nome", "Endereço", "Número", "Complemento", "Bairro", "Cidade", "Cep", "Telefone", "Celular"
+                "Codigo", "Nome", "Endereço", "Número", "Complemento", "Bairro", "Cidade", "Cep", "Telefone", "Celular", "Matricula", "Login", "Permissao"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -356,7 +409,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
             for (int i = 0; i < prod.size(); i++) {
                 dtm.addRow(new String[]{
                     String.valueOf(prod.get(i).getCodigo()),
-                    String.valueOf(prod.get(i).getNome()),
+                    String.valueOf(prod.get(i).getNomeuser()),
                     String.valueOf(prod.get(i).getEndereco()),
                     String.valueOf(prod.get(i).getEndereco_nr()),
                     String.valueOf(prod.get(i).getEndereco_complemento()),
@@ -364,7 +417,10 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
                     String.valueOf(prod.get(i).getCep()),
                     String.valueOf(prod.get(i).getCidades()),
                     String.valueOf(prod.get(i).getTelefone()),
-                    String.valueOf(prod.get(i).getCelular())
+                    String.valueOf(prod.get(i).getCelular()),
+                    String.valueOf(prod.get(i).getMatriculauser()),
+                    String.valueOf(prod.get(i).getLoginunico()),
+                    String.valueOf(prod.get(i).getPermissaouser()),
                 });
             }//fecha for
             
@@ -437,13 +493,15 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
             jtValor.setText(String.valueOf(prod.get(i).getCidades()))
             jtValor.setText(String.valueOf(prod.get(i).getCep()))
             jtValor.setText(String.valueOf(prod.get(i).getTelefone()))
-            jtValor.setText(String.valueOf(prod.get(i).getCelular()))*/        
-            
-            
+            jtValor.setText(String.valueOf(prod.get(i).getCelular()))        
+            jtValor.setText(String.valueOf(prod.get(i).getMatricula()))
+            jtValor.setText(String.valueOf(prod.get(i).getLogin()))
+            jtValor.setText(String.valueOf(prod.get(i).getSenha()))        
+            jtValor.setText(String.valueOf(prod.get(i).getPermissao()))*/
             
             
 
-            prod.get(i).setNome(jtNome.getText());
+            prod.get(i).setNomeuser(jtNome.getText());
             prod.get(i).setEndereco(jtEndereco.getText());
             prod.get(i).setEndereco_nr(jtEndereco_nr.getText());
             prod.get(i).setEndereco_complemento(jtEndereco_complemento.getText());
@@ -452,6 +510,11 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
             prod.get(i).setCep(jtCep.getText());
             prod.get(i).setTelefone(jtTelefone.getText());
             prod.get(i).setCelular(jtCelular.getText());
+            prod.get(i).setMatriculauser(jtMatricula.getText());
+            prod.get(i).setLoginunico(jtLogin.getText());
+            prod.get(i).setSenhauser(jtSenha.getText());
+            prod.get(i).setPermissaouser((String) jtPermissao.getSelectedItem());
+            
             
             
             
@@ -479,7 +542,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
 
             int i = jtableUsuario.getSelectedRow();
             
-            jtNome.setText(prod.get(i).getNome());
+            jtNome.setText(prod.get(i).getNomeuser());
             jtEndereco.setText(String.valueOf(prod.get(i).getEndereco()));
             jtEndereco_nr.setText(String.valueOf(prod.get(i).getEndereco_nr()));
             jtEndereco_complemento.setText(String.valueOf(prod.get(i).getEndereco_complemento()));
@@ -488,6 +551,10 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
             jtCep.setText(String.valueOf(prod.get(i).getCep()));
             jtTelefone.setText(String.valueOf(prod.get(i).getTelefone()));
             jtCelular.setText(String.valueOf(prod.get(i).getCelular()));
+            jtMatricula.setText(String.valueOf(prod.get(i).getMatriculauser()));
+            jtLogin.setText(String.valueOf(prod.get(i).getLoginunico()));
+            jtSenha.setText(String.valueOf(prod.get(i).getSenhauser()));
+            jtPermissao.setSelectedItem(String.valueOf(prod.get(i).getPermissaouser()));
             
             
             
@@ -509,6 +576,10 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         jtCep.setText(null);
         jtTelefone.setText(null);
         jtCelular.setText(null);
+        jtMatricula.setText(null);
+        jtLogin.setText(null);
+        jtSenha.setText(null);
+        jtPermissao.setSelectedItem(null);
 
     }
 
@@ -560,9 +631,25 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtBairroActionPerformed
 
+    private void jtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtSenhaActionPerformed
+
+    private void jtCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCelularActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtCelularActionPerformed
+
     private void jtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtNomeActionPerformed
+
+    private void jtMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtMatriculaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtMatriculaActionPerformed
+
+    private void jtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtLoginActionPerformed
 
      /**
      * @param args the command line arguments
@@ -610,6 +697,10 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JButton jDeletar;
     private javax.swing.JFrame jFAlterar;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -632,7 +723,11 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtEndereco;
     private javax.swing.JTextField jtEndereco_complemento;
     private javax.swing.JTextField jtEndereco_nr;
+    private javax.swing.JTextField jtLogin;
+    private javax.swing.JTextField jtMatricula;
     private javax.swing.JTextField jtNome;
+    private javax.swing.JComboBox<String> jtPermissao;
+    private javax.swing.JTextField jtSenha;
     private javax.swing.JFormattedTextField jtTelefone;
     private javax.swing.JTable jtableUsuario;
     // End of variables declaration//GEN-END:variables

@@ -22,17 +22,18 @@ public class UsuarioDAO {
          Buscando uma conexão com o Banco de Dados
          **/
         Connection con = ConexaoBanco.getConexao();
+        Statement stat = con.createStatement();
         /**
          Criando obj. capaz de executar instruções
          SQL no banco de dados
          Montando a instrução INSERT para inserir
          um objeto usuario no Banco MySQL
          **/
-        String sql = "INSERT INTO usuario(codigo, nome, endereco, endereco_nr, endereco_complemento, bairro, cidades, cep, telefone, celular,data) VALUES(default,?,?,?,?,?,?,?,?,?, CURRENT_DATE)";
+        String sql = "INSERT INTO usuario(codigo, nomeuser, endereco, endereco_nr, endereco_complemento, bairro, cidades, cep, telefone, celular, matriculauser, loginunico, senhauser, permissaouser,data) VALUES(default,?,?,?,?,?,?,?,?,?,?,?,?,?, CURRENT_DATE)";
         try { 
             PreparedStatement stmt = con.prepareStatement(sql);
             
-            stmt.setString(1, usuario.getNome());
+            stmt.setString(1, usuario.getNomeuser());
             stmt.setString(2, usuario.getEndereco());
             stmt.setString(3, usuario.getEndereco_nr());
             stmt.setString(4, usuario.getEndereco_complemento());
@@ -41,6 +42,10 @@ public class UsuarioDAO {
             stmt.setString(7, usuario.getCep());
             stmt.setString(8, usuario.getTelefone());
             stmt.setString(9, usuario.getCelular());
+            stmt.setString(10, usuario.getMatriculauser());
+            stmt.setString(11, usuario.getLoginunico());
+            stmt.setString(12, usuario.getSenhauser());
+            stmt.setString(13, usuario.getPermissaouser());
             stmt.execute();
             stmt.close();
             con.close();
@@ -90,7 +95,7 @@ public class UsuarioDAO {
                  chamado pVO 
                  **/
                 p.setCodigo(rs.getInt("codigo"));
-                p.setNome(rs.getString("nome"));
+                p.setNomeuser(rs.getString("nomeuser"));
                 p.setEndereco(rs.getString("endereco"));
                 p.setEndereco_nr(rs.getString("endereco_nr"));
                 p.setEndereco_complemento(rs.getString("endereco_complemento"));
@@ -99,6 +104,10 @@ public class UsuarioDAO {
                 p.setCep(rs.getString("cep"));
                 p.setTelefone(rs.getString("telefone"));
                 p.setCelular(rs.getString("celular"));
+                p.setMatriculauser(rs.getString("matriculauser"));
+                p.setLoginunico(rs.getString("loginunico"));
+                p.setSenhauser(rs.getString("senhauser"));
+                p.setPermissaouser(rs.getString("permissaouser"));
                 
 
                 /** 
@@ -132,9 +141,9 @@ public class UsuarioDAO {
     public void alterar(UsuarioVO usuario) throws SQLException {
 
         Connection con = ConexaoBanco.getConexao();
-        PreparedStatement p = con.prepareStatement("update usuario set nome=?,endereco=?,endereco_nr=?,endereco_complemento=?,bairro=?,cidades=?,cep=?,telefone=?,celular=? where codigo=?");
+        PreparedStatement p = con.prepareStatement("update usuario set nomeuser=?,endereco=?,endereco_nr=?,endereco_complemento=?,bairro=?,cidades=?,cep=?,telefone=?,celular=?,matriculauser=?,loginunico=?,senhauser=?,permissaouser=?  where codigo=?");
 
-        p.setString(1, usuario.getNome());
+        p.setString(1, usuario.getNomeuser());
         p.setString(2, usuario.getEndereco());
         p.setString(3, usuario.getEndereco_nr());
         p.setString(4, usuario.getEndereco_complemento());
@@ -143,7 +152,11 @@ public class UsuarioDAO {
         p.setString(7, usuario.getCep());
         p.setString(8, usuario.getTelefone());
         p.setString(9, usuario.getCelular());
-        p.setInt(10, usuario.getCodigo());
+        p.setString(10, usuario.getMatriculauser());
+        p.setString(11, usuario.getLoginunico());
+        p.setString(12, usuario.getSenhauser());
+        p.setString(13, usuario.getPermissaouser());
+        p.setInt(14, usuario.getCodigo());
         p.execute();
         p.close();
 

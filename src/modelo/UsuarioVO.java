@@ -8,7 +8,7 @@ package modelo;
 public class UsuarioVO {
 
     private int codigo;
-    private String nome;
+    private String nomeuser;
     private String endereco;
     private String endereco_nr;
     private String endereco_complemento;
@@ -17,7 +17,10 @@ public class UsuarioVO {
     private String cep;
     private String telefone;
     private String celular;
-
+    private String matriculauser;
+    private String loginunico;
+    private String senhauser;
+    private String permissaouser;
     /**
      * @return the codigo
      */
@@ -33,17 +36,17 @@ public class UsuarioVO {
     }
 
     /**
-     * @return the nome
+     * @return the nomeuser
      */
-    public String getNome() {
-        return nome;
+    public String getNomeuser() {
+        return nomeuser;
     }
 
     /**
-     * @param nome the nome to set
+     * @param nomeuser the nomeuser to set
      */
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeuser(String nomeuser) {
+        this.nomeuser = nomeuser;
     }
 
     /**
@@ -157,9 +160,72 @@ public class UsuarioVO {
     public void setCelular(String celular) {
         this.celular = celular;
     }
+
+    /**
+     * @return the matriculauser
+     */
+    public String getMatriculauser() {
+        return matriculauser;
+    }
+
+    /**
+     * @param matriculauser the matriculauser to set
+     */
+    public void setMatriculauser(String matriculauser) {
+        this.matriculauser = matriculauser;
+    }
+
+    /**
+     * @return the loginunico
+     */
+    public String getLoginunico() {
+        return loginunico;
+    }
+
+    /**
+     * @param loginunico the loginunico to set
+     */
+    public void setLoginunico(String loginunico) {
+        this.loginunico = loginunico;
+    }
+
+    /**
+     * @return the senhauser
+     */
+    public String getSenhauser() {
+        return senhauser;
+    }
+
+    /**
+     * @param senhauser the senhauser to set
+     */
+    public void setSenhauser(String senhauser) {
+        this.senhauser = senhauser;
+    }
+
+    /**
+     * @return the permissaouser
+     */
+    public String getPermissaouser() {
+        return permissaouser;
+    }
+
+    /**
+     * @param permissaouser the permissaouser to set
+     */
+    public void setPermissaouser(String permissaouser) {
+        this.permissaouser = permissaouser;
+    }
+    
+    
+
+    
+
+    
+
     
    @Override
     public String toString() {
-        return "UsuarioVO{" + "Codigo=" + codigo + ", nome=" + nome + ", endereco=" + endereco + "endereco_nr=" + endereco_nr + ", endereco_complemento=" + endereco_complemento + "bairro=" + bairro + "cidades=" + cidades + "cep=" + cep + "telefone=" + telefone + "celular=" + celular + '}';
+        return "UsuarioVO{" + "Codigo=" + getCodigo() + ", nomeuser=" + getNomeuser() + ", endereco=" + getEndereco() + "endereco_nr=" + getEndereco_nr() + ", endereco_complemento=" + getEndereco_complemento() + "bairro=" + getBairro() + "cidades=" + getCidades() + "cep=" + getCep() + "telefone=" + getTelefone() + "celular=" + getCelular() + "matriculauser=" + getMatriculauser () + "loginunico=" + getLoginunico() + "senhauser=" + getSenhauser() + "permissaouser=" + getPermissaouser() +'}';
     }
 }//fecha classe
