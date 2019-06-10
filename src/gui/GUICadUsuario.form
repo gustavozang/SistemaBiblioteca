@@ -44,29 +44,31 @@
                           <Component id="jPanel13" alignment="0" pref="98" max="32767" attributes="0"/>
                           <Component id="jPanel14" alignment="0" pref="98" max="32767" attributes="0"/>
                           <Component id="jButton1" max="32767" attributes="0"/>
-                          <Component id="jPanel15" alignment="0" pref="98" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="TextField14" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jButton2" min="-2" pref="80" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="fechar" min="-2" pref="80" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="TextField13" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jButton2" min="-2" pref="80" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Component id="fechar" min="-2" pref="80" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="TextField1" pref="200" max="32767" attributes="0"/>
+                                  <Component id="TextField2" max="32767" attributes="0"/>
+                                  <Component id="TextField5" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="TextField6" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="TextField7" max="32767" attributes="0"/>
+                                  <Component id="TextField3" max="32767" attributes="0"/>
+                                  <Component id="TextField4" max="32767" attributes="0"/>
+                                  <Component id="TextField8" max="32767" attributes="0"/>
+                                  <Component id="TextField9" max="32767" attributes="0"/>
+                                  <Component id="TextField10" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="TextField11" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="TextField12" alignment="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
-                          <Component id="TextField1" alignment="0" pref="200" max="32767" attributes="0"/>
-                          <Component id="TextField3" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TextField6" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TextField7" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TextField8" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TextField4" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TextField9" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TextField10" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TextField11" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TextField12" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TextField13" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TextField2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TextField5" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -84,78 +86,75 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="TextField1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="TextField1" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jPanel15" min="-2" pref="23" max="-2" attributes="0"/>
                   <Component id="TextField2" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel3" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextField3" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextField4" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="TextField3" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="TextField4" min="-2" max="-2" attributes="0"/>
                   <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextField5" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel6" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextField6" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="TextField5" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextField7" min="-2" max="-2" attributes="0"/>
+                  <Component id="TextField6" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextField8" min="-2" max="-2" attributes="0"/>
+                  <Component id="TextField7" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextField9" min="-2" max="-2" attributes="0"/>
+                  <Component id="TextField8" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel10" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextField10" min="-2" max="-2" attributes="0"/>
+                  <Component id="TextField9" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextField11" min="-2" max="-2" attributes="0"/>
+                  <Component id="TextField10" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="TextField12" min="-2" max="-2" attributes="0"/>
+                  <Component id="TextField11" min="-2" max="-2" attributes="0"/>
                   <Component id="jPanel13" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextField13" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="TextField12" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextField14" min="-2" max="-2" attributes="0"/>
+                  <Component id="TextField13" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -302,7 +301,7 @@
     </Container>
     <Component class="javax.swing.JTextField" name="TextField1">
     </Component>
-    <Component class="javax.swing.JTextField" name="TextField3">
+    <Component class="javax.swing.JTextField" name="TextField2">
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
@@ -468,14 +467,21 @@
         </DimensionLayout>
       </Layout>
     </Container>
+    <Component class="javax.swing.JTextField" name="TextField5">
+    </Component>
     <Component class="javax.swing.JTextField" name="TextField6">
     </Component>
-    <Component class="javax.swing.JTextField" name="TextField7">
-    </Component>
-    <Component class="javax.swing.JFormattedTextField" name="TextField8">
+    <Component class="javax.swing.JFormattedTextField" name="TextField7">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="#####-###" subtype="-1" type="5"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="TextField3">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+          <Format format="#0" subtype="-1" type="0"/>
         </Property>
       </Properties>
     </Component>
@@ -486,24 +492,24 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="TextField9">
+    <Component class="javax.swing.JFormattedTextField" name="TextField8">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="## ####-####" subtype="-1" type="5"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextField9ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextField8ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="TextField10">
+    <Component class="javax.swing.JFormattedTextField" name="TextField9">
       <Properties>
         <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
           <Format format="## # ####-####" subtype="-1" type="5"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextField10ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TextField9ActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel11">
@@ -534,7 +540,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JTextField" name="TextField11">
+    <Component class="javax.swing.JTextField" name="TextField10">
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel12">
       <Properties>
@@ -564,7 +570,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JTextField" name="TextField12">
+    <Component class="javax.swing.JTextField" name="TextField11">
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel13">
       <Properties>
@@ -594,7 +600,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JTextField" name="TextField13">
+    <Component class="javax.swing.JTextField" name="TextField12">
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel14">
       <Properties>
@@ -624,7 +630,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JComboBox" name="TextField14">
+    <Component class="javax.swing.JComboBox" name="TextField13">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
@@ -637,40 +643,6 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
-    </Component>
-    <Container class="javax.swing.JPanel" name="jPanel15">
-      <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Cpf"/>
-          </Border>
-        </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[90, 25]"/>
-        </Property>
-      </Properties>
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-    </Container>
-    <Component class="javax.swing.JFormattedTextField" name="TextField2">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="###.###.###-##" subtype="-1" type="5"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="TextField5">
     </Component>
   </SubComponents>
 </Form>

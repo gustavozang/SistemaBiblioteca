@@ -9,11 +9,12 @@ public class ObraVO {
 
     private int codigo;
     private String nome;
-    private String editora;
-    private String edicao;
     private String autor;
-    private String categoria;
-    private int quantidade;
+    private String ano_publicacao;
+    private String situacao_obra;
+    private String cod_editora;
+    private String cod_fornecedor;
+    
     /**
      * @return the codigo
      */
@@ -43,34 +44,6 @@ public class ObraVO {
     }
 
     /**
-     * @return the editora
-     */
-    public String getEditora() {
-        return editora;
-    }
-
-    /**
-     * @param editora the editora to set
-     */
-    public void setEditora(String editora) {
-        this.editora = editora;
-    }
-
-    /**
-     * @return the edicao
-     */
-    public String getEdicao() {
-        return edicao;
-    }
-
-    /**
-     * @param edicao the edicao to set
-     */
-    public void setEdicao(String edicao) {
-        this.edicao = edicao;
-    }
-
-    /**
      * @return the autor
      */
     public String getAutor() {
@@ -85,40 +58,64 @@ public class ObraVO {
     }
 
     /**
-     * @return the categoria
+     * @return the ano_publicacao
      */
-    public String getCategoria() {
-        return categoria;
+    public String getAno_publicacao() {
+        return ano_publicacao;
     }
 
     /**
-     * @param categoria the categoria to set
+     * @param ano_publicacao the ano_publicacao to set
      */
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
+    public void setAno_publicacao(String ano_publicacao) {
+        this.ano_publicacao = ano_publicacao;
     }
 
     /**
-     * @return the quantidade
+     * @return the situacao_obra
      */
-    public int getQuantidade() {
-        return quantidade;
+    public String getSituacao_obra() {
+        return situacao_obra;
     }
 
     /**
-     * @param quantidade the quantidade to set
+     * @param situacao_obra the situacao_obra to set
      */
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setSituacao_obra(String situacao_obra) {
+        this.situacao_obra = situacao_obra;
     }
-    
-  
-   
-   
-    
+
+    /**
+     * @return the cod_editora
+     */
+    public String getCod_editora() {
+        return cod_editora;
+    }
+
+    /**
+     * @param cod_editora the cod_editora to set
+     */
+    public void setCod_editora(String cod_editora) {
+        this.cod_editora = cod_editora;
+    }
+
+    /**
+     * @return the cod_fornecedor
+     */
+    public String getCod_fornecedor() {
+        return cod_fornecedor;
+    }
+
+    /**
+     * @param cod_fornecedor the cod_fornecedor to set
+     */
+    public void setCod_fornecedor(String cod_fornecedor) {
+        this.cod_fornecedor = cod_fornecedor;
+    }
+
  @Override
  
     public String toString() {
-        return "ObraVO{" + "Codigo=" + getCodigo() + ", nome=" + getNome() + ", editora=" + getEditora() + "edicao=" + getEdicao() + "autor=" + getAutor() + "categoria=" + getCategoria() + "quantidade=" + getQuantidade() + '}';
+        return "ObraVO{" + "Codigo=" + getCodigo() + ", nome=" + getNome() + ", autor=" + autor + "ano_publicacao=" + ano_publicacao + ", situacao_obra=" + situacao_obra + "cod_editora=" + cod_editora + "cod_fornecedor=" + cod_fornecedor + '}';
     }
 }//fecha classe

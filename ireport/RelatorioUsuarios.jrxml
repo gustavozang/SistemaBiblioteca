@@ -10,7 +10,6 @@
 		<![CDATA[SELECT * FROM usuario;]]>
 	</queryString>
 	<field name="codigo" class="java.lang.Integer"/>
-	<field name="cpf" class="java.lang.String"/>
 	<field name="nomeuser" class="java.lang.String"/>
 	<field name="endereco" class="java.lang.String"/>
 	<field name="endereco_nr" class="java.lang.String"/>
@@ -57,64 +56,56 @@
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="40" y="0" width="94" height="20" uuid="26b1a879-93bb-41d0-ab01-c281a9ef58cd"/>
+				<reportElement x="100" y="0" width="100" height="20" uuid="26b1a879-93bb-41d0-ab01-c281a9ef58cd"/>
 				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="215" y="0" width="95" height="20" uuid="a3384db6-28b6-4a0b-aca6-508e4a7f9051"/>
+				<reportElement x="200" y="0" width="100" height="20" uuid="a3384db6-28b6-4a0b-aca6-508e4a7f9051"/>
 				<text><![CDATA[Endereço]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="310" y="0" width="90" height="20" uuid="5e53121b-3496-431c-bcb3-f8f282ffebce"/>
+				<reportElement x="300" y="0" width="100" height="20" uuid="5e53121b-3496-431c-bcb3-f8f282ffebce"/>
 				<text><![CDATA[Cidade]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="400" y="0" width="70" height="20" uuid="924f53c6-a27c-4c47-8f09-16e4bd10f949"/>
+				<reportElement x="400" y="0" width="80" height="20" uuid="924f53c6-a27c-4c47-8f09-16e4bd10f949"/>
 				<text><![CDATA[Telefone]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="0" width="40" height="20" uuid="45404e06-bfba-4e2b-bbb2-625c135bbc6f"/>
+				<reportElement x="0" y="0" width="100" height="20" uuid="45404e06-bfba-4e2b-bbb2-625c135bbc6f"/>
 				<text><![CDATA[Codigo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="470" y="0" width="85" height="20" uuid="9ba72fe2-f079-47b3-954b-7018d40f3ca5"/>
+				<reportElement x="480" y="0" width="75" height="20" uuid="9ba72fe2-f079-47b3-954b-7018d40f3ca5"/>
 				<text><![CDATA[Celular]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="134" y="0" width="81" height="20" uuid="a2415874-d726-4546-a3fb-ac4d909be430"/>
-				<text><![CDATA[CPF]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="26" splitType="Stretch">
 			<textField>
-				<reportElement x="40" y="0" width="94" height="20" uuid="a4a88c53-e324-4f61-9a92-8a03c2af32d1"/>
+				<reportElement x="100" y="0" width="100" height="20" uuid="a4a88c53-e324-4f61-9a92-8a03c2af32d1"/>
 				<textFieldExpression><![CDATA[$F{nomeuser}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="215" y="0" width="95" height="20" uuid="44ab6fd5-caf9-49d9-8828-0419af718e71"/>
+				<reportElement x="200" y="0" width="100" height="20" uuid="44ab6fd5-caf9-49d9-8828-0419af718e71"/>
 				<textFieldExpression><![CDATA[$F{endereco}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="310" y="0" width="90" height="20" uuid="6b6ba374-f457-4d63-afa5-ac8ae6be53e7"/>
+				<reportElement x="300" y="0" width="100" height="20" uuid="6b6ba374-f457-4d63-afa5-ac8ae6be53e7"/>
 				<textFieldExpression><![CDATA[$F{cidades}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="0" width="70" height="20" uuid="69e57be9-b382-48ab-92f1-72576b9033fc"/>
+				<reportElement x="400" y="0" width="80" height="20" uuid="69e57be9-b382-48ab-92f1-72576b9033fc"/>
 				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="40" height="20" uuid="067eb8e4-0343-4806-be27-b7c479e80e47"/>
+				<reportElement x="0" y="0" width="100" height="20" uuid="067eb8e4-0343-4806-be27-b7c479e80e47"/>
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="470" y="0" width="85" height="20" uuid="6a1a9d10-e9bd-4bd4-bfe9-60d929214772"/>
+				<reportElement x="480" y="0" width="75" height="20" uuid="6a1a9d10-e9bd-4bd4-bfe9-60d929214772"/>
 				<textFieldExpression><![CDATA[$F{celular}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="134" y="0" width="81" height="20" uuid="0427a595-1c9f-4385-8a3a-3acb5ae63ba2"/>
-				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -18,7 +18,7 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
      com o nome das colunas */
     DefaultTableModel dtm = new DefaultTableModel(
             new Object[][]{},
-            new Object[]{"Código", "Nome", "Editora", "Edicao", "Autor", "Categoria", "Quantidade"});
+            new Object[]{"Código", "Nome", "Autor", "Ano_Publicacao", "Situacao_obra", "Cod_editora", "Cod_fornecedor"});
 
     /**
      * Creates new form GUIManutencaoObra
@@ -42,18 +42,18 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
         jFAlterar = new javax.swing.JFrame();
         jbAtualizar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jtEditora = new javax.swing.JTextField();
+        jtAutor = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jtSituacao_obra = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jtEdicao = new javax.swing.JTextField();
+        jtAno_publicacao = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jtCategoria = new javax.swing.JTextField();
+        jtCod_fornecedor = new javax.swing.JTextField();
+        jtCod_editora = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jtNome = new javax.swing.JTextField();
-        jtQuantidade = new javax.swing.JFormattedTextField();
-        jtAutor = new javax.swing.JTextField();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableObra = new javax.swing.JTable();
@@ -77,40 +77,54 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Preencha os campos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(0, 0, 204))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jtEditora.addActionListener(new java.awt.event.ActionListener() {
+        jtAutor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtEditoraActionPerformed(evt);
+                jtAutorActionPerformed(evt);
             }
         });
-        jPanel1.add(jtEditora, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 80, 208, -1));
+        jPanel1.add(jtAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 80, 208, -1));
 
-        jLabel3.setText("Edição:");
+        jLabel3.setText("Publicação:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 111, -1, -1));
 
-        jLabel2.setText("Editora:");
+        jtSituacao_obra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtSituacao_obraActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jtSituacao_obra, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 146, 180, -1));
+
+        jLabel2.setText("Autor:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 80, -1, -1));
 
-        jLabel4.setText("Autor:");
+        jLabel4.setText("Situação:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 142, -1, 24));
 
-        jtEdicao.addActionListener(new java.awt.event.ActionListener() {
+        jtAno_publicacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtEdicaoActionPerformed(evt);
+                jtAno_publicacaoActionPerformed(evt);
             }
         });
-        jPanel1.add(jtEdicao, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 111, 208, -1));
+        jPanel1.add(jtAno_publicacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 111, 208, -1));
 
-        jLabel5.setText("Categoria:");
+        jLabel5.setText("Editora:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 177, -1, 24));
 
-        jtCategoria.addActionListener(new java.awt.event.ActionListener() {
+        jtCod_fornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtCategoriaActionPerformed(evt);
+                jtCod_fornecedorActionPerformed(evt);
             }
         });
-        jPanel1.add(jtCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 208, -1));
+        jPanel1.add(jtCod_fornecedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 216, 208, -1));
 
-        jLabel7.setText("Quantidade:");
+        jtCod_editora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtCod_editoraActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jtCod_editora, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 181, 208, -1));
+
+        jLabel7.setText("Fornecedor:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 212, -1, 24));
 
         jLabel10.setText("Nome:");
@@ -122,21 +136,6 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 49, 208, -1));
-
-        jtQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
-        jtQuantidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtQuantidadeActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 200, -1));
-
-        jtAutor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtAutorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 210, -1));
 
         javax.swing.GroupLayout jFAlterarLayout = new javax.swing.GroupLayout(jFAlterar.getContentPane());
         jFAlterar.getContentPane().setLayout(jFAlterarLayout);
@@ -176,7 +175,7 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Nome", "Editora", "Edição", "Autor", "Categoria", "Quantidade"
+                "Codigo", "Nome", "Autor", "Publicacao", "Situacao", "Editora", "Fornecedor"
             }
         ) {
             Class[] types = new Class [] {
@@ -292,8 +291,6 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getAccessibleContext().setAccessibleName("Manutenção Obra");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -314,11 +311,11 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
                 dtm.addRow(new String[]{
                     String.valueOf(prod.get(i).getCodigo()),
                     String.valueOf(prod.get(i).getNome()),
-                    String.valueOf(prod.get(i).getEditora()),
-                    String.valueOf(prod.get(i).getEdicao()),
                     String.valueOf(prod.get(i).getAutor()),
-                    String.valueOf(prod.get(i).getCategoria()),
-                    String.valueOf(prod.get(i).getQuantidade()),
+                    String.valueOf(prod.get(i).getAno_publicacao()),
+                    String.valueOf(prod.get(i).getSituacao_obra()),
+                    String.valueOf(prod.get(i).getCod_editora()),
+                    String.valueOf(prod.get(i).getCod_fornecedor()),
                 });
             }//fecha for
             
@@ -384,11 +381,11 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
 
             ObraDAO p = new ObraDAO();
             /*jtNome.setText(prod.get(i).getNome());
-            jtValor.setText(String.valueOf(prod.get(i).getEditora()));
-            jtValor.setText(String.valueOf(prod.get(i).getEdicao()))
-            jtValor.setText(String.valueOf(prod.get(i).getAutor()))
-            jtValor.setText(String.valueOf(prod.get(i).getCategoria()))
-            jtValor.setText(String.valueOf(prod.get(i).getQuantidade()))*/
+            jtValor.setText(String.valueOf(prod.get(i).getAutor()));
+            jtValor.setText(String.valueOf(prod.get(i).getAno_publicacao()))
+            jtValor.setText(String.valueOf(prod.get(i).getSituacao_obra()))
+            jtValor.setText(String.valueOf(prod.get(i).getCod_editora()))
+            jtValor.setText(String.valueOf(prod.get(i).getCod_fornecedor()))*/
                 
             
             
@@ -396,11 +393,11 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
             
 
             prod.get(i).setNome(jtNome.getText());
-            prod.get(i).setEditora(jtEditora.getText());
-            prod.get(i).setEdicao(jtEdicao.getText());
             prod.get(i).setAutor(jtAutor.getText());
-            prod.get(i).setCategoria(jtCategoria.getText());
-            prod.get(i).setQuantidade(Integer.parseInt(jtQuantidade.getText()));
+            prod.get(i).setAno_publicacao(jtAno_publicacao.getText());
+            prod.get(i).setSituacao_obra(jtSituacao_obra.getText());
+            prod.get(i).setCod_editora(jtCod_editora.getText());
+            prod.get(i).setCod_fornecedor(jtCod_fornecedor.getText());
                       
             
             
@@ -429,11 +426,11 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
             int i = jtableObra.getSelectedRow();
             
             jtNome.setText(prod.get(i).getNome());
-            jtEditora.setText(String.valueOf(prod.get(i).getEditora()));
-            jtEdicao.setText(String.valueOf(prod.get(i).getEdicao()));
             jtAutor.setText(String.valueOf(prod.get(i).getAutor()));
-            jtCategoria.setText(String.valueOf(prod.get(i).getCategoria()));
-            jtQuantidade.setText(String.valueOf(prod.get(i).getQuantidade()));
+            jtAno_publicacao.setText(String.valueOf(prod.get(i).getAno_publicacao()));
+            jtSituacao_obra.setText(String.valueOf(prod.get(i).getSituacao_obra()));
+            jtCod_editora.setText(String.valueOf(prod.get(i).getCod_editora()));
+            jtCod_fornecedor.setText(String.valueOf(prod.get(i).getCod_fornecedor()));
                      
             
             
@@ -447,11 +444,11 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
 
     private void limparAlterar() {
         jtNome.setText(null);
-        jtEditora.setText(null);
-        jtEdicao.setText(null);
         jtAutor.setText(null);
-        jtCategoria.setText(null);
-        jtQuantidade.setText(null);
+        jtAno_publicacao.setText(null);
+        jtSituacao_obra.setText(null);
+        jtCod_editora.setText(null);
+        jtCod_fornecedor.setText(null);
     }
 
     private void jbPreencherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPreencherActionPerformed
@@ -469,9 +466,13 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
         jbPreencherActionPerformed(evt);
     }//GEN-LAST:event_jDeletarActionPerformed
 
-    private void jtEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtEditoraActionPerformed
+    private void jtAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtAutorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtEditoraActionPerformed
+    }//GEN-LAST:event_jtAutorActionPerformed
+
+    private void jtSituacao_obraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtSituacao_obraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtSituacao_obraActionPerformed
 
     private void jbAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarActionPerformed
         alterar();
@@ -486,25 +487,21 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
         jFAlterar.setVisible(true);
     }//GEN-LAST:event_jAlterarActionPerformed
 
-    private void jtEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtEdicaoActionPerformed
+    private void jtAno_publicacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtAno_publicacaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtEdicaoActionPerformed
+    }//GEN-LAST:event_jtAno_publicacaoActionPerformed
 
-    private void jtCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCategoriaActionPerformed
+    private void jtCod_fornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCod_fornecedorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtCategoriaActionPerformed
+    }//GEN-LAST:event_jtCod_fornecedorActionPerformed
+
+    private void jtCod_editoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCod_editoraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtCod_editoraActionPerformed
 
     private void jtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtNomeActionPerformed
-
-    private void jtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtQuantidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtQuantidadeActionPerformed
-
-    private void jtAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtAutorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtAutorActionPerformed
 
      /**
      * @param args the command line arguments
@@ -566,12 +563,12 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAtualizar;
     private javax.swing.JButton jbLimpar;
     private javax.swing.JButton jbPreencher;
+    private javax.swing.JTextField jtAno_publicacao;
     private javax.swing.JTextField jtAutor;
-    private javax.swing.JTextField jtCategoria;
-    private javax.swing.JTextField jtEdicao;
-    private javax.swing.JTextField jtEditora;
+    private javax.swing.JTextField jtCod_editora;
+    private javax.swing.JTextField jtCod_fornecedor;
     private javax.swing.JTextField jtNome;
-    private javax.swing.JFormattedTextField jtQuantidade;
+    private javax.swing.JTextField jtSituacao_obra;
     private javax.swing.JTable jtableObra;
     // End of variables declaration//GEN-END:variables
 }
