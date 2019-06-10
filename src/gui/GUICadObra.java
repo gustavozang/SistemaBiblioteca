@@ -48,8 +48,8 @@ public class GUICadObra extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         TextField5 = new javax.swing.JTextField();
-        TextField6 = new javax.swing.JTextField();
         TextField3 = new javax.swing.JTextField();
+        TextField6 = new javax.swing.JFormattedTextField();
         TextField4 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,7 +85,7 @@ public class GUICadObra extends javax.swing.JFrame {
             .addGap(0, 2, Short.MAX_VALUE)
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Autor"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Editora"));
         jPanel3.setPreferredSize(new java.awt.Dimension(90, 25));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -99,7 +99,7 @@ public class GUICadObra extends javax.swing.JFrame {
             .addGap(0, 2, Short.MAX_VALUE)
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Ano publicação"));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Edição"));
         jPanel4.setPreferredSize(new java.awt.Dimension(90, 25));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -113,7 +113,7 @@ public class GUICadObra extends javax.swing.JFrame {
             .addGap(0, 2, Short.MAX_VALUE)
         );
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Situação"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Autor"));
         jPanel5.setPreferredSize(new java.awt.Dimension(90, 25));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -148,7 +148,7 @@ public class GUICadObra extends javax.swing.JFrame {
             }
         });
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Editora"));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Categoria"));
         jPanel6.setMinimumSize(new java.awt.Dimension(0, 0));
         jPanel6.setPreferredSize(new java.awt.Dimension(90, 25));
 
@@ -163,7 +163,7 @@ public class GUICadObra extends javax.swing.JFrame {
             .addGap(0, 2, Short.MAX_VALUE)
         );
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Fornecedor"));
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Quantidade"));
         jPanel7.setMinimumSize(new java.awt.Dimension(0, 0));
         jPanel7.setPreferredSize(new java.awt.Dimension(90, 25));
 
@@ -177,6 +177,13 @@ public class GUICadObra extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 2, Short.MAX_VALUE)
         );
+
+        TextField6.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        TextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextField6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,8 +213,8 @@ public class GUICadObra extends javax.swing.JFrame {
                                     .addComponent(TextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                     .addComponent(TextField2)
                                     .addComponent(TextField5)
-                                    .addComponent(TextField6)
                                     .addComponent(TextField3)
+                                    .addComponent(TextField6)
                                     .addComponent(TextField4)))))
                     .addComponent(jLabel1)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -240,18 +247,18 @@ public class GUICadObra extends javax.swing.JFrame {
                     .addComponent(TextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(TextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(119, 119, 119)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(fechar))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(119, 119, 119)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2)
+                            .addComponent(fechar)))
+                    .addComponent(TextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
 
@@ -271,7 +278,7 @@ public class GUICadObra extends javax.swing.JFrame {
         TextField1.setText("");
         TextField2.setText("");
         TextField3.setText("");
-        TextField4.setText("");
+        TextField6.setText("");
         TextField5.setText("");
         TextField6.setText("");
         
@@ -280,11 +287,11 @@ public class GUICadObra extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 ObraVO obra = new ObraVO();
 obra.setNome(TextField1.getText());
-obra.setAutor(TextField2.getText());
-obra.setAno_publicacao(TextField3.getText());
-obra.setSituacao_obra(TextField4.getText());
-obra.setCod_editora(TextField5.getText());
-obra.setCod_fornecedor(TextField6.getText());
+obra.setEditora(TextField2.getText());
+obra.setEdicao(TextField3.getText());
+obra.setAutor(TextField4.getText());
+obra.setCategoria(TextField5.getText());
+obra.setQuantidade(Integer.parseInt(TextField6.getText()));
 
 
 // fazendo a validação dos dados
@@ -311,6 +318,10 @@ TextField4.setText("");
 TextField5.setText("");
 TextField6.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void TextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextField6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,7 +367,7 @@ TextField6.setText("");
     private javax.swing.JTextField TextField3;
     private javax.swing.JTextField TextField4;
     private javax.swing.JTextField TextField5;
-    private javax.swing.JTextField TextField6;
+    private javax.swing.JFormattedTextField TextField6;
     private javax.swing.JButton fechar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

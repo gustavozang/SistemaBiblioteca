@@ -11,11 +11,11 @@
 	</queryString>
 	<field name="codigo" class="java.lang.Integer"/>
 	<field name="nome" class="java.lang.String"/>
+	<field name="editora" class="java.lang.String"/>
+	<field name="edicao" class="java.lang.String"/>
 	<field name="autor" class="java.lang.String"/>
-	<field name="ano_publicacao" class="java.lang.String"/>
-	<field name="situacao_obra" class="java.lang.String"/>
-	<field name="cod_editora" class="java.lang.String"/>
-	<field name="cod_fornecedor" class="java.lang.String"/>
+	<field name="categoria" class="java.lang.String"/>
+	<field name="quantidade" class="java.lang.String"/>
 	<field name="data" class="java.sql.Date"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -58,11 +58,11 @@
 			</staticText>
 			<staticText>
 				<reportElement x="300" y="0" width="100" height="20" uuid="5e53121b-3496-431c-bcb3-f8f282ffebce"/>
-				<text><![CDATA[Ano Publicação]]></text>
+				<text><![CDATA[Edição]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="400" y="0" width="80" height="20" uuid="924f53c6-a27c-4c47-8f09-16e4bd10f949"/>
-				<text><![CDATA[Situação]]></text>
+				<text><![CDATA[Quantidade]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="100" height="20" uuid="45404e06-bfba-4e2b-bbb2-625c135bbc6f"/>
@@ -82,11 +82,11 @@
 			</textField>
 			<textField>
 				<reportElement x="300" y="0" width="100" height="20" uuid="6b6ba374-f457-4d63-afa5-ac8ae6be53e7"/>
-				<textFieldExpression><![CDATA[$F{ano_publicacao}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{edicao}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="400" y="0" width="80" height="20" uuid="69e57be9-b382-48ab-92f1-72576b9033fc"/>
-				<textFieldExpression><![CDATA[$F{situacao_obra}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="100" height="20" uuid="067eb8e4-0343-4806-be27-b7c479e80e47"/>

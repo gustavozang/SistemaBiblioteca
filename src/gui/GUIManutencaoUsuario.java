@@ -18,7 +18,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
      com o nome das colunas */
     DefaultTableModel dtm = new DefaultTableModel(
             new Object[][]{},
-            new Object[]{"Código", "Nome", "Endereco", "Numero", "Endereco_Complemento", "Bairro", "Cidades", "Cep", "Telefone", "Celular", "Matricula", "Login","Permissao"});
+            new Object[]{"Código", "Nome", "Cpf", "Endereco", "Numero", "Endereco_Complemento", "Bairro", "Cidades", "Cep", "Telefone", "Celular", "Matricula", "Login","Permissao"});
 
     /**
      * Creates new form GUIManutencaoUsuario
@@ -69,6 +69,8 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         jtLogin = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jtPermissao = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        jtCpf = new javax.swing.JFormattedTextField();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableUsuario = new javax.swing.JTable();
@@ -79,7 +81,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         jAlterar = new javax.swing.JButton();
 
         jFAlterar.setTitle("Atualizar");
-        jFAlterar.setMinimumSize(new java.awt.Dimension(450, 700));
+        jFAlterar.setMinimumSize(new java.awt.Dimension(550, 450));
 
         jbAtualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jbAtualizar.setText("Atualizar");
@@ -97,81 +99,81 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
                 jtEnderecoActionPerformed(evt);
             }
         });
-        jPanel1.add(jtEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 80, 208, -1));
+        jPanel1.add(jtEndereco, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 208, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Número:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 111, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
 
         jtEndereco_complemento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtEndereco_complementoActionPerformed(evt);
             }
         });
-        jPanel1.add(jtEndereco_complemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 146, 180, -1));
+        jPanel1.add(jtEndereco_complemento, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 180, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Endereço:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 80, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Complemento:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 142, -1, 24));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, 24));
 
         jtEndereco_nr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtEndereco_nrActionPerformed(evt);
             }
         });
-        jPanel1.add(jtEndereco_nr, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 111, 208, -1));
+        jPanel1.add(jtEndereco_nr, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 208, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Bairro:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 177, -1, 24));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, 24));
 
         jtCidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtCidadesActionPerformed(evt);
             }
         });
-        jPanel1.add(jtCidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 216, 208, -1));
+        jPanel1.add(jtCidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 208, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Cep:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 247, -1, 24));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, 24));
 
         jtBairro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtBairroActionPerformed(evt);
             }
         });
-        jPanel1.add(jtBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 181, 208, -1));
+        jPanel1.add(jtBairro, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 208, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Cidade:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 212, -1, 24));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, 24));
 
         try {
             jtCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel1.add(jtCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 251, 208, -1));
+        jPanel1.add(jtCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 208, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Permissão:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, -1, 24));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, 24));
 
         try {
             jtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("## ####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel1.add(jtTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 282, 207, -1));
+        jPanel1.add(jtTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 207, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Telefone:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 282, -1, 24));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, 24));
 
         try {
             jtCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("## # ####-####")));
@@ -183,58 +185,69 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
                 jtCelularActionPerformed(evt);
             }
         });
-        jPanel1.add(jtCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 317, 207, -1));
+        jPanel1.add(jtCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 207, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Nome:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 49, -1, -1));
+        jLabel10.setText("Cpf:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         jtSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtSenhaActionPerformed(evt);
             }
         });
-        jPanel1.add(jtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 208, -1));
+        jPanel1.add(jtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 208, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Celular:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 317, -1, 24));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, 24));
 
         jtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtNomeActionPerformed(evt);
             }
         });
-        jPanel1.add(jtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 49, 208, -1));
+        jPanel1.add(jtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 208, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Matricula:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, 24));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, -1, 24));
 
         jtMatricula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtMatriculaActionPerformed(evt);
             }
         });
-        jPanel1.add(jtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 208, -1));
+        jPanel1.add(jtMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 208, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Login:");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, 24));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, 24));
 
         jtLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtLoginActionPerformed(evt);
             }
         });
-        jPanel1.add(jtLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 208, -1));
+        jPanel1.add(jtLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 208, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Senha:");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, -1, 24));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, 24));
 
         jtPermissao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALUNO", "PROFESSOR", "ADMINISTRADOR" }));
-        jPanel1.add(jtPermissao, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, -1, -1));
+        jPanel1.add(jtPermissao, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 460, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel15.setText("Nome:");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+
+        try {
+            jtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jPanel1.add(jtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 210, -1));
 
         javax.swing.GroupLayout jFAlterarLayout = new javax.swing.GroupLayout(jFAlterar.getContentPane());
         jFAlterar.getContentPane().setLayout(jFAlterarLayout);
@@ -274,11 +287,11 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Nome", "Endereço", "Número", "Complemento", "Bairro", "Cidade", "Cep", "Telefone", "Celular", "Matricula", "Login", "Permissao"
+                "Codigo", "Nome", "Cpf", "Endereço", "Número", "Complemento", "Bairro", "Cidade", "Cep", "Telefone", "Celular", "Matricula", "Login", "Permissao"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -410,6 +423,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
                 dtm.addRow(new String[]{
                     String.valueOf(prod.get(i).getCodigo()),
                     String.valueOf(prod.get(i).getNomeuser()),
+                    String.valueOf(prod.get(i).getCpf()),
                     String.valueOf(prod.get(i).getEndereco()),
                     String.valueOf(prod.get(i).getEndereco_nr()),
                     String.valueOf(prod.get(i).getEndereco_complemento()),
@@ -486,6 +500,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
 
             UsuarioDAO p = new UsuarioDAO();
             /*jtNome.setText(prod.get(i).getNome());
+            jtValor.setText(String.valueOf(prod.get(i).getCpf()));
             jtValor.setText(String.valueOf(prod.get(i).getEndereco()));
             jtValor.setText(String.valueOf(prod.get(i).getEndereco_nr()))
             jtValor.setText(String.valueOf(prod.get(i).getEndereco_complemento()))
@@ -502,6 +517,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
             
 
             prod.get(i).setNomeuser(jtNome.getText());
+            prod.get(i).setCpf(jtCpf.getText());
             prod.get(i).setEndereco(jtEndereco.getText());
             prod.get(i).setEndereco_nr(jtEndereco_nr.getText());
             prod.get(i).setEndereco_complemento(jtEndereco_complemento.getText());
@@ -543,6 +559,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
             int i = jtableUsuario.getSelectedRow();
             
             jtNome.setText(prod.get(i).getNomeuser());
+            jtCpf.setText(prod.get(i).getCpf());
             jtEndereco.setText(String.valueOf(prod.get(i).getEndereco()));
             jtEndereco_nr.setText(String.valueOf(prod.get(i).getEndereco_nr()));
             jtEndereco_complemento.setText(String.valueOf(prod.get(i).getEndereco_complemento()));
@@ -568,6 +585,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
 
     private void limparAlterar() {
         jtNome.setText(null);
+        jtCpf.setText(null);
         jtEndereco.setText(null);
         jtEndereco_nr.setText(null);
         jtEndereco_complemento.setText(null);
@@ -701,6 +719,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -720,6 +739,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JFormattedTextField jtCelular;
     private javax.swing.JFormattedTextField jtCep;
     private javax.swing.JTextField jtCidades;
+    private javax.swing.JFormattedTextField jtCpf;
     private javax.swing.JTextField jtEndereco;
     private javax.swing.JTextField jtEndereco_complemento;
     private javax.swing.JTextField jtEndereco_nr;

@@ -29,23 +29,24 @@ public class UsuarioDAO {
          Montando a instrução INSERT para inserir
          um objeto usuario no Banco MySQL
          **/
-        String sql = "INSERT INTO usuario(codigo, nomeuser, endereco, endereco_nr, endereco_complemento, bairro, cidades, cep, telefone, celular, matriculauser, loginunico, senhauser, permissaouser,data) VALUES(default,?,?,?,?,?,?,?,?,?,?,?,?,?, CURRENT_DATE)";
+        String sql = "INSERT INTO usuario(codigo, nomeuser, cpf, endereco, endereco_nr, endereco_complemento, bairro, cidades, cep, telefone, celular, matriculauser, loginunico, senhauser, permissaouser,data) VALUES(default,?,?,?,?,?,?,?,?,?,?,?,?,?,?, CURRENT_DATE)";
         try { 
             PreparedStatement stmt = con.prepareStatement(sql);
             
             stmt.setString(1, usuario.getNomeuser());
-            stmt.setString(2, usuario.getEndereco());
-            stmt.setString(3, usuario.getEndereco_nr());
-            stmt.setString(4, usuario.getEndereco_complemento());
-            stmt.setString(5, usuario.getBairro());
-            stmt.setString(6, usuario.getCidades());
-            stmt.setString(7, usuario.getCep());
-            stmt.setString(8, usuario.getTelefone());
-            stmt.setString(9, usuario.getCelular());
-            stmt.setString(10, usuario.getMatriculauser());
-            stmt.setString(11, usuario.getLoginunico());
-            stmt.setString(12, usuario.getSenhauser());
-            stmt.setString(13, usuario.getPermissaouser());
+            stmt.setString(2, usuario.getCpf());
+            stmt.setString(3, usuario.getEndereco());
+            stmt.setString(4, usuario.getEndereco_nr());
+            stmt.setString(5, usuario.getEndereco_complemento());
+            stmt.setString(6, usuario.getBairro());
+            stmt.setString(7, usuario.getCidades());
+            stmt.setString(8, usuario.getCep());
+            stmt.setString(9, usuario.getTelefone());
+            stmt.setString(10, usuario.getCelular());
+            stmt.setString(11, usuario.getMatriculauser());
+            stmt.setString(12, usuario.getLoginunico());
+            stmt.setString(13, usuario.getSenhauser());
+            stmt.setString(14, usuario.getPermissaouser());
             stmt.execute();
             stmt.close();
             con.close();
@@ -96,6 +97,7 @@ public class UsuarioDAO {
                  **/
                 p.setCodigo(rs.getInt("codigo"));
                 p.setNomeuser(rs.getString("nomeuser"));
+                p.setCpf(rs.getString("cpf"));
                 p.setEndereco(rs.getString("endereco"));
                 p.setEndereco_nr(rs.getString("endereco_nr"));
                 p.setEndereco_complemento(rs.getString("endereco_complemento"));
@@ -141,22 +143,23 @@ public class UsuarioDAO {
     public void alterar(UsuarioVO usuario) throws SQLException {
 
         Connection con = ConexaoBanco.getConexao();
-        PreparedStatement p = con.prepareStatement("update usuario set nomeuser=?,endereco=?,endereco_nr=?,endereco_complemento=?,bairro=?,cidades=?,cep=?,telefone=?,celular=?,matriculauser=?,loginunico=?,senhauser=?,permissaouser=?  where codigo=?");
+        PreparedStatement p = con.prepareStatement("update usuario set nomeuser=?,cpf=?,endereco=?,endereco_nr=?,endereco_complemento=?,bairro=?,cidades=?,cep=?,telefone=?,celular=?,matriculauser=?,loginunico=?,senhauser=?,permissaouser=?  where codigo=?");
 
         p.setString(1, usuario.getNomeuser());
-        p.setString(2, usuario.getEndereco());
-        p.setString(3, usuario.getEndereco_nr());
-        p.setString(4, usuario.getEndereco_complemento());
-        p.setString(5, usuario.getBairro());
-        p.setString(6, usuario.getCidades());
-        p.setString(7, usuario.getCep());
-        p.setString(8, usuario.getTelefone());
-        p.setString(9, usuario.getCelular());
-        p.setString(10, usuario.getMatriculauser());
-        p.setString(11, usuario.getLoginunico());
-        p.setString(12, usuario.getSenhauser());
-        p.setString(13, usuario.getPermissaouser());
-        p.setInt(14, usuario.getCodigo());
+        p.setString(2, usuario.getCpf());
+        p.setString(3, usuario.getEndereco());
+        p.setString(4, usuario.getEndereco_nr());
+        p.setString(5, usuario.getEndereco_complemento());
+        p.setString(6, usuario.getBairro());
+        p.setString(7, usuario.getCidades());
+        p.setString(8, usuario.getCep());
+        p.setString(9, usuario.getTelefone());
+        p.setString(10, usuario.getCelular());
+        p.setString(11, usuario.getMatriculauser());
+        p.setString(12, usuario.getLoginunico());
+        p.setString(13, usuario.getSenhauser());
+        p.setString(14, usuario.getPermissaouser());
+        p.setInt(15, usuario.getCodigo());
         p.execute();
         p.close();
 

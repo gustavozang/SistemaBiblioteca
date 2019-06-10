@@ -6,9 +6,10 @@
 package modelo;
 
 public class UsuarioVO {
-
-    private int codigo;
+    
+ private int codigo;
     private String nomeuser;
+    private String cpf;
     private String endereco;
     private String endereco_nr;
     private String endereco_complemento;
@@ -47,6 +48,20 @@ public class UsuarioVO {
      */
     public void setNomeuser(String nomeuser) {
         this.nomeuser = nomeuser;
+    }
+
+    /**
+     * @return the cpf
+     */
+    public String getCpf() {
+        return cpf;
+    }
+
+    /**
+     * @param cpf the cpf to set
+     */
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     /**
@@ -216,8 +231,7 @@ public class UsuarioVO {
     public void setPermissaouser(String permissaouser) {
         this.permissaouser = permissaouser;
     }
-    
-    
+
 
     
 
@@ -226,6 +240,6 @@ public class UsuarioVO {
     
    @Override
     public String toString() {
-        return "UsuarioVO{" + "Codigo=" + getCodigo() + ", nomeuser=" + getNomeuser() + ", endereco=" + getEndereco() + "endereco_nr=" + getEndereco_nr() + ", endereco_complemento=" + getEndereco_complemento() + "bairro=" + getBairro() + "cidades=" + getCidades() + "cep=" + getCep() + "telefone=" + getTelefone() + "celular=" + getCelular() + "matriculauser=" + getMatriculauser () + "loginunico=" + getLoginunico() + "senhauser=" + getSenhauser() + "permissaouser=" + getPermissaouser() +'}';
+        return "UsuarioVO{" + "Codigo=" + getCodigo() + " nomeuser=" + getNomeuser()+ "cpf=" + getCpf()+ " endereco=" + getEndereco() + "endereco_nr=" + getEndereco_nr() + " endereco_complemento=" + getEndereco_complemento() + "bairro=" + getBairro() + "cidades=" + getCidades() + "cep=" + getCep() + "telefone=" + getTelefone() + "celular=" + getCelular() + "matriculauser=" + getMatriculauser () + "loginunico=" + getLoginunico() + "senhauser=" + getSenhauser() + "permissaouser=" + getPermissaouser() +'}';
     }
 }//fecha classe
