@@ -17,12 +17,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
-public class Emprestar extends javax.swing.JFrame {
+public class GUIEmprestar extends javax.swing.JFrame {
 
     /**
      * Creates new form Emprestar
      */
-    public Emprestar() throws SQLException {
+    public GUIEmprestar() throws SQLException {
         initComponents();
         ObraDAO dadosLivro = new ObraDAO();
         ArrayList<ObraVO> listaLivros = new ArrayList();
@@ -44,7 +44,7 @@ public class Emprestar extends javax.swing.JFrame {
         try {
             listaEmprestimos = dadosEmprestimo.selecionarTodosRegistros();
         } catch (SQLException ex) {
-            Logger.getLogger(Emprestar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUIEmprestar.class.getName()).log(Level.SEVERE, null, ex);
         }
         for(Emprestimo emprestimo : listaEmprestimos)
         {
@@ -107,9 +107,9 @@ public class Emprestar extends javax.swing.JFrame {
         {
             dispose();
             try {
-                new Emprestar().setVisible(true);
+                new GUIEmprestar().setVisible(true);
             } catch (SQLException ex) {
-                Logger.getLogger(Emprestar.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GUIEmprestar.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else
@@ -258,7 +258,7 @@ public class Emprestar extends javax.swing.JFrame {
                         campocpf.setText("");
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(Emprestar.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GUIEmprestar.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
        }
@@ -281,14 +281,16 @@ public class Emprestar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Emprestar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIEmprestar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Emprestar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIEmprestar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Emprestar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIEmprestar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Emprestar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIEmprestar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -296,9 +298,9 @@ public class Emprestar extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Emprestar().setVisible(true);
+                    new GUIEmprestar().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(Emprestar.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GUIEmprestar.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

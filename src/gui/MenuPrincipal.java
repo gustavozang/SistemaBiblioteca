@@ -6,6 +6,9 @@ package gui;
 
 import modelo.UsuarioVO;
 import dao.UsuarioDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -46,7 +49,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmiManObra = new javax.swing.JMenuItem();
         jmiManDepartamento = new javax.swing.JMenuItem();
         jmiManAutor = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        jmRelatorio = new javax.swing.JMenu();
         jRelatUsuario = new javax.swing.JMenuItem();
         jRelatEditora = new javax.swing.JMenuItem();
         jjRelatFornecedor = new javax.swing.JMenuItem();
@@ -54,10 +57,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jjRelatObra = new javax.swing.JMenuItem();
         jjRelatDepartamento = new javax.swing.JMenuItem();
         jjRelatAutor = new javax.swing.JMenuItem();
+        jmFuncionalidades = new javax.swing.JMenu();
+        jEmprestar = new javax.swing.JMenuItem();
+        jDevolver = new javax.swing.JMenuItem();
         jmSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sistema de Biblioteca");
+        setTitle("Sistema Exemplo");
         setMinimumSize(new java.awt.Dimension(300, 300));
 
         jAreaTrabalho.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sistema de Biblioteca", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
@@ -198,7 +204,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jmbMenuPrincipal.add(jmManutencao);
 
-        jMenu1.setText("Relatórios");
+        jmRelatorio.setText("Relatórios");
 
         jRelatUsuario.setText("Usuário");
         jRelatUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +212,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jRelatUsuarioActionPerformed(evt);
             }
         });
-        jMenu1.add(jRelatUsuario);
+        jmRelatorio.add(jRelatUsuario);
 
         jRelatEditora.setText("Editora");
         jRelatEditora.addActionListener(new java.awt.event.ActionListener() {
@@ -214,7 +220,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jRelatEditoraActionPerformed(evt);
             }
         });
-        jMenu1.add(jRelatEditora);
+        jmRelatorio.add(jRelatEditora);
 
         jjRelatFornecedor.setText("Fornecedor");
         jjRelatFornecedor.addActionListener(new java.awt.event.ActionListener() {
@@ -222,7 +228,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jjRelatFornecedorActionPerformed(evt);
             }
         });
-        jMenu1.add(jjRelatFornecedor);
+        jmRelatorio.add(jjRelatFornecedor);
 
         jjRelatFuncionario.setText("Funcionario");
         jjRelatFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -230,7 +236,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jjRelatFuncionarioActionPerformed(evt);
             }
         });
-        jMenu1.add(jjRelatFuncionario);
+        jmRelatorio.add(jjRelatFuncionario);
 
         jjRelatObra.setText("Obra");
         jjRelatObra.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +244,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jjRelatObraActionPerformed(evt);
             }
         });
-        jMenu1.add(jjRelatObra);
+        jmRelatorio.add(jjRelatObra);
 
         jjRelatDepartamento.setText("Departamento");
         jjRelatDepartamento.addActionListener(new java.awt.event.ActionListener() {
@@ -246,7 +252,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jjRelatDepartamentoActionPerformed(evt);
             }
         });
-        jMenu1.add(jjRelatDepartamento);
+        jmRelatorio.add(jjRelatDepartamento);
 
         jjRelatAutor.setText("Autor");
         jjRelatAutor.addActionListener(new java.awt.event.ActionListener() {
@@ -254,9 +260,29 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 jjRelatAutorActionPerformed(evt);
             }
         });
-        jMenu1.add(jjRelatAutor);
+        jmRelatorio.add(jjRelatAutor);
 
-        jmbMenuPrincipal.add(jMenu1);
+        jmbMenuPrincipal.add(jmRelatorio);
+
+        jmFuncionalidades.setText("Funcionalidades");
+
+        jEmprestar.setText("Emprestar");
+        jEmprestar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEmprestarActionPerformed(evt);
+            }
+        });
+        jmFuncionalidades.add(jEmprestar);
+
+        jDevolver.setText("Devolver");
+        jDevolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDevolverActionPerformed(evt);
+            }
+        });
+        jmFuncionalidades.add(jDevolver);
+
+        jmbMenuPrincipal.add(jmFuncionalidades);
 
         jmSair.setText("Sair");
         jmSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -373,6 +399,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         gmp.setVisible(true);
     }//fecha método
     
+     private void abrirEmprestar() throws SQLException{
+        GUIEmprestar gmp = new GUIEmprestar();
+        jAreaTrabalho.add(gmp);
+        gmp.setVisible(true);
+    }//fecha método
+     
+      private void abrirDevolver() throws SQLException{
+        GUIDevolver gmp = new GUIDevolver();
+        jAreaTrabalho.add(gmp);
+        gmp.setVisible(true);
+    }//fecha método
+    
     private void jmCadUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCadUsuarioActionPerformed
         GUICadUsuario frameGUICadUsuario = new GUICadUsuario();
         frameGUICadUsuario.setVisible(true);
@@ -479,6 +517,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
         frameRelatorioAutor.setVisible(true);
     }//GEN-LAST:event_jjRelatAutorActionPerformed
 
+    private void jEmprestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEmprestarActionPerformed
+        try {
+            abrirEmprestar();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jEmprestarActionPerformed
+
+    private void jDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDevolverActionPerformed
+        try {
+            abrirDevolver();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jDevolverActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -515,8 +569,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jAreaTrabalho;
+    private javax.swing.JMenuItem jDevolver;
+    private javax.swing.JMenuItem jEmprestar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jRelatEditora;
     private javax.swing.JMenuItem jRelatUsuario;
     private javax.swing.JMenuItem jjRelatAutor;
@@ -532,7 +587,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmCadObra;
     private javax.swing.JMenuItem jmCadUsuario;
     private javax.swing.JMenu jmCadastro;
+    private javax.swing.JMenu jmFuncionalidades;
     private javax.swing.JMenu jmManutencao;
+    private javax.swing.JMenu jmRelatorio;
     private javax.swing.JMenu jmSair;
     private javax.swing.JMenuBar jmbMenuPrincipal;
     private javax.swing.JMenuItem jmiManAutor;
