@@ -518,19 +518,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jjRelatAutorActionPerformed
 
     private void jEmprestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEmprestarActionPerformed
+     GUIEmprestar frameGUIEmprestar = null;
         try {
-            abrirEmprestar();
+            frameGUIEmprestar = new GUIEmprestar();
         } catch (SQLException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+     frameGUIEmprestar.setVisible(true);
     }//GEN-LAST:event_jEmprestarActionPerformed
 
     private void jDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDevolverActionPerformed
+        GUIDevolver frameGUIDevolver = null;
         try {
-            abrirDevolver();
+            frameGUIDevolver = new GUIDevolver();
         } catch (SQLException ex) {
             Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+     frameGUIDevolver.setVisible(true);
     }//GEN-LAST:event_jDevolverActionPerformed
 
     /**
