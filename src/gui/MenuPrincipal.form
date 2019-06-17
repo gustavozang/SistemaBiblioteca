@@ -195,7 +195,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jjRelatFuncionario">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Funcionario"/>
+                <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jjRelatFuncionarioActionPerformed"/>
@@ -223,6 +223,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jjRelatAutorActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jjRelaEmprestimo">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Empr&#xe9;stimo"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jjRelaEmprestimoActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

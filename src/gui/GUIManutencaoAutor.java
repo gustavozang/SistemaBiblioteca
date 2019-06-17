@@ -46,6 +46,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jtNome = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableAutor = new javax.swing.JTable();
@@ -88,6 +89,10 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 49, 208, -1));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setText("Alteração de Autor");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 120, -1));
 
         javax.swing.GroupLayout jFAlterarLayout = new javax.swing.GroupLayout(jFAlterar.getContentPane());
         jFAlterar.getContentPane().setLayout(jFAlterarLayout);
@@ -470,6 +475,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
     private javax.swing.JButton jAlterar;
     private javax.swing.JButton jDeletar;
     private javax.swing.JFrame jFAlterar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;

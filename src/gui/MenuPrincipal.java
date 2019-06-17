@@ -57,6 +57,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jjRelatObra = new javax.swing.JMenuItem();
         jjRelatDepartamento = new javax.swing.JMenuItem();
         jjRelatAutor = new javax.swing.JMenuItem();
+        jjRelaEmprestimo = new javax.swing.JMenuItem();
         jmFuncionalidades = new javax.swing.JMenu();
         jEmprestar = new javax.swing.JMenuItem();
         jDevolver = new javax.swing.JMenuItem();
@@ -230,7 +231,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jmRelatorio.add(jjRelatFornecedor);
 
-        jjRelatFuncionario.setText("Funcionario");
+        jjRelatFuncionario.setText("Funcionário");
         jjRelatFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jjRelatFuncionarioActionPerformed(evt);
@@ -261,6 +262,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
         jmRelatorio.add(jjRelatAutor);
+
+        jjRelaEmprestimo.setText("Empréstimo");
+        jjRelaEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jjRelaEmprestimoActionPerformed(evt);
+            }
+        });
+        jmRelatorio.add(jjRelaEmprestimo);
 
         jmbMenuPrincipal.add(jmRelatorio);
 
@@ -537,6 +546,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
      frameGUIDevolver.setVisible(true);
     }//GEN-LAST:event_jDevolverActionPerformed
 
+    private void jjRelaEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jjRelaEmprestimoActionPerformed
+        RelatorioEmprestimo frameRelatorioEmprestimo = new RelatorioEmprestimo();
+        frameRelatorioEmprestimo.setVisible(true);
+    }//GEN-LAST:event_jjRelaEmprestimoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -578,6 +592,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jRelatEditora;
     private javax.swing.JMenuItem jRelatUsuario;
+    private javax.swing.JMenuItem jjRelaEmprestimo;
     private javax.swing.JMenuItem jjRelatAutor;
     private javax.swing.JMenuItem jjRelatDepartamento;
     private javax.swing.JMenuItem jjRelatFornecedor;

@@ -7,13 +7,13 @@ package modelo;
 
 public class ObraVO {
 
-    private int codigo;
     private String nome;
     private String editora;
     private String edicao;
     private String autor;
     private String categoria;
     private int quantidade;
+    private int codigo;
     /**
      * @return the codigo
      */

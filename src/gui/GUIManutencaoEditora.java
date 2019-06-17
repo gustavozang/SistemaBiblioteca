@@ -21,7 +21,7 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
             new Object[]{"Código", "Nome", "Endereco", "Numero", "Endereco_Complemento", "Bairro", "Cidades", "Cep", "Telefone", });
 
     /**
-     * Creates new form GUIManutencaoUsuario
+     * Creates new form GUIManutencaoEditora
      */
     public GUIManutencaoEditora() {
         initComponents();
@@ -58,6 +58,7 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jtNome = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableEditora = new javax.swing.JTable();
@@ -168,6 +169,10 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 49, 208, -1));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setText("Alteração de Editora");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 120, -1));
 
         javax.swing.GroupLayout jFAlterarLayout = new javax.swing.GroupLayout(jFAlterar.getContentPane());
         jFAlterar.getContentPane().setLayout(jFAlterarLayout);
@@ -323,22 +328,20 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getAccessibleContext().setAccessibleName("Manutenção Editora");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void preencherTabela() {
         try {
 
-            //Buscando objeto UsuarioServicos     
+            //Buscando objeto EditoraServicos     
             EditoraServicos ps = ServicosFactory.getEditoraServicos();
 
             /* Criando um ArrayList<ProdutoVO> vazio
              para receber o ArrayList com os dados */
             ArrayList<EditoraVO> prod = new ArrayList<>();
 
-            //Recebendo o ArrayList cheio em usuarios
+            //Recebendo o ArrayList cheio em editoras
             prod = ps.buscarEditoras();
 
             for (int i = 0; i < prod.size(); i++) {
@@ -462,7 +465,7 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
              para receber o ArrayList com os dados */
             ArrayList<EditoraVO> prod = new ArrayList<>();
 
-            //Recebendo o ArrayList cheio em usuarios
+            //Recebendo o ArrayList cheio em editoras
             prod = ps.buscarEditoras();
 
             int i = jtableEditora.getSelectedRow();
@@ -570,13 +573,13 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIManutencaoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIManutencaoEditora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIManutencaoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIManutencaoEditora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIManutencaoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIManutencaoEditora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIManutencaoUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIManutencaoEditora.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -584,7 +587,7 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIManutencaoUsuario().setVisible(true);
+                new GUIManutencaoEditora().setVisible(true);
             }
         });
     }
@@ -597,6 +600,7 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
     private javax.swing.JButton jAlterar;
     private javax.swing.JButton jDeletar;
     private javax.swing.JFrame jFAlterar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
