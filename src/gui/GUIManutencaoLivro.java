@@ -4,15 +4,15 @@
  */
 package gui;
 
-import dao.ObraDAO;
+import dao.DAOLivro;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.ObraVO;
-import servicos.ObraServicos;
+import modelo.Livro;
+import servicos.LivroServicos;
 import servicos.ServicosFactory;
 
-public class GUIManutencaoObra extends javax.swing.JInternalFrame {
+public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
 
     /* Criando um modelo de tabela padrão 
      com o nome das colunas */
@@ -21,9 +21,9 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
             new Object[]{"Código", "Nome", "Editora", "Edicao", "Autor", "Categoria", "Quantidade"});
 
     /**
-     * Creates new form GUIManutencaoObra
+     * Creates new form GUIManutencaoLivro
      */
-    public GUIManutencaoObra() {
+    public GUIManutencaoLivro() {
         initComponents();
         /* Chamando o método preencherTabela 
          no construtor */
@@ -54,9 +54,10 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
         jtNome = new javax.swing.JTextField();
         jtQuantidade = new javax.swing.JFormattedTextField();
         jtAutor = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtableObra = new javax.swing.JTable();
+        jtableLivro = new javax.swing.JTable();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jbPreencher = new javax.swing.JButton();
         jbLimpar = new javax.swing.JButton();
@@ -138,6 +139,10 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jtAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 210, -1));
 
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setText("Alteração livros");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 140, -1));
+
         javax.swing.GroupLayout jFAlterarLayout = new javax.swing.GroupLayout(jFAlterar.getContentPane());
         jFAlterar.getContentPane().setLayout(jFAlterarLayout);
         jFAlterarLayout.setHorizontalGroup(
@@ -164,14 +169,14 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setClosable(true);
         setIconifiable(true);
-        setTitle("Manutenção Obra");
+        setTitle("Manutenção Livro");
         setMinimumSize(new java.awt.Dimension(550, 400));
         setPreferredSize(new java.awt.Dimension(1000, 500));
 
         jLayeredPane1.setBackground(new java.awt.Color(127, 131, 249));
         jLayeredPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jtableObra.setModel(new javax.swing.table.DefaultTableModel(
+        jtableLivro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -187,8 +192,8 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
-        jtableObra.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jtableObra);
+        jtableLivro.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jtableLivro);
 
         jLayeredPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -292,7 +297,7 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getAccessibleContext().setAccessibleName("Manutenção Obra");
+        getAccessibleContext().setAccessibleName("Manutenção Livro");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -300,15 +305,15 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
     private void preencherTabela() {
         try {
 
-            //Buscando objeto ObraServicos     
-            ObraServicos ps = ServicosFactory.getObraServicos();
+            //Buscando objeto LivroServicos     
+            LivroServicos ps = ServicosFactory.getLivroServicos();
 
-            /* Criando um ArrayList<ObraVO> vazio
+            /* Criando um ArrayList<LivroVO> vazio
              para receber o ArrayList com os dados */
-            ArrayList<ObraVO> prod = new ArrayList<>();
+            ArrayList<Livro> prod = new ArrayList<>();
 
-            //Recebendo o ArrayList cheio em obras
-            prod = ps.buscarObras();
+            //Recebendo o ArrayList cheio em livros
+            prod = ps.buscarLivros();
 
             for (int i = 0; i < prod.size(); i++) {
                 dtm.addRow(new String[]{
@@ -323,8 +328,8 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
             }//fecha for
             
             /* Adicionando o modelo de tabela 
-             com os dados na tabela obra */
-            jtableObra.setModel(dtm);
+             com os dados na tabela livro */
+            jtableLivro.setModel(dtm);
             
             
 
@@ -344,19 +349,19 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
     private void excluir() {
 
         try {
-            //Buscando objeto ObraServicos     
-            ObraServicos ps = ServicosFactory.getObraServicos();
+            //Buscando objeto LivroServicos     
+            LivroServicos ps = ServicosFactory.getLivroServicos();
 
-            /* Criando um ArrayList<ObraVO> vazio
+            /* Criando um ArrayList<LivroVO> vazio
              para receber o ArrayList com os dados */
-            ArrayList<ObraVO> prod = new ArrayList<>();
+            ArrayList<Livro> prod = new ArrayList<>();
 
-            //Recebendo o ArrayList cheio em obras
-            prod = ps.buscarObras();
+            //Recebendo o ArrayList cheio em Livros
+            prod = ps.buscarLivros();
 
-            int i = jtableObra.getSelectedRow();
+            int i = jtableLivro.getSelectedRow();
 
-            ObraDAO p = new ObraDAO();
+            DAOLivro p = new DAOLivro();
 
             p.deletar(prod.get(i));
 
@@ -370,19 +375,19 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
 
     private void alterar() {
         try {
-            //Buscando objeto ObraServicos     
-            ObraServicos ps = ServicosFactory.getObraServicos();
+            //Buscando objeto LivroServicos     
+            LivroServicos ps = ServicosFactory.getLivroServicos();
 
-            /* Criando um ArrayList<ObraVO> vazio
+            /* Criando um ArrayList<LivroVO> vazio
              para receber o ArrayList com os dados */
-            ArrayList<ObraVO> prod = new ArrayList<>();
+            ArrayList<Livro> prod = new ArrayList<>();
 
-            //Recebendo o ArrayList cheio em obras
-            prod = ps.buscarObras();
+            //Recebendo o ArrayList cheio em Livros
+            prod = ps.buscarLivros();
 
-            int i = jtableObra.getSelectedRow();
+            int i = jtableLivro.getSelectedRow();
 
-            ObraDAO p = new ObraDAO();
+            DAOLivro p = new DAOLivro();
             /*jtNome.setText(prod.get(i).getNome());
             jtValor.setText(String.valueOf(prod.get(i).getEditora()));
             jtValor.setText(String.valueOf(prod.get(i).getEdicao()))
@@ -416,17 +421,17 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
     
     private void informacoes(){
          try {
-            //Buscando objeto ObraServicos     
-            ObraServicos ps = ServicosFactory.getObraServicos();
+            //Buscando objeto LivroServicos     
+            LivroServicos ps = ServicosFactory.getLivroServicos();
 
-            /* Criando um ArrayList<ObraVO> vazio
+            /* Criando um ArrayList<LivroVO> vazio
              para receber o ArrayList com os dados */
-            ArrayList<ObraVO> prod = new ArrayList<>();
+            ArrayList<Livro> prod = new ArrayList<>();
 
-            //Recebendo o ArrayList cheio em obras
-            prod = ps.buscarObras();
+            //Recebendo o ArrayList cheio em Livros
+            prod = ps.buscarLivros();
 
-            int i = jtableObra.getSelectedRow();
+            int i = jtableLivro.getSelectedRow();
             
             jtNome.setText(prod.get(i).getNome());
             jtEditora.setText(String.valueOf(prod.get(i).getEditora()));
@@ -524,14 +529,18 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIManutencaoObra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIManutencaoLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIManutencaoObra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIManutencaoLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIManutencaoObra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIManutencaoLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIManutencaoObra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUIManutencaoLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -540,7 +549,7 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIManutencaoObra().setVisible(true);
+                new GUIManutencaoLivro().setVisible(true);
             }
         });
     }
@@ -553,6 +562,7 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
     private javax.swing.JButton jAlterar;
     private javax.swing.JButton jDeletar;
     private javax.swing.JFrame jFAlterar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -572,6 +582,6 @@ public class GUIManutencaoObra extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtEditora;
     private javax.swing.JTextField jtNome;
     private javax.swing.JFormattedTextField jtQuantidade;
-    private javax.swing.JTable jtableObra;
+    private javax.swing.JTable jtableLivro;
     // End of variables declaration//GEN-END:variables
 }

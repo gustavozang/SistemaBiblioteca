@@ -12,12 +12,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import modelo.ObraVO;
+import modelo.Livro;
 import persistencia.ConexaoBanco;
 
-public class ObraDAO {
+public class DAOLivro {
 
-   public void cadastrarObra(ObraVO obra) throws SQLException {
+   public void cadastrarLivro(Livro livro) throws SQLException {
 
         /**
          Buscando uma conexão com o Banco de Dados
@@ -27,18 +27,18 @@ public class ObraDAO {
          Criando obj. capaz de executar instruções
          SQL no banco de dados
          Montando a instrução INSERT para inserir
-         um objeto obra no Banco MySQL
+         um objeto livro no Banco MySQL
          **/
-        String sql = "INSERT INTO obra(codigo, nome, editora, edicao, autor, categoria, quantidade,data) VALUES(default,?,?,?,?,?,?, CURRENT_DATE)";
+        String sql = "INSERT INTO livro(codigo, nome, editora, edicao, autor, categoria, quantidade,data) VALUES(default,?,?,?,?,?,?, CURRENT_DATE)";
         try { 
             PreparedStatement stmt = con.prepareStatement(sql);
             
-            stmt.setString(1, obra.getNome());
-            stmt.setString(2, obra.getEditora());
-            stmt.setString(3, obra.getEdicao());
-            stmt.setString(4, obra.getAutor());
-            stmt.setString(5, obra.getCategoria());
-            stmt.setInt(6, obra.getQuantidade());
+            stmt.setString(1, livro.getNome());
+            stmt.setString(2, livro.getEditora());
+            stmt.setString(3, livro.getEdicao());
+            stmt.setString(4, livro.getAutor());
+            stmt.setString(5, livro.getCategoria());
+            stmt.setInt(6, livro.getQuantidade());
             stmt.execute();
             stmt.close();
             con.close();
@@ -52,7 +52,7 @@ public class ObraDAO {
 
         
 
-    public ArrayList<ObraVO> buscarObras() throws SQLException {
+    public ArrayList<Livro> buscarLivros() throws SQLException {
 
         Connection con = ConexaoBanco.getConexao();
         Statement stat = con.createStatement();
@@ -61,7 +61,7 @@ public class ObraDAO {
             String sql;
 
             //Montando o sql            
-            sql = "select * from obra";
+            sql = "select * from livro";
 
             /**
              Executando o SQL  e armazenando
@@ -74,15 +74,15 @@ public class ObraDAO {
              Criando ArrayList para armazenar 
              objetos do tipo produto 
              **/
-            ArrayList<ObraVO> prod = new ArrayList<>();
+            ArrayList<Livro> prod = new ArrayList<>();
 
             /**
              Enquanto houver uma próxima linha no 
              banco de dados o while roda 
              **/
             while (rs.next()) {
-                //Criando um novo obj. ObraVO
-                ObraVO p = new ObraVO();
+                //Criando um novo obj. Livro
+                Livro p = new Livro();
 
                 /** Mapeando a tabela do banco para objeto
                  chamado pVO 
@@ -108,34 +108,34 @@ public class ObraDAO {
             return prod;
 
         } catch (SQLException e) {
-            throw new SQLException("Erro ao buscar obras! " + e.getMessage());
+            throw new SQLException("Erro ao buscar livros! " + e.getMessage());
         } finally {
             con.close();
             stat.close();
         }//fecha finally
     }//fecha método
 
-    public void deletar(ObraVO obra) throws SQLException {
+    public void deletar(Livro livro) throws SQLException {
         Connection con = ConexaoBanco.getConexao();
 
-        PreparedStatement p = con.prepareStatement("delete from obra where codigo = ?");
-        p.setInt(1, obra.getCodigo());
+        PreparedStatement p = con.prepareStatement("delete from livro where codigo = ?");
+        p.setInt(1, livro.getCodigo());
         p.execute();
         p.close();
     }
 
-    public void alterar(ObraVO obra) throws SQLException {
+    public void alterar(Livro livro) throws SQLException {
 
         Connection con = ConexaoBanco.getConexao();
-        PreparedStatement p = con.prepareStatement("update obra set nome=?,editora=?,edicao=?,autor=?,categoria=?,quantidade=? where codigo=?");
+        PreparedStatement p = con.prepareStatement("update livro set nome=?,editora=?,edicao=?,autor=?,categoria=?,quantidade=? where codigo=?");
 
-        p.setString(1, obra.getNome());
-        p.setString(2, obra.getEditora());
-        p.setString(3, obra.getEdicao());
-        p.setString(4, obra.getAutor());
-        p.setString(5, obra.getCategoria());
-        p.setInt(6, obra.getQuantidade());
-        p.setInt(7, obra.getCodigo());
+        p.setString(1, livro.getNome());
+        p.setString(2, livro.getEditora());
+        p.setString(3, livro.getEdicao());
+        p.setString(4, livro.getAutor());
+        p.setString(5, livro.getCategoria());
+        p.setInt(6, livro.getQuantidade());
+        p.setInt(7, livro.getCodigo());
         p.execute();
         p.close();
 
@@ -165,7 +165,7 @@ private Connection con;
    
       public boolean somaLivro(String codigo) throws SQLException, SQLException{
         conectar();
-         String sql = "UPDATE obra SET quantidade=quantidade+1 where codigo=?";
+         String sql = "UPDATE livro SET quantidade=quantidade+1 where codigo=?";
          try{
             comando = con.prepareStatement(sql);
             comando.setString(1, codigo);
@@ -178,7 +178,7 @@ private Connection con;
         }
          return false;
     }
-      public boolean alteraLivro(ObraVO livro) throws SQLException{
+      public boolean alteraLivro(Livro livro) throws SQLException{
         conectar();
          String sql = "UPDATE LIVRO SET NOME = ?, EDITORA = ?, EDICAO = ?, AUTOR= ?, CATEGORIA = ?, QUANTIDADE = ?"
                  + " WHERE CODIGO = ?";
@@ -200,4 +200,37 @@ private Connection con;
         }
          return false;
       }
+      
+      public  ArrayList<Livro> selecionarTodosRegistros() throws SQLException
+    {
+        conectar();
+        //interface utilizada pra guardar dados vindos de um banco de dados
+        ResultSet rs;
+        String sql = "SELECT * FROM LIVRO";
+        //lista que conterá todas as informações de livros no banco de dados
+        ArrayList<Livro> listaLivros = new ArrayList();
+        try{
+            comando = con.prepareStatement(sql);
+            rs = comando.executeQuery();
+            while(rs.next())
+            {
+                Livro livro = new Livro();
+                livro.setNome(rs.getString("NOME"));
+                livro.setEditora(rs.getString("EDITORA"));
+                livro.setEdicao(rs.getString("EDICAO"));
+                livro.setAutor(rs.getString("AUTOR"));
+                livro.setCategoria(rs.getString("CATEGORIA"));
+                livro.setQuantidade(rs.getInt("QUANTIDADE"));
+                livro.setCodigo(rs.getInt("CODIGO"));
+                listaLivros.add(livro);
+            }
+            fechar();
+            return listaLivros;
+        }catch(SQLException e){
+            imprimeErro("Erro ao buscar livros(s)", e.getMessage());
+            fechar();
+            return null;
+        }
+            
+    }
 }//fecha classe

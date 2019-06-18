@@ -6,10 +6,10 @@
 package gui;
 
 import dao.DAOEmprestimo;
-import dao.ObraDAO;
+import dao.DAOLivro;
 import java.sql.SQLException;
 import modelo.Emprestimo;
-import modelo.ObraVO;
+import modelo.Livro;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,7 +55,7 @@ public class GUIDevolver extends javax.swing.JFrame {
     {
             int linha = tabelaDados.getSelectedRow();
             String codigo = tabelaDados.getValueAt(linha, 1).toString();
-            ObraDAO soma = new ObraDAO();
+            DAOLivro soma = new DAOLivro();
             if(soma.somaLivro(codigo))
             {
                 return true;

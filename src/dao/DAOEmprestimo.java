@@ -6,7 +6,7 @@
 package dao;
 
 import modelo.Emprestimo;
-import modelo.ObraVO;
+import modelo.Livro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

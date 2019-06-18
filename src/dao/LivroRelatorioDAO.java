@@ -15,18 +15,18 @@ import net.sf.jasperreports.engine.JasperPrint;
  *
  * @author Gustavo
  */
-public class ObraRelatorioDAO {
+public class LivroRelatorioDAO {
     public Connection conn;
     public JasperPrint relat;
     
-    public ObraRelatorioDAO(){
+    public LivroRelatorioDAO(){
         conn = new ConnectionFactory().getConnection();
         
     }
     public JasperPrint gerar(){
         try{
             HashMap map = new HashMap();
-            String arquivo = "ireport/RelatorioObras.jasper";
+            String arquivo = "ireport/RelatorioLivros.jasper";
             relat = JasperFillManager.fillReport(arquivo, map, conn);
         }catch(Exception erro){
             throw new RuntimeException(erro);

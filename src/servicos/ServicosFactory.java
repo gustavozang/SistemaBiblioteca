@@ -15,7 +15,7 @@ public class ServicosFactory {
    private static EditoraServicos editoraServicos= new EditoraServicos();
    private static FornecedorServicos fornecedorServicos= new FornecedorServicos();
    private static FuncionarioServicos funcionarioServicos= new FuncionarioServicos();
-   private static ObraServicos obraServicos= new ObraServicos();
+   private static LivroServicos livroServicos= new LivroServicos();
    private static DepartamentoServicos departamentoServicos= new DepartamentoServicos();
    private static AutorServicos autorServicos= new AutorServicos();
 
@@ -38,9 +38,9 @@ public class ServicosFactory {
           
        return funcionarioServicos;
     }//fecha metodo    
-   public static ObraServicos getObraServicos(){
+   public static LivroServicos getLivroServicos(){
           
-       return obraServicos;     
+       return livroServicos;     
    }//fecha metodo
      
 

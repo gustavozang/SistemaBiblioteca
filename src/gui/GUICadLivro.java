@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 package gui;
-import modelo.ObraVO;
-import dao.ObraDAO;
+import modelo.Livro;
+import dao.DAOLivro;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,12 +15,12 @@ import javax.swing.JOptionPane;
  *
  * @author Gustavo
  */
-public class GUICadObra extends javax.swing.JFrame {
+public class GUICadLivro extends javax.swing.JFrame {
 
     /**
-     * Creates new form ObraGUI
+     * Creates new form LivroGUI
      */
-    public GUICadObra() {
+    public GUICadLivro() {
         initComponents();
         setBounds (200, 100, 400, 550);
     }
@@ -49,16 +49,16 @@ public class GUICadObra extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         TextField5 = new javax.swing.JTextField();
         TextField3 = new javax.swing.JTextField();
-        TextField6 = new javax.swing.JFormattedTextField();
         TextField4 = new javax.swing.JTextField();
+        TextField6 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Cadastro de Obra");
-        jLabel1.setToolTipText("Cadastro de Usuário");
+        jLabel1.setText("Cadastro de Livro");
+        jLabel1.setToolTipText("Cadastro de Livro");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastrar novas obras"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastrar novos livros"));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -178,13 +178,6 @@ public class GUICadObra extends javax.swing.JFrame {
             .addGap(0, 2, Short.MAX_VALUE)
         );
 
-        TextField6.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
-        TextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextField6ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -214,8 +207,8 @@ public class GUICadObra extends javax.swing.JFrame {
                                     .addComponent(TextField2)
                                     .addComponent(TextField5)
                                     .addComponent(TextField3)
-                                    .addComponent(TextField6)
-                                    .addComponent(TextField4)))))
+                                    .addComponent(TextField4)
+                                    .addComponent(TextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(jLabel1)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(118, Short.MAX_VALUE))
@@ -251,14 +244,13 @@ public class GUICadObra extends javax.swing.JFrame {
                     .addComponent(TextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(119, 119, 119)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(fechar)))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(119, 119, 119)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2)
+                    .addComponent(fechar))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
 
@@ -285,13 +277,13 @@ public class GUICadObra extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-ObraVO obra = new ObraVO();
-obra.setNome(TextField1.getText());
-obra.setEditora(TextField2.getText());
-obra.setEdicao(TextField3.getText());
-obra.setAutor(TextField4.getText());
-obra.setCategoria(TextField5.getText());
-obra.setQuantidade(Integer.parseInt(TextField6.getText()));
+Livro livro = new Livro();
+livro.setNome(TextField1.getText());
+livro.setEditora(TextField2.getText());
+livro.setEdicao(TextField3.getText());
+livro.setAutor(TextField4.getText());
+livro.setCategoria(TextField5.getText());
+livro.setQuantidade(Integer.parseInt(TextField6.getText()));
 
 
 // fazendo a validação dos dados
@@ -300,14 +292,14 @@ if ((TextField1.getText().isEmpty()) || (TextField2.getText().isEmpty()) || (Tex
 }
 else {
 
-    // instanciando a classe ObraDAO do pacote dao e criando seu objeto dao
-     ObraDAO dao = new ObraDAO();
+    // instanciando a classe DAOLivro do pacote dao e criando seu objeto dao
+     DAOLivro dao = new DAOLivro();
     try {
-        dao.cadastrarObra(obra);
+        dao.cadastrarLivro(livro);
     } catch (SQLException ex) {
-        Logger.getLogger(GUICadObra.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(GUICadLivro.class.getName()).log(Level.SEVERE, null, ex);
     }
-     JOptionPane.showMessageDialog(null, "Obra "+TextField1.getText()+" inserido com sucesso! ");
+     JOptionPane.showMessageDialog(null, "Livro "+TextField1.getText()+" inserido com sucesso! ");
 }
 
 // apaga os dados preenchidos nos campos de texto
@@ -318,10 +310,6 @@ TextField4.setText("");
 TextField5.setText("");
 TextField6.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void TextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextField6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,14 +328,18 @@ TextField6.setText("");
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUICadObra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUICadLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUICadObra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUICadLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUICadObra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUICadLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUICadObra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUICadLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -356,7 +348,7 @@ TextField6.setText("");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUICadObra().setVisible(true);
+                new GUICadLivro().setVisible(true);
             }
         });
     }
@@ -367,7 +359,7 @@ TextField6.setText("");
     private javax.swing.JTextField TextField3;
     private javax.swing.JTextField TextField4;
     private javax.swing.JTextField TextField5;
-    private javax.swing.JFormattedTextField TextField6;
+    private javax.swing.JTextField TextField6;
     private javax.swing.JButton fechar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

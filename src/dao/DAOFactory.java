@@ -14,7 +14,7 @@ public class DAOFactory {
  private static final EditoraDAO editoraDAO = new EditoraDAO();
  private static final FornecedorDAO fornecedorDAO = new FornecedorDAO();
  private static final FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
- private static final ObraDAO obraDAO = new ObraDAO();
+ private static final DAOLivro livroDAO = new DAOLivro();
  private static final DepartamentoDAO departamentoDAO = new DepartamentoDAO();
  private static final AutorDAO autorDAO = new AutorDAO();
     
@@ -35,8 +35,8 @@ public class DAOFactory {
         return funcionarioDAO;
     }
 
-    public static ObraDAO getObraDAO() {
-        return obraDAO;
+    public static DAOLivro getLivroDAO() {
+        return livroDAO;
     }
     
     public static DepartamentoDAO getDepartamentoDAO() {

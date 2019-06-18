@@ -5,7 +5,7 @@
  */
 package modelo;
 
-public class ObraVO {
+public class Livro {
 
     private String nome;
     private String editora;

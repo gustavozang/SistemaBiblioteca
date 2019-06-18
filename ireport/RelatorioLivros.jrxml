@@ -7,7 +7,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT * FROM obra;]]>
+		<![CDATA[SELECT * FROM livro;]]>
 	</queryString>
 	<field name="codigo" class="java.lang.Integer"/>
 	<field name="nome" class="java.lang.String"/>
@@ -15,7 +15,7 @@
 	<field name="edicao" class="java.lang.String"/>
 	<field name="autor" class="java.lang.String"/>
 	<field name="categoria" class="java.lang.String"/>
-	<field name="quantidade" class="java.lang.String"/>
+	<field name="quantidade" class="java.lang.Integer"/>
 	<field name="data" class="java.sql.Date"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -39,7 +39,7 @@
 				<textElement>
 					<font size="12" isBold="true" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[Consulta Obra]]></text>
+				<text><![CDATA[Consulta Livros]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -49,23 +49,23 @@
 	<columnHeader>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="100" y="0" width="100" height="20" uuid="26b1a879-93bb-41d0-ab01-c281a9ef58cd"/>
+				<reportElement x="56" y="0" width="165" height="20" uuid="26b1a879-93bb-41d0-ab01-c281a9ef58cd"/>
 				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="200" y="0" width="100" height="20" uuid="a3384db6-28b6-4a0b-aca6-508e4a7f9051"/>
+				<reportElement x="221" y="0" width="168" height="20" uuid="a3384db6-28b6-4a0b-aca6-508e4a7f9051"/>
 				<text><![CDATA[Autor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="0" width="100" height="20" uuid="5e53121b-3496-431c-bcb3-f8f282ffebce"/>
+				<reportElement x="389" y="0" width="91" height="20" uuid="5e53121b-3496-431c-bcb3-f8f282ffebce"/>
 				<text><![CDATA[Edição]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="400" y="0" width="80" height="20" uuid="924f53c6-a27c-4c47-8f09-16e4bd10f949"/>
+				<reportElement x="480" y="0" width="75" height="20" uuid="924f53c6-a27c-4c47-8f09-16e4bd10f949"/>
 				<text><![CDATA[Quantidade]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="0" width="100" height="20" uuid="45404e06-bfba-4e2b-bbb2-625c135bbc6f"/>
+				<reportElement x="0" y="0" width="56" height="20" uuid="45404e06-bfba-4e2b-bbb2-625c135bbc6f"/>
 				<text><![CDATA[Codigo]]></text>
 			</staticText>
 		</band>
@@ -73,23 +73,23 @@
 	<detail>
 		<band height="26" splitType="Stretch">
 			<textField>
-				<reportElement x="100" y="0" width="100" height="20" uuid="a4a88c53-e324-4f61-9a92-8a03c2af32d1"/>
+				<reportElement x="56" y="0" width="165" height="20" uuid="a4a88c53-e324-4f61-9a92-8a03c2af32d1"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="0" width="100" height="20" uuid="44ab6fd5-caf9-49d9-8828-0419af718e71"/>
+				<reportElement x="221" y="0" width="168" height="20" uuid="44ab6fd5-caf9-49d9-8828-0419af718e71"/>
 				<textFieldExpression><![CDATA[$F{autor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="300" y="0" width="100" height="20" uuid="6b6ba374-f457-4d63-afa5-ac8ae6be53e7"/>
+				<reportElement x="389" y="0" width="91" height="20" uuid="6b6ba374-f457-4d63-afa5-ac8ae6be53e7"/>
 				<textFieldExpression><![CDATA[$F{edicao}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="400" y="0" width="80" height="20" uuid="69e57be9-b382-48ab-92f1-72576b9033fc"/>
+				<reportElement x="480" y="0" width="75" height="20" uuid="69e57be9-b382-48ab-92f1-72576b9033fc"/>
 				<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="100" height="20" uuid="067eb8e4-0343-4806-be27-b7c479e80e47"/>
+				<reportElement x="0" y="0" width="56" height="20" uuid="067eb8e4-0343-4806-be27-b7c479e80e47"/>
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 		</band>

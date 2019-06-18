@@ -4,18 +4,18 @@
  * and open the template in the editor.
  */
 package gui;
-import dao.ObraRelatorioDAO;
+import dao.LivroRelatorioDAO;
 import net.sf.jasperreports.view.JasperViewer;
 /**
  *
  * @author gustavoz
  */
-public class RelatorioObra extends javax.swing.JFrame {
+public class RelatorioLivro extends javax.swing.JFrame {
 
     /**
      * Creates new form RelatorioObra
      */
-    public RelatorioObra() {
+    public RelatorioLivro() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -36,7 +36,7 @@ public class RelatorioObra extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel1.setText("Pesquisa Obras:");
+        jLabel1.setText("Pesquisa Livros:");
 
         jButton1.setText("Gerar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +82,7 @@ public class RelatorioObra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ObraRelatorioDAO prd = new ObraRelatorioDAO();
+        LivroRelatorioDAO prd = new LivroRelatorioDAO();
         JasperViewer.viewReport(prd.gerar());
     }//GEN-LAST:event_jButton1ActionPerformed
 	private void fechar(){
@@ -111,21 +111,23 @@ public class RelatorioObra extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RelatorioObra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RelatorioObra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RelatorioObra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelatorioObra.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RelatorioLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RelatorioObra().setVisible(true);
+                new RelatorioLivro().setVisible(true);
             }
         });
     }

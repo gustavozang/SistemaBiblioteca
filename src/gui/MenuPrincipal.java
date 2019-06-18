@@ -116,7 +116,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmCadastro.add(jmCadFuncionario);
 
         jmCadObra.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        jmCadObra.setText("Obra");
+        jmCadObra.setText("Livro");
         jmCadObra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmCadObraActionPerformed(evt);
@@ -179,7 +179,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jmManutencao.add(jmiManFuncionario);
 
-        jmiManObra.setText("Obra");
+        jmiManObra.setText("Livro");
         jmiManObra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiManObraActionPerformed(evt);
@@ -239,7 +239,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jmRelatorio.add(jjRelatFuncionario);
 
-        jjRelatObra.setText("Obra");
+        jjRelatObra.setText("Livro");
         jjRelatObra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jjRelatObraActionPerformed(evt);
@@ -349,7 +349,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//fecha método
      
      private void abrirCadObra(){
-        GUICadObra gcp = new GUICadObra();
+        GUICadLivro gcp = new GUICadLivro();
         jAreaTrabalho.add(gcp);
         gcp.setVisible(true);
     }//fecha método
@@ -391,7 +391,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//fecha método
     
     private void abrirManObra(){
-        GUIManutencaoObra gmp = new GUIManutencaoObra();
+        GUIManutencaoLivro gmp = new GUIManutencaoLivro();
         jAreaTrabalho.add(gmp);
         gmp.setVisible(true);
     }//fecha método
@@ -485,7 +485,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jjRelatFuncionarioActionPerformed
 
     private void jmCadObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCadObraActionPerformed
-        GUICadObra frameGUICadObra = new GUICadObra();
+        GUICadLivro frameGUICadObra = new GUICadLivro();
         frameGUICadObra.setVisible(true);
     }//GEN-LAST:event_jmCadObraActionPerformed
 
@@ -503,7 +503,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiManDepartamentoActionPerformed
 
     private void jjRelatObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jjRelatObraActionPerformed
-        RelatorioObra frameRelatorioObra = new RelatorioObra();
+        RelatorioLivro frameRelatorioObra = new RelatorioLivro();
         frameRelatorioObra.setVisible(true);
     }//GEN-LAST:event_jjRelatObraActionPerformed
 
