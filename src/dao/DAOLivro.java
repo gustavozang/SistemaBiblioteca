@@ -122,6 +122,8 @@ public class DAOLivro {
         p.setInt(1, livro.getCodigo());
         p.execute();
         p.close();
+        
+             
     }
 
     public void alterar(Livro livro) throws SQLException {

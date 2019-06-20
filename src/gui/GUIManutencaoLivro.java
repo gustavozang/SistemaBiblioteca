@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Livro;
+import org.exolab.castor.mapping.loader.J1CollectionHandlers;
 import servicos.LivroServicos;
 import servicos.ServicosFactory;
 
@@ -297,7 +298,7 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getAccessibleContext().setAccessibleName("Manutenção Livro");
+        getAccessibleContext().setAccessibleName("Manutenção Obra");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -469,9 +470,13 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbLimparActionPerformed
 
     private void jDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeletarActionPerformed
+        int resposta = JOptionPane.showConfirmDialog(null,"Deseja realmente excluir",title,JOptionPane.YES_NO_OPTION);
+        if(resposta ==JOptionPane.YES_OPTION){;
         excluir();
-
         jbPreencherActionPerformed(evt);
+        }else if (resposta == JOptionPane.NO_OPTION)
+              
+        return;
     }//GEN-LAST:event_jDeletarActionPerformed
 
     private void jtEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtEditoraActionPerformed

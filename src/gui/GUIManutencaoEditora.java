@@ -513,9 +513,13 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbLimparActionPerformed
 
     private void jDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeletarActionPerformed
+       int resposta = JOptionPane.showConfirmDialog(null,"Deseja realmente excluir",title,JOptionPane.YES_NO_OPTION);
+        if(resposta ==JOptionPane.YES_OPTION){;
         excluir();
-
         jbPreencherActionPerformed(evt);
+        }else if (resposta == JOptionPane.NO_OPTION)
+              
+        return;
     }//GEN-LAST:event_jDeletarActionPerformed
 
     private void jtEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtEnderecoActionPerformed

@@ -80,7 +80,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmCadastro.setText("Cadastro");
 
         jmCadUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
-        jmCadUsuario.setText("Usuario");
+        jmCadUsuario.setText("Usuário");
         jmCadUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmCadUsuarioActionPerformed(evt);
@@ -107,7 +107,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmCadastro.add(jmCadFornecedor);
 
         jmCadFuncionario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
-        jmCadFuncionario.setText("Funcionario");
+        jmCadFuncionario.setText("Funcionário");
         jmCadFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmCadFuncionarioActionPerformed(evt);
@@ -147,7 +147,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmManutencao.setText("Manutenção");
 
         jmiManUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
-        jmiManUsuario.setText("Usuario");
+        jmiManUsuario.setText("Usuário");
         jmiManUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiManUsuarioActionPerformed(evt);
@@ -171,7 +171,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jmManutencao.add(jmiManFornecedor);
 
-        jmiManFuncionario.setText("Funcionario");
+        jmiManFuncionario.setText("Funcionário");
         jmiManFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiManFuncionarioActionPerformed(evt);
