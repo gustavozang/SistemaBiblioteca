@@ -64,9 +64,9 @@
                           <Component id="TextField10" alignment="0" max="32767" attributes="0"/>
                           <Component id="TextField11" alignment="0" max="32767" attributes="0"/>
                           <Component id="TextField12" alignment="0" max="32767" attributes="0"/>
-                          <Component id="TextField13" alignment="0" max="32767" attributes="0"/>
                           <Component id="TextField2" alignment="0" max="32767" attributes="0"/>
                           <Component id="TextField5" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TextField13" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -150,7 +150,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
-                  <Component id="TextField13" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="TextField13" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -594,8 +594,6 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Component class="javax.swing.JTextField" name="TextField13">
-    </Component>
     <Container class="javax.swing.JPanel" name="jPanel14">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -671,6 +669,8 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="TextField5">
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="TextField13">
     </Component>
   </SubComponents>
 </Form>

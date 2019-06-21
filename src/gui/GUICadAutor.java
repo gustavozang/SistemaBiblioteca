@@ -77,7 +77,7 @@ public class GUICadAutor extends javax.swing.JFrame {
             .addGap(0, 2, Short.MAX_VALUE)
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Obra"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cidade"));
         jPanel3.setPreferredSize(new java.awt.Dimension(90, 25));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -184,7 +184,7 @@ public class GUICadAutor extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 AutorVO autor = new AutorVO();
 autor.setNome(TextField1.getText());
-autor.setObra(TextField2.getText());
+autor.setCidade(TextField2.getText());
 
 // fazendo a validação dos dados
 if ((TextField1.getText().isEmpty()) || (TextField2.getText().isEmpty())) {

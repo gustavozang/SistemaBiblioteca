@@ -18,7 +18,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
      com o nome das colunas */
     DefaultTableModel dtm = new DefaultTableModel(
             new Object[][]{},
-            new Object[]{"Codigo", "Nome", "Obra"});
+            new Object[]{"Codigo", "Nome", "Cidade"});
 
     /**
      * Creates new form GUIManutencaoAutor
@@ -42,7 +42,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
         jFAlterar = new javax.swing.JFrame();
         jbAtualizar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jtObra = new javax.swing.JTextField();
+        jtCidade = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jtNome = new javax.swing.JTextField();
@@ -70,14 +70,14 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Preencha os campos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(0, 0, 204))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jtObra.addActionListener(new java.awt.event.ActionListener() {
+        jtCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtObraActionPerformed(evt);
+                jtCidadeActionPerformed(evt);
             }
         });
-        jPanel1.add(jtObra, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 80, 208, -1));
+        jPanel1.add(jtCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 80, 208, -1));
 
-        jLabel2.setText("Obra:");
+        jLabel2.setText("Cidade:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 80, -1, -1));
 
         jLabel10.setText("Nome:");
@@ -132,7 +132,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Nome", "Obra"
+                "Codigo", "Nome", "Cidade"
             }
         ) {
             Class[] types = new Class [] {
@@ -268,7 +268,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
                 dtm.addRow(new String[]{
                     String.valueOf(prod.get(i).getCodigo()),
                     String.valueOf(prod.get(i).getNome()),
-                    String.valueOf(prod.get(i).getObra()),
+                    String.valueOf(prod.get(i).getCidade()),
                 });
             }//fecha for
             
@@ -334,7 +334,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
 
             AutorDAO p = new AutorDAO();
             /*jtNome.setText(prod.get(i).getNome());
-            jtValor.setText(String.valueOf(prod.get(i).getObra()));*/
+            jtValor.setText(String.valueOf(prod.get(i).getCidade()));*/
                       
             
             
@@ -342,7 +342,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
             
 
             prod.get(i).setNome(jtNome.getText());
-            prod.get(i).setObra(jtObra.getText());
+            prod.get(i).setCidade(jtCidade.getText());
                                
             
             
@@ -371,7 +371,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
             int i = jtableAutor.getSelectedRow();
             
             jtNome.setText(prod.get(i).getNome());
-            jtObra.setText(String.valueOf(prod.get(i).getObra()));
+            jtCidade.setText(String.valueOf(prod.get(i).getCidade()));
                              
             
             
@@ -385,7 +385,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
 
     private void limparAlterar() {
         jtNome.setText(null);
-        jtObra.setText(null);
+        jtCidade.setText(null);
     }
 
     private void jbPreencherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPreencherActionPerformed
@@ -424,9 +424,9 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtNomeActionPerformed
 
-    private void jtObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtObraActionPerformed
+    private void jtCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCidadeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtObraActionPerformed
+    }//GEN-LAST:event_jtCidadeActionPerformed
 
      /**
      * @param args the command line arguments
@@ -489,8 +489,8 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAtualizar;
     private javax.swing.JButton jbLimpar;
     private javax.swing.JButton jbPreencher;
+    private javax.swing.JTextField jtCidade;
     private javax.swing.JTextField jtNome;
-    private javax.swing.JTextField jtObra;
     private javax.swing.JTable jtableAutor;
     // End of variables declaration//GEN-END:variables
 }

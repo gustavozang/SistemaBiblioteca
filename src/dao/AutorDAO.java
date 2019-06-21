@@ -28,12 +28,12 @@ public class AutorDAO {
          Montando a instrução INSERT para inserir
          um objeto autor no Banco MySQL
          **/
-        String sql = "INSERT INTO autor(codigo, nome, obra,data) VALUES(default,?,?, CURRENT_DATE)";
+        String sql = "INSERT INTO autor(codigo, nome, cidade,data) VALUES(default,?,?, CURRENT_DATE)";
         try { 
             PreparedStatement stmt = con.prepareStatement(sql);
             
             stmt.setString(1, autor.getNome());
-            stmt.setString(2, autor.getObra());
+            stmt.setString(2, autor.getCidade());
             stmt.execute();
             stmt.close();
             con.close();
@@ -84,7 +84,7 @@ public class AutorDAO {
                  **/
                 p.setCodigo(rs.getInt("codigo"));
                 p.setNome(rs.getString("nome"));
-                p.setObra(rs.getString("obra"));
+                p.setCidade(rs.getString("cidade"));
                                              
 
                 /** 
@@ -118,11 +118,11 @@ public class AutorDAO {
     public void alterar(AutorVO autor) throws SQLException {
 
         Connection con = ConexaoBanco.getConexao();
-        PreparedStatement p = con.prepareStatement("update autor set nome=?,obra=? where codigo=?");
+        PreparedStatement p = con.prepareStatement("update autor set nome=?,cidade=? where codigo=?");
 
         p.setString(1, autor.getNome());
-        p.setString(2, autor.getObra());
-        p.setInt(7, autor.getCodigo());
+        p.setString(2, autor.getCidade());
+        p.setInt(3, autor.getCodigo());
         p.execute();
         p.close();
 

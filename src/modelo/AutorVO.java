@@ -9,7 +9,7 @@ public class AutorVO {
 
     private int codigo;
     private String nome;
-    private String obra;
+    private String cidade;
    
     
     
@@ -44,22 +44,22 @@ public class AutorVO {
     }
 
     /**
-     * @return the obra
+     * @return the cidade
      */
-    public String getObra() {
-        return obra;
+    public String getCidade() {
+        return cidade;
     }
 
     /**
-     * @param obra the obra to set
+     * @param cidade the cidade to set
      */
-    public void setObra(String obra) {
-        this.obra = obra;
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
     
  @Override
  
     public String toString() {
-        return "ObraVO{" + "Codigo=" + getCodigo() + ", nome=" + getNome() + ", obra=" + obra + '}';
+        return "AutorVO{" + "Codigo=" + getCodigo() + ", nome=" + getNome() + ", cidade=" + getCidade() + '}';
     }
 }//fecha classe

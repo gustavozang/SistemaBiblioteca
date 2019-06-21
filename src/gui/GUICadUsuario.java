@@ -61,12 +61,12 @@ public class GUICadUsuario extends javax.swing.JFrame {
         jPanel12 = new javax.swing.JPanel();
         TextField12 = new javax.swing.JTextField();
         jPanel13 = new javax.swing.JPanel();
-        TextField13 = new javax.swing.JTextField();
         jPanel14 = new javax.swing.JPanel();
         TextField14 = new javax.swing.JComboBox<>();
         jPanel15 = new javax.swing.JPanel();
         TextField2 = new javax.swing.JFormattedTextField();
         TextField5 = new javax.swing.JTextField();
+        TextField13 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -388,9 +388,9 @@ public class GUICadUsuario extends javax.swing.JFrame {
                             .addComponent(TextField10)
                             .addComponent(TextField11)
                             .addComponent(TextField12)
-                            .addComponent(TextField13)
                             .addComponent(TextField2)
-                            .addComponent(TextField5)))
+                            .addComponent(TextField5)
+                            .addComponent(TextField13)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -597,7 +597,7 @@ TextField14.setSelectedItem("");
     private javax.swing.JFormattedTextField TextField10;
     private javax.swing.JTextField TextField11;
     private javax.swing.JTextField TextField12;
-    private javax.swing.JTextField TextField13;
+    private javax.swing.JPasswordField TextField13;
     private javax.swing.JComboBox<String> TextField14;
     private javax.swing.JFormattedTextField TextField2;
     private javax.swing.JTextField TextField3;
