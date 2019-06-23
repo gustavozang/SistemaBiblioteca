@@ -42,7 +42,7 @@ public class GUICadFuncionario extends javax.swing.JFrame {
             /**
             Montando o sql
             **/
-            sql = "select * from departamento";
+            sql = "select * from departamento ORDER BY nome";
 
             /** Executando o SQL  e armazenando
              o ResultSet em um objeto do tipo

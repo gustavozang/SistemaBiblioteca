@@ -348,7 +348,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         gcp.setVisible(true);
     }//fecha método
      
-     private void abrirCadObra(){
+     private void abrirCadObra() throws SQLException{
         GUICadLivro gcp = new GUICadLivro();
         jAreaTrabalho.add(gcp);
         gcp.setVisible(true);
@@ -390,7 +390,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         gmp.setVisible(true);
     }//fecha método
     
-    private void abrirManObra(){
+    private void abrirManObra() throws SQLException{
         GUIManutencaoLivro gmp = new GUIManutencaoLivro();
         jAreaTrabalho.add(gmp);
         gmp.setVisible(true);
@@ -494,12 +494,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jjRelatFuncionarioActionPerformed
 
     private void jmCadObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCadObraActionPerformed
-        GUICadLivro frameGUICadObra = new GUICadLivro();
+        GUICadLivro frameGUICadObra = null;
+        try {
+            frameGUICadObra = new GUICadLivro();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         frameGUICadObra.setVisible(true);
     }//GEN-LAST:event_jmCadObraActionPerformed
 
     private void jmiManObraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiManObraActionPerformed
-        abrirManObra();
+        try {
+            abrirManObra();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jmiManObraActionPerformed
 
     private void jmCadDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCadDepartamentoActionPerformed

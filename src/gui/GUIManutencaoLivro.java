@@ -5,11 +5,20 @@
 package gui;
 
 import dao.DAOLivro;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.AutorVO;
+import modelo.EditoraVO;
 import modelo.Livro;
 import org.exolab.castor.mapping.loader.J1CollectionHandlers;
+import persistencia.ConexaoBanco;
 import servicos.LivroServicos;
 import servicos.ServicosFactory;
 
@@ -24,13 +33,111 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
     /**
      * Creates new form GUIManutencaoLivro
      */
-    public GUIManutencaoLivro() {
+    public GUIManutencaoLivro() throws SQLException {
         initComponents();
+        this.populaJComboBoxEditora();
+        this.populaJComboBoxAutor();
         /* Chamando o método preencherTabela 
          no construtor */
         preencherTabela();
     }
+    public void populaJComboBoxEditora() throws SQLException{
+        Connection con = ConexaoBanco.getConexao();
+        Statement stat = con.createStatement();
 
+        try {
+            String sql;
+            /**
+            Montando o sql
+            **/
+            sql = "select * from editora ORDER BY nome";
+
+            /** Executando o SQL  e armazenando
+             o ResultSet em um objeto do tipo
+             ResultSet chamado rs **/
+            ResultSet rs = stat.executeQuery(sql);
+
+            /** Criando ArrayList para armazenar 
+             objetos do tipo produto **/
+            ArrayList<EditoraVO> prod = new ArrayList<>();
+
+            /** Enquanto houver uma próxima linha no 
+             banco de dados o while roda **/
+            while (rs.next()) {
+                /**
+                 Criando um novo obj. EditoraVO
+                 * */
+                EditoraVO p = new EditoraVO();
+
+                /** Mapeando a tabela do banco para objeto
+                 chamado pVO **/
+                jComboBoxEditora.addItem(rs.getString("nome"));
+                              
+
+                /** 
+                 Inserindo o objeto pVO no ArrayList 
+                 **/
+                prod.add(p);
+            }
+            //Retornando o ArrayList com todos objetos
+            //fecha while
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao buscar editora! " + e.getMessage());
+        } finally {
+            con.close();
+            stat.close();
+        }
+    }
+    
+    public void populaJComboBoxAutor() throws SQLException{
+        Connection con = ConexaoBanco.getConexao();
+        Statement stat = con.createStatement();
+
+        try {
+            String sql;
+            /**
+            Montando o sql
+            **/
+            sql = "select * from autor ORDER BY nome";
+
+            /** Executando o SQL  e armazenando
+             o ResultSet em um objeto do tipo
+             ResultSet chamado rs **/
+            ResultSet rs = stat.executeQuery(sql);
+
+            /** Criando ArrayList para armazenar 
+             objetos do tipo produto **/
+            ArrayList<AutorVO> prod = new ArrayList<>();
+
+            /** Enquanto houver uma próxima linha no 
+             banco de dados o while roda **/
+            while (rs.next()) {
+                /**
+                 Criando um novo obj. AutorVO
+                 * */
+                AutorVO p = new AutorVO();
+
+                /** Mapeando a tabela do banco para objeto
+                 chamado pVO **/
+                jComboBoxAutor.addItem(rs.getString("nome"));
+                              
+
+                /** 
+                 Inserindo o objeto pVO no ArrayList 
+                 **/
+                prod.add(p);
+            }
+            //Retornando o ArrayList com todos objetos
+            //fecha while
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao buscar Autor! " + e.getMessage());
+        } finally {
+            con.close();
+            stat.close();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,7 +150,6 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
         jFAlterar = new javax.swing.JFrame();
         jbAtualizar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jtEditora = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -54,8 +160,9 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jtNome = new javax.swing.JTextField();
         jtQuantidade = new javax.swing.JFormattedTextField();
-        jtAutor = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jComboBoxEditora = new javax.swing.JComboBox<>();
+        jComboBoxAutor = new javax.swing.JComboBox<>();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableLivro = new javax.swing.JTable();
@@ -78,13 +185,6 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Preencha os campos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(0, 0, 204))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jtEditora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtEditoraActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtEditora, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 80, 208, -1));
 
         jLabel3.setText("Edição:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 111, -1, -1));
@@ -131,18 +231,15 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
                 jtQuantidadeActionPerformed(evt);
             }
         });
-        jPanel1.add(jtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 200, -1));
-
-        jtAutor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtAutorActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 210, -1));
+        jPanel1.add(jtQuantidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 40, -1));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("Alteração livros");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 140, -1));
+
+        jPanel1.add(jComboBoxEditora, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 210, -1));
+
+        jPanel1.add(jComboBoxAutor, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 210, -1));
 
         javax.swing.GroupLayout jFAlterarLayout = new javax.swing.GroupLayout(jFAlterar.getContentPane());
         jFAlterar.getContentPane().setLayout(jFAlterarLayout);
@@ -402,9 +499,9 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
             
 
             prod.get(i).setNome(jtNome.getText());
-            prod.get(i).setEditora(jtEditora.getText());
+            prod.get(i).setEditora((String) jComboBoxEditora.getSelectedItem());
             prod.get(i).setEdicao(jtEdicao.getText());
-            prod.get(i).setAutor(jtAutor.getText());
+            prod.get(i).setAutor((String) jComboBoxAutor.getSelectedItem());
             prod.get(i).setCategoria(jtCategoria.getText());
             prod.get(i).setQuantidade(Integer.parseInt(jtQuantidade.getText()));
                       
@@ -435,9 +532,9 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
             int i = jtableLivro.getSelectedRow();
             
             jtNome.setText(prod.get(i).getNome());
-            jtEditora.setText(String.valueOf(prod.get(i).getEditora()));
+            jComboBoxEditora.setSelectedItem(String.valueOf(prod.get(i).getEditora()));
             jtEdicao.setText(String.valueOf(prod.get(i).getEdicao()));
-            jtAutor.setText(String.valueOf(prod.get(i).getAutor()));
+            jComboBoxAutor.setSelectedItem(String.valueOf(prod.get(i).getAutor()));
             jtCategoria.setText(String.valueOf(prod.get(i).getCategoria()));
             jtQuantidade.setText(String.valueOf(prod.get(i).getQuantidade()));
                      
@@ -453,9 +550,9 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
 
     private void limparAlterar() {
         jtNome.setText(null);
-        jtEditora.setText(null);
+        jComboBoxEditora.setSelectedItem(null);
         jtEdicao.setText(null);
-        jtAutor.setText(null);
+        jComboBoxAutor.setSelectedItem(null);
         jtCategoria.setText(null);
         jtQuantidade.setText(null);
     }
@@ -478,10 +575,6 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
               
         return;
     }//GEN-LAST:event_jDeletarActionPerformed
-
-    private void jtEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtEditoraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtEditoraActionPerformed
 
     private void jbAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarActionPerformed
         alterar();
@@ -511,10 +604,6 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
     private void jtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtQuantidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtQuantidadeActionPerformed
-
-    private void jtAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtAutorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtAutorActionPerformed
 
      /**
      * @param args the command line arguments
@@ -554,7 +643,11 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIManutencaoLivro().setVisible(true);
+                try {
+                    new GUIManutencaoLivro().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUIManutencaoLivro.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -565,6 +658,8 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAlterar;
+    private javax.swing.JComboBox<String> jComboBoxAutor;
+    private javax.swing.JComboBox<String> jComboBoxEditora;
     private javax.swing.JButton jDeletar;
     private javax.swing.JFrame jFAlterar;
     private javax.swing.JLabel jLabel1;
@@ -581,10 +676,8 @@ public class GUIManutencaoLivro extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAtualizar;
     private javax.swing.JButton jbLimpar;
     private javax.swing.JButton jbPreencher;
-    private javax.swing.JTextField jtAutor;
     private javax.swing.JTextField jtCategoria;
     private javax.swing.JTextField jtEdicao;
-    private javax.swing.JTextField jtEditora;
     private javax.swing.JTextField jtNome;
     private javax.swing.JFormattedTextField jtQuantidade;
     private javax.swing.JTable jtableLivro;

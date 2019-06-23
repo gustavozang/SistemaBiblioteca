@@ -49,10 +49,10 @@ public class GUICadEditora extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         fechar = new javax.swing.JButton();
         TextField3 = new javax.swing.JFormattedTextField();
-        TextField4 = new javax.swing.JFormattedTextField();
         TextField7 = new javax.swing.JFormattedTextField();
         jPanel9 = new javax.swing.JPanel();
         TextField8 = new javax.swing.JFormattedTextField();
+        TextField4 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -220,13 +220,6 @@ public class GUICadEditora extends javax.swing.JFrame {
 
         TextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        TextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-        TextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TextField4ActionPerformed(evt);
-            }
-        });
-
         try {
             TextField7.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
@@ -260,6 +253,12 @@ public class GUICadEditora extends javax.swing.JFrame {
         TextField8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TextField8ActionPerformed(evt);
+            }
+        });
+
+        TextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextField4ActionPerformed(evt);
             }
         });
 
@@ -306,9 +305,9 @@ public class GUICadEditora extends javax.swing.JFrame {
                                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
                                 .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(TextField4))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(TextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -342,9 +341,7 @@ public class GUICadEditora extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(TextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(TextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(TextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -445,10 +442,6 @@ TextField8.setText("");
         // TODO add your handling code here:
     }//GEN-LAST:event_TextField5ActionPerformed
 
-    private void TextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TextField4ActionPerformed
-
     private void TextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextField7ActionPerformed
@@ -456,6 +449,10 @@ TextField8.setText("");
     private void TextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextField8ActionPerformed
+
+    private void TextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextField4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -497,7 +494,7 @@ TextField8.setText("");
     private javax.swing.JTextField TextField1;
     private javax.swing.JTextField TextField2;
     private javax.swing.JFormattedTextField TextField3;
-    private javax.swing.JFormattedTextField TextField4;
+    private javax.swing.JTextField TextField4;
     private javax.swing.JTextField TextField5;
     private javax.swing.JTextField TextField6;
     private javax.swing.JFormattedTextField TextField7;
