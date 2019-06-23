@@ -5,10 +5,18 @@
 package gui;
 
 import dao.FuncionarioDAO;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.DepartamentoVO;
 import modelo.FuncionarioVO;
+import persistencia.ConexaoBanco;
 import servicos.FuncionarioServicos;
 import servicos.ServicosFactory;
 
@@ -23,13 +31,61 @@ public class GUIManutencaoFuncionario extends javax.swing.JInternalFrame {
     /**
      * Creates new form GUIManutencaoFuncionario
      */
-    public GUIManutencaoFuncionario() {
+    public GUIManutencaoFuncionario() throws SQLException {
         initComponents();
+        this.populaJComboBox();
         /* Chamando o método preencherTabela 
          no construtor */
         preencherTabela();
     }
+ public void populaJComboBox() throws SQLException{
+        Connection con = ConexaoBanco.getConexao();
+        Statement stat = con.createStatement();
 
+        try {
+            String sql;
+            /**
+            Montando o sql
+            **/
+            sql = "select * from departamento";
+
+            /** Executando o SQL  e armazenando
+             o ResultSet em um objeto do tipo
+             ResultSet chamado rs **/
+            ResultSet rs = stat.executeQuery(sql);
+
+            /** Criando ArrayList para armazenar 
+             objetos do tipo produto **/
+            ArrayList<DepartamentoVO> prod = new ArrayList<>();
+
+            /** Enquanto houver uma próxima linha no 
+             banco de dados o while roda **/
+            while (rs.next()) {
+                /**
+                 Criando um novo obj. DepartamentoVO
+                 * */
+                DepartamentoVO p = new DepartamentoVO();
+
+                /** Mapeando a tabela do banco para objeto
+                 chamado pVO **/
+                jComboBoxDepartamento.addItem(rs.getString("nome"));
+                              
+
+                /** 
+                 Inserindo o objeto pVO no ArrayList 
+                 **/
+                prod.add(p);
+            }
+            //Retornando o ArrayList com todos objetos
+            //fecha while
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao buscar departamentos! " + e.getMessage());
+        } finally {
+            con.close();
+            stat.close();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,11 +98,11 @@ public class GUIManutencaoFuncionario extends javax.swing.JInternalFrame {
         jFAlterar = new javax.swing.JFrame();
         jbAtualizar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jtNome_departamento = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jtNome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jComboBoxDepartamento = new javax.swing.JComboBox<>();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableFuncionario = new javax.swing.JTable();
@@ -70,14 +126,7 @@ public class GUIManutencaoFuncionario extends javax.swing.JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Preencha os campos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(0, 0, 204))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jtNome_departamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtNome_departamentoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtNome_departamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 80, 208, -1));
-
-        jLabel2.setText("Departamento");
+        jLabel2.setText("Departamento:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 80, -1, -1));
 
         jLabel10.setText("Nome:");
@@ -93,6 +142,8 @@ public class GUIManutencaoFuncionario extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("Alteração de Funcionário");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 160, -1));
+
+        jPanel1.add(jComboBoxDepartamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 200, -1));
 
         javax.swing.GroupLayout jFAlterarLayout = new javax.swing.GroupLayout(jFAlterar.getContentPane());
         jFAlterar.getContentPane().setLayout(jFAlterarLayout);
@@ -342,7 +393,7 @@ public class GUIManutencaoFuncionario extends javax.swing.JInternalFrame {
             
 
             prod.get(i).setNome(jtNome.getText());
-            prod.get(i).setNome_departamento(jtNome_departamento.getText());
+            prod.get(i).setNome_departamento((String) jComboBoxDepartamento.getSelectedItem());
                     
             
             
@@ -371,7 +422,8 @@ public class GUIManutencaoFuncionario extends javax.swing.JInternalFrame {
             int i = jtableFuncionario.getSelectedRow();
             
             jtNome.setText(prod.get(i).getNome());
-            jtNome_departamento.setText(String.valueOf(prod.get(i).getNome_departamento()));
+            jComboBoxDepartamento.setSelectedItem(prod.get(i).getNome_departamento());
+            
                     
             
             
@@ -385,7 +437,8 @@ public class GUIManutencaoFuncionario extends javax.swing.JInternalFrame {
 
     private void limparAlterar() {
         jtNome.setText(null);
-        jtNome_departamento.setText(null);
+        jComboBoxDepartamento.setSelectedItem(null);
+        
      
     }
 
@@ -407,10 +460,6 @@ public class GUIManutencaoFuncionario extends javax.swing.JInternalFrame {
               
         return;
     }//GEN-LAST:event_jDeletarActionPerformed
-
-    private void jtNome_departamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNome_departamentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtNome_departamentoActionPerformed
 
     private void jbAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarActionPerformed
         alterar();
@@ -463,7 +512,11 @@ public class GUIManutencaoFuncionario extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIManutencaoFuncionario().setVisible(true);
+                try {
+                    new GUIManutencaoFuncionario().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUIManutencaoFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -474,6 +527,7 @@ public class GUIManutencaoFuncionario extends javax.swing.JInternalFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAlterar;
+    private javax.swing.JComboBox<String> jComboBoxDepartamento;
     private javax.swing.JButton jDeletar;
     private javax.swing.JFrame jFAlterar;
     private javax.swing.JLabel jLabel1;
@@ -487,7 +541,6 @@ public class GUIManutencaoFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbLimpar;
     private javax.swing.JButton jbPreencher;
     private javax.swing.JTextField jtNome;
-    private javax.swing.JTextField jtNome_departamento;
     private javax.swing.JTable jtableFuncionario;
     // End of variables declaration//GEN-END:variables
 }

@@ -342,7 +342,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         gcp.setVisible(true);
     }//fecha método
     
-     private void abrirCadFuncionario(){
+     private void abrirCadFuncionario() throws SQLException{
         GUICadFuncionario gcp = new GUICadFuncionario();
         jAreaTrabalho.add(gcp);
         gcp.setVisible(true);
@@ -384,7 +384,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         gmp.setVisible(true);
     }//fecha método
     
-    private void abrirManFuncionario(){
+    private void abrirManFuncionario() throws SQLException{
         GUIManutencaoFuncionario gmp = new GUIManutencaoFuncionario();
         jAreaTrabalho.add(gmp);
         gmp.setVisible(true);
@@ -471,11 +471,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jjRelatFornecedorActionPerformed
 
     private void jmiManFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiManFuncionarioActionPerformed
-        abrirManFuncionario();
+        try {
+            abrirManFuncionario();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jmiManFuncionarioActionPerformed
 
     private void jmCadFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCadFuncionarioActionPerformed
-        GUICadFuncionario frameGUICadFuncionario = new GUICadFuncionario();
+        GUICadFuncionario frameGUICadFuncionario = null;
+        try {
+            frameGUICadFuncionario = new GUICadFuncionario();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         frameGUICadFuncionario.setVisible(true);
     }//GEN-LAST:event_jmCadFuncionarioActionPerformed
 

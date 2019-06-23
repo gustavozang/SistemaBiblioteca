@@ -109,10 +109,12 @@ public class FuncionarioDAO {
     public void alterar(FuncionarioVO funcionario) throws SQLException {
 
         Connection con = ConexaoBanco.getConexao();
-        PreparedStatement p = con.prepareStatement("update funcionario set nome=?,cod_departamento=? where codigo=?");
+        PreparedStatement p = con.prepareStatement("update funcionario set nome=?,nome_departamento=? where codigo=?");
 
         p.setString(1, funcionario.getNome());
         p.setString(2, funcionario.getNome_departamento());
+        p.setInt(3,funcionario.getCodigo());
+        p.execute();
         p.close();
 
     }
