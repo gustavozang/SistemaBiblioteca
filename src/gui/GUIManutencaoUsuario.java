@@ -13,6 +13,8 @@ import servicos.UsuarioServicos;
 import servicos.ServicosFactory;
 
 public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
+	
+	
 
     /* Criando um modelo de tabela padrão 
      com o nome das colunas */
@@ -81,7 +83,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         jAlterar = new javax.swing.JButton();
 
         jFAlterar.setTitle("Atualizar");
-        jFAlterar.setMinimumSize(new java.awt.Dimension(550, 450));
+        jFAlterar.setMinimumSize(new java.awt.Dimension(550, 750));
 
         jbAtualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jbAtualizar.setText("Atualizar");

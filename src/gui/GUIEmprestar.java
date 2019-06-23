@@ -229,8 +229,12 @@ public class GUIEmprestar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dispose();
-        new MenuPrincipal().setVisible(true);
+          this.fechar();
+    }                                      
+    private void fechar(){
+        if(javax.swing.JOptionPane.showConfirmDialog(null,"Deseja Fechar?","ATENÇÂO ",javax.swing.JOptionPane.YES_NO_OPTION )==0){
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
