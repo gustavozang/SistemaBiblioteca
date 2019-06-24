@@ -83,7 +83,7 @@ public class RelatorioEmprestimo extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         EmprestimoRelatorioDAO prd = new EmprestimoRelatorioDAO();
-        JasperViewer.viewReport(prd.gerar());
+        JasperViewer.viewReport(prd.gerar(),false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void fecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharActionPerformed

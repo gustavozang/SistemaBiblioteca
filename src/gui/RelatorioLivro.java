@@ -83,7 +83,7 @@ public class RelatorioLivro extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         LivroRelatorioDAO prd = new LivroRelatorioDAO();
-        JasperViewer.viewReport(prd.gerar());
+        JasperViewer.viewReport(prd.gerar(),false);
     }//GEN-LAST:event_jButton1ActionPerformed
 	private void fechar(){
         if(javax.swing.JOptionPane.showConfirmDialog(null,"Deseja Fechar?","ATENÇÂO ",javax.swing.JOptionPane.YES_NO_OPTION )==0){

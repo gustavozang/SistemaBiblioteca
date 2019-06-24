@@ -83,7 +83,7 @@ public class RelatorioDepartamento extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         DepartamentoRelatorioDAO prd = new DepartamentoRelatorioDAO();
-        JasperViewer.viewReport(prd.gerar());
+        JasperViewer.viewReport(prd.gerar(),false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void fecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fecharActionPerformed

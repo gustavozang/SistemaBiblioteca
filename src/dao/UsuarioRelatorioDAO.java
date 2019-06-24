@@ -26,6 +26,7 @@ public class UsuarioRelatorioDAO {
     public JasperPrint gerar(){
         try{
             HashMap map = new HashMap();
+            
             String arquivo = "ireport/RelatorioUsuarios.jasper";
             relat = JasperFillManager.fillReport(arquivo, map, conn);
         }catch(Exception erro){
