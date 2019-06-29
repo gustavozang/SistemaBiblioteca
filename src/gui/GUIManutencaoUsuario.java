@@ -62,7 +62,6 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jtCelular = new javax.swing.JFormattedTextField();
         jLabel10 = new javax.swing.JLabel();
-        jtSenha = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jtNome = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -73,6 +72,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         jtPermissao = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
         jtCpf = new javax.swing.JFormattedTextField();
+        jtSenha = new javax.swing.JPasswordField();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableUsuario = new javax.swing.JTable();
@@ -193,13 +193,6 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         jLabel10.setText("Cpf:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
-        jtSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtSenhaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 208, -1));
-
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Celular:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, -1, 24));
@@ -250,6 +243,9 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
         jPanel1.add(jtCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 210, -1));
+
+        jtSenha.setText("jPasswordField1");
+        jPanel1.add(jtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 210, -1));
 
         javax.swing.GroupLayout jFAlterarLayout = new javax.swing.GroupLayout(jFAlterar.getContentPane());
         jFAlterar.getContentPane().setLayout(jFAlterarLayout);
@@ -655,10 +651,6 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtBairroActionPerformed
 
-    private void jtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtSenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtSenhaActionPerformed
-
     private void jtCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCelularActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtCelularActionPerformed
@@ -753,7 +745,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtMatricula;
     private javax.swing.JTextField jtNome;
     private javax.swing.JComboBox<String> jtPermissao;
-    private javax.swing.JTextField jtSenha;
+    private javax.swing.JPasswordField jtSenha;
     private javax.swing.JFormattedTextField jtTelefone;
     private javax.swing.JTable jtableUsuario;
     // End of variables declaration//GEN-END:variables

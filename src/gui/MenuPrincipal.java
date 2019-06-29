@@ -11,6 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Box;
+import persistencia.ConexaoBanco;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
@@ -19,8 +21,31 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     public MenuPrincipal() {
         initComponents();
+        liberaPermissao();
+        
     }
-     
+    TelaLogin telalogin = new TelaLogin();
+    ConexaoBanco conect = new ConexaoBanco();
+    
+    public final void liberaPermissao() {
+        switch (telalogin.tipouser) {
+            case "ALUNO":
+                jmCadastro.setVisible(false);
+                jmManutencao.setVisible(false);
+                jmRelatorio.setVisible(false);
+                break;
+
+            case "PROFESSOR":
+               jmCadastro.setVisible(false);
+               jmManutencao.setVisible(false);
+               break;
+
+            case "ADMINISTRADOR":
+                break;
+
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify tis code. The content of this method is always
@@ -31,7 +56,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jAreaTrabalho = new javax.swing.JDesktopPane();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jmbMenuPrincipal = new javax.swing.JMenuBar();
         jmCadastro = new javax.swing.JMenu();
         jmCadUsuario = new javax.swing.JMenuItem();
@@ -41,14 +70,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmCadObra = new javax.swing.JMenuItem();
         jmCadDepartamento = new javax.swing.JMenuItem();
         jmCadAutor = new javax.swing.JMenuItem();
-        jmManutencao = new javax.swing.JMenu();
-        jmiManUsuario = new javax.swing.JMenuItem();
-        jmiManEditora = new javax.swing.JMenuItem();
-        jmiManFornecedor = new javax.swing.JMenuItem();
-        jmiManFuncionario = new javax.swing.JMenuItem();
-        jmiManObra = new javax.swing.JMenuItem();
-        jmiManDepartamento = new javax.swing.JMenuItem();
-        jmiManAutor = new javax.swing.JMenuItem();
         jmRelatorio = new javax.swing.JMenu();
         jRelatUsuario = new javax.swing.JMenuItem();
         jRelatEditora = new javax.swing.JMenuItem();
@@ -61,18 +82,68 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmFuncionalidades = new javax.swing.JMenu();
         jEmprestar = new javax.swing.JMenuItem();
         jDevolver = new javax.swing.JMenuItem();
+        jmManutencao = new javax.swing.JMenu();
+        jmiManUsuario = new javax.swing.JMenuItem();
+        jmiManEditora = new javax.swing.JMenuItem();
+        jmiManFornecedor = new javax.swing.JMenuItem();
+        jmiManFuncionario = new javax.swing.JMenuItem();
+        jmiManObra = new javax.swing.JMenuItem();
+        jmiManDepartamento = new javax.swing.JMenuItem();
+        jmiManAutor = new javax.swing.JMenuItem();
+        jTrocarusuario = new javax.swing.JMenu();
+        menuUsuario = new javax.swing.JMenuItem();
+        submenuAlterarSenha = new javax.swing.JMenuItem();
         jmSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sistema Exemplo");
+        setTitle("Sistema de Biblioteca");
         setMinimumSize(new java.awt.Dimension(300, 300));
 
         jAreaTrabalho.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sistema de Biblioteca", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N
 
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabel2.setBackground(new java.awt.Color(102, 102, 255));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Olá "+telalogin.nomelogado+" - "+telalogin.matriculalogado);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/userlogado.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jAreaTrabalho.add(jPanel1);
+        jPanel1.setBounds(0, 290, 410, 60);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/BIBLIOTECA.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
         jAreaTrabalho.add(jLabel1);
-        jLabel1.setBounds(0, 0, 1000, 500);
+        jLabel1.setBounds(0, 40, 1000, 460);
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Sistema de Biblioteca");
+        jAreaTrabalho.add(jLabel5);
+        jLabel5.setBounds(10, 10, 170, 30);
 
         jmbMenuPrincipal.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jmbMenuPrincipal.setPreferredSize(new java.awt.Dimension(157, 30));
@@ -143,67 +214,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmCadastro.add(jmCadAutor);
 
         jmbMenuPrincipal.add(jmCadastro);
-
-        jmManutencao.setText("Manutenção");
-
-        jmiManUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
-        jmiManUsuario.setText("Usuário");
-        jmiManUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiManUsuarioActionPerformed(evt);
-            }
-        });
-        jmManutencao.add(jmiManUsuario);
-
-        jmiManEditora.setText("Editora");
-        jmiManEditora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiManEditoraActionPerformed(evt);
-            }
-        });
-        jmManutencao.add(jmiManEditora);
-
-        jmiManFornecedor.setText("Fornecedor");
-        jmiManFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiManFornecedorActionPerformed(evt);
-            }
-        });
-        jmManutencao.add(jmiManFornecedor);
-
-        jmiManFuncionario.setText("Funcionário");
-        jmiManFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiManFuncionarioActionPerformed(evt);
-            }
-        });
-        jmManutencao.add(jmiManFuncionario);
-
-        jmiManObra.setText("Livro");
-        jmiManObra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiManObraActionPerformed(evt);
-            }
-        });
-        jmManutencao.add(jmiManObra);
-
-        jmiManDepartamento.setText("Departamento");
-        jmiManDepartamento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiManDepartamentoActionPerformed(evt);
-            }
-        });
-        jmManutencao.add(jmiManDepartamento);
-
-        jmiManAutor.setText("Autor");
-        jmiManAutor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiManAutorActionPerformed(evt);
-            }
-        });
-        jmManutencao.add(jmiManAutor);
-
-        jmbMenuPrincipal.add(jmManutencao);
 
         jmRelatorio.setText("Relatórios");
 
@@ -292,6 +302,94 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmFuncionalidades.add(jDevolver);
 
         jmbMenuPrincipal.add(jmFuncionalidades);
+
+        jmManutencao.setText("Manutenção");
+
+        jmiManUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        jmiManUsuario.setText("Usuário");
+        jmiManUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiManUsuarioActionPerformed(evt);
+            }
+        });
+        jmManutencao.add(jmiManUsuario);
+
+        jmiManEditora.setText("Editora");
+        jmiManEditora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiManEditoraActionPerformed(evt);
+            }
+        });
+        jmManutencao.add(jmiManEditora);
+
+        jmiManFornecedor.setText("Fornecedor");
+        jmiManFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiManFornecedorActionPerformed(evt);
+            }
+        });
+        jmManutencao.add(jmiManFornecedor);
+
+        jmiManFuncionario.setText("Funcionário");
+        jmiManFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiManFuncionarioActionPerformed(evt);
+            }
+        });
+        jmManutencao.add(jmiManFuncionario);
+
+        jmiManObra.setText("Livro");
+        jmiManObra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiManObraActionPerformed(evt);
+            }
+        });
+        jmManutencao.add(jmiManObra);
+
+        jmiManDepartamento.setText("Departamento");
+        jmiManDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiManDepartamentoActionPerformed(evt);
+            }
+        });
+        jmManutencao.add(jmiManDepartamento);
+
+        jmiManAutor.setText("Autor");
+        jmiManAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiManAutorActionPerformed(evt);
+            }
+        });
+        jmManutencao.add(jmiManAutor);
+
+        jmbMenuPrincipal.add(jmManutencao);
+
+        jTrocarusuario.setText("Trocar usuário");
+        jTrocarusuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTrocarusuarioActionPerformed(evt);
+            }
+        });
+
+        menuUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        menuUsuario.setText("Usuário logoff");
+        menuUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuUsuarioActionPerformed(evt);
+            }
+        });
+        jTrocarusuario.add(menuUsuario);
+
+        submenuAlterarSenha.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        submenuAlterarSenha.setText("Alterar Senha");
+        submenuAlterarSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submenuAlterarSenhaActionPerformed(evt);
+            }
+        });
+        jTrocarusuario.add(submenuAlterarSenha);
+
+        jmbMenuPrincipal.add(jTrocarusuario);
 
         jmSair.setText("Sair");
         jmSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -416,6 +514,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
      
       private void abrirDevolver() throws SQLException{
         GUIDevolver gmp = new GUIDevolver();
+        jAreaTrabalho.add(gmp);
+        gmp.setVisible(true);
+     }//fecha método   
+     private void abrirAlterarSenha() throws SQLException{
+        GUITelaAlterarSenha gmp = new GUITelaAlterarSenha();
         jAreaTrabalho.add(gmp);
         gmp.setVisible(true);
     }//fecha método
@@ -569,6 +672,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
         frameRelatorioEmprestimo.setVisible(true);
     }//GEN-LAST:event_jjRelaEmprestimoActionPerformed
 
+    private void menuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuarioActionPerformed
+        dispose();
+        telalogin.setVisible(true);
+    }//GEN-LAST:event_menuUsuarioActionPerformed
+
+    private void jTrocarusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTrocarusuarioActionPerformed
+
+    }//GEN-LAST:event_jTrocarusuarioActionPerformed
+
+    private void submenuAlterarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submenuAlterarSenhaActionPerformed
+        try {
+            abrirAlterarSenha();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_submenuAlterarSenhaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -608,8 +728,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jDevolver;
     private javax.swing.JMenuItem jEmprestar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem jRelatEditora;
     private javax.swing.JMenuItem jRelatUsuario;
+    private javax.swing.JMenu jTrocarusuario;
     private javax.swing.JMenuItem jjRelaEmprestimo;
     private javax.swing.JMenuItem jjRelatAutor;
     private javax.swing.JMenuItem jjRelatDepartamento;
@@ -636,5 +761,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiManFuncionario;
     private javax.swing.JMenuItem jmiManObra;
     private javax.swing.JMenuItem jmiManUsuario;
+    private javax.swing.JMenuItem menuUsuario;
+    private javax.swing.JMenuItem submenuAlterarSenha;
     // End of variables declaration//GEN-END:variables
 }
