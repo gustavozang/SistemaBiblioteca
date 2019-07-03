@@ -5,10 +5,18 @@
 package gui;
 
 import dao.AutorDAO;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.AutorVO;
+import modelo.CidadeVO;
+import persistencia.ConexaoBanco;
 import servicos.AutorServicos;
 import servicos.ServicosFactory;
 
@@ -23,13 +31,61 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
     /**
      * Creates new form GUIManutencaoAutor
      */
-    public GUIManutencaoAutor() {
+    public GUIManutencaoAutor() throws SQLException {
         initComponents();
+        this.populaJComboBoxCidade();
         /* Chamando o método preencherTabela 
          no construtor */
         preencherTabela();
     }
+     public void populaJComboBoxCidade() throws SQLException{
+        Connection con = ConexaoBanco.getConexao();
+        Statement stat = con.createStatement();
 
+        try {
+            String sql;
+            /**
+            Montando o sql
+            **/
+            sql = "select * from cidade ORDER BY cidade";
+
+            /** Executando o SQL  e armazenando
+             o ResultSet em um objeto do tipo
+             ResultSet chamado rs **/
+            ResultSet rs = stat.executeQuery(sql);
+
+            /** Criando ArrayList para armazenar 
+             objetos do tipo produto **/
+            ArrayList<CidadeVO> prod = new ArrayList<>();
+
+            /** Enquanto houver uma próxima linha no 
+             banco de dados o while roda **/
+            while (rs.next()) {
+                /**
+                 Criando um novo obj. CidadeVO
+                 * */
+                CidadeVO p = new CidadeVO();
+
+                /** Mapeando a tabela do banco para objeto
+                 chamado pVO **/
+                jComboBoxCidade.addItem(rs.getString("cidade"));
+                              
+
+                /** 
+                 Inserindo o objeto pVO no ArrayList 
+                 **/
+                prod.add(p);
+            }
+            //Retornando o ArrayList com todos objetos
+            //fecha while
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao buscar cidade! " + e.getMessage());
+        } finally {
+            con.close();
+            stat.close();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,11 +98,11 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
         jFAlterar = new javax.swing.JFrame();
         jbAtualizar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jtCidade = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jtNome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jComboBoxCidade = new javax.swing.JComboBox<>();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableAutor = new javax.swing.JTable();
@@ -57,7 +113,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
         jAlterar = new javax.swing.JButton();
 
         jFAlterar.setTitle("Atualizar");
-        jFAlterar.setMinimumSize(new java.awt.Dimension(550, 450));
+        jFAlterar.setMinimumSize(new java.awt.Dimension(550, 650));
 
         jbAtualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jbAtualizar.setText("Atualizar");
@@ -69,13 +125,6 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Preencha os campos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14), new java.awt.Color(0, 0, 204))); // NOI18N
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jtCidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtCidadeActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 80, 208, -1));
 
         jLabel2.setText("Cidade:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 80, -1, -1));
@@ -93,6 +142,8 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("Alteração de Autor");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 120, -1));
+
+        jPanel1.add(jComboBoxCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 210, -1));
 
         javax.swing.GroupLayout jFAlterarLayout = new javax.swing.GroupLayout(jFAlterar.getContentPane());
         jFAlterar.getContentPane().setLayout(jFAlterarLayout);
@@ -342,7 +393,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
             
 
             prod.get(i).setNome(jtNome.getText());
-            prod.get(i).setCidade(jtCidade.getText());
+            prod.get(i).setCidade((String) jComboBoxCidade.getSelectedItem());
                                
             
             
@@ -371,7 +422,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
             int i = jtableAutor.getSelectedRow();
             
             jtNome.setText(prod.get(i).getNome());
-            jtCidade.setText(String.valueOf(prod.get(i).getCidade()));
+            jComboBoxCidade.setSelectedItem(String.valueOf(prod.get(i).getCidade()));
                              
             
             
@@ -385,7 +436,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
 
     private void limparAlterar() {
         jtNome.setText(null);
-        jtCidade.setText(null);
+        jComboBoxCidade.setSelectedItem(null);
     }
 
     private void jbPreencherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPreencherActionPerformed
@@ -423,10 +474,6 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
     private void jtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtNomeActionPerformed
-
-    private void jtCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtCidadeActionPerformed
 
      /**
      * @param args the command line arguments
@@ -466,7 +513,11 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIManutencaoAutor().setVisible(true);
+                try {
+                    new GUIManutencaoAutor().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUIManutencaoAutor.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -477,6 +528,7 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAlterar;
+    private javax.swing.JComboBox<String> jComboBoxCidade;
     private javax.swing.JButton jDeletar;
     private javax.swing.JFrame jFAlterar;
     private javax.swing.JLabel jLabel1;
@@ -489,7 +541,6 @@ public class GUIManutencaoAutor extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAtualizar;
     private javax.swing.JButton jbLimpar;
     private javax.swing.JButton jbPreencher;
-    private javax.swing.JTextField jtCidade;
     private javax.swing.JTextField jtNome;
     private javax.swing.JTable jtableAutor;
     // End of variables declaration//GEN-END:variables

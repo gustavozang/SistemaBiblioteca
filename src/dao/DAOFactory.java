@@ -17,6 +17,9 @@ public class DAOFactory {
  private static final DAOLivro livroDAO = new DAOLivro();
  private static final DepartamentoDAO departamentoDAO = new DepartamentoDAO();
  private static final AutorDAO autorDAO = new AutorDAO();
+ private static final CidadeDAO cidadeDAO = new CidadeDAO();
+ private static final CategoriaDAO categoriaDAO = new CategoriaDAO();
+ 
     
     
     public static UsuarioDAO getUsuarioDAO(){
@@ -45,6 +48,13 @@ public class DAOFactory {
     
     public static AutorDAO getAutorDAO() {
         return autorDAO;
+    }
+    public static CidadeDAO getCidadeDAO() {
+        return cidadeDAO;
+    }
+    
+    public static CategoriaDAO getCategoriaDAO() {
+        return categoriaDAO;
     }
 }    
 

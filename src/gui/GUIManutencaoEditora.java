@@ -5,10 +5,18 @@
 package gui;
 
 import dao.EditoraDAO;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.CidadeVO;
 import modelo.EditoraVO;
+import persistencia.ConexaoBanco;
 import servicos.EditoraServicos;
 import servicos.ServicosFactory;
 
@@ -23,13 +31,62 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
     /**
      * Creates new form GUIManutencaoEditora
      */
-    public GUIManutencaoEditora() {
+    public GUIManutencaoEditora() throws SQLException {
         initComponents();
+        this.populaJComboBoxCidade();
         /* Chamando o método preencherTabela 
          no construtor */
         preencherTabela();
     }
 
+    public void populaJComboBoxCidade() throws SQLException{
+        Connection con = ConexaoBanco.getConexao();
+        Statement stat = con.createStatement();
+
+        try {
+            String sql;
+            /**
+            Montando o sql
+            **/
+            sql = "select * from cidade ORDER BY cidade";
+
+            /** Executando o SQL  e armazenando
+             o ResultSet em um objeto do tipo
+             ResultSet chamado rs **/
+            ResultSet rs = stat.executeQuery(sql);
+
+            /** Criando ArrayList para armazenar 
+             objetos do tipo produto **/
+            ArrayList<CidadeVO> prod = new ArrayList<>();
+
+            /** Enquanto houver uma próxima linha no 
+             banco de dados o while roda **/
+            while (rs.next()) {
+                /**
+                 Criando um novo obj. CidadeVO
+                 * */
+                CidadeVO p = new CidadeVO();
+
+                /** Mapeando a tabela do banco para objeto
+                 chamado pVO **/
+                jComboBoxCidade.addItem(rs.getString("cidade"));
+                              
+
+                /** 
+                 Inserindo o objeto pVO no ArrayList 
+                 **/
+                prod.add(p);
+            }
+            //Retornando o ArrayList com todos objetos
+            //fecha while
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao buscar cidade! " + e.getMessage());
+        } finally {
+            con.close();
+            stat.close();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,7 +106,6 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jtEndereco_nr = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jtCidades = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jtBairro = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -59,6 +115,7 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         jtNome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jComboBoxCidade = new javax.swing.JComboBox<>();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableEditora = new javax.swing.JTable();
@@ -69,7 +126,7 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
         jAlterar = new javax.swing.JButton();
 
         jFAlterar.setTitle("Atualizar");
-        jFAlterar.setMinimumSize(new java.awt.Dimension(550, 450));
+        jFAlterar.setMinimumSize(new java.awt.Dimension(550, 650));
 
         jbAtualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jbAtualizar.setText("Atualizar");
@@ -119,13 +176,6 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
         jLabel5.setText("Bairro:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 177, -1, 24));
 
-        jtCidades.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtCidadesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtCidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 216, 208, -1));
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Cep:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 247, -1, 24));
@@ -173,6 +223,8 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel1.setText("Alteração de Editora");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 120, -1));
+
+        jPanel1.add(jComboBoxCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 210, -1));
 
         javax.swing.GroupLayout jFAlterarLayout = new javax.swing.GroupLayout(jFAlterar.getContentPane());
         jFAlterar.getContentPane().setLayout(jFAlterarLayout);
@@ -439,7 +491,7 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
             prod.get(i).setEndereco_nr(jtEndereco_nr.getText());
             prod.get(i).setEndereco_complemento(jtEndereco_complemento.getText());
             prod.get(i).setBairro(jtBairro.getText());
-            prod.get(i).setCidades(jtCidades.getText());
+            prod.get(i).setCidades((String) jComboBoxCidade.getSelectedItem());
             prod.get(i).setCep(jtCep.getText());
             prod.get(i).setTelefone(jtTelefone.getText());
          
@@ -475,7 +527,7 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
             jtEndereco_nr.setText(String.valueOf(prod.get(i).getEndereco_nr()));
             jtEndereco_complemento.setText(String.valueOf(prod.get(i).getEndereco_complemento()));
             jtBairro.setText(String.valueOf(prod.get(i).getBairro()));
-            jtCidades.setText(String.valueOf(prod.get(i).getCidades()));
+            jComboBoxCidade.setSelectedItem(String.valueOf(prod.get(i).getCidades()));
             jtCep.setText(String.valueOf(prod.get(i).getCep()));
             jtTelefone.setText(String.valueOf(prod.get(i).getTelefone()));
             
@@ -496,7 +548,7 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
         jtEndereco_nr.setText(null);
         jtEndereco_complemento.setText(null);
         jtBairro.setText(null);
-        jtCidades.setText(null);
+        jComboBoxCidade.setSelectedItem(null);
         jtCep.setText(null);
         jtTelefone.setText(null);
         
@@ -547,10 +599,6 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtEndereco_nrActionPerformed
 
-    private void jtCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCidadesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtCidadesActionPerformed
-
     private void jtBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtBairroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtBairroActionPerformed
@@ -591,7 +639,11 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIManutencaoEditora().setVisible(true);
+                try {
+                    new GUIManutencaoEditora().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUIManutencaoEditora.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -602,6 +654,7 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAlterar;
+    private javax.swing.JComboBox<String> jComboBoxCidade;
     private javax.swing.JButton jDeletar;
     private javax.swing.JFrame jFAlterar;
     private javax.swing.JLabel jLabel1;
@@ -622,7 +675,6 @@ public class GUIManutencaoEditora extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbPreencher;
     private javax.swing.JTextField jtBairro;
     private javax.swing.JFormattedTextField jtCep;
-    private javax.swing.JTextField jtCidades;
     private javax.swing.JTextField jtEndereco;
     private javax.swing.JTextField jtEndereco_complemento;
     private javax.swing.JTextField jtEndereco_nr;

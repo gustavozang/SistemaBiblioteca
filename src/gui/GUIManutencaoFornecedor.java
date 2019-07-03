@@ -5,10 +5,18 @@
 package gui;
 
 import dao.FornecedorDAO;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.CidadeVO;
 import modelo.FornecedorVO;
+import persistencia.ConexaoBanco;
 import servicos.FornecedorServicos;
 import servicos.ServicosFactory;
 
@@ -23,13 +31,62 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
     /**
      * Creates new form GUIManutencaoFornecedor
      */
-    public GUIManutencaoFornecedor() {
+    public GUIManutencaoFornecedor() throws SQLException {
         initComponents();
+        this.populaJComboBoxCidade();
         /* Chamando o método preencherTabela 
          no construtor */
         preencherTabela();
     }
 
+    public void populaJComboBoxCidade() throws SQLException{
+        Connection con = ConexaoBanco.getConexao();
+        Statement stat = con.createStatement();
+
+        try {
+            String sql;
+            /**
+            Montando o sql
+            **/
+            sql = "select * from cidade ORDER BY cidade";
+
+            /** Executando o SQL  e armazenando
+             o ResultSet em um objeto do tipo
+             ResultSet chamado rs **/
+            ResultSet rs = stat.executeQuery(sql);
+
+            /** Criando ArrayList para armazenar 
+             objetos do tipo produto **/
+            ArrayList<CidadeVO> prod = new ArrayList<>();
+
+            /** Enquanto houver uma próxima linha no 
+             banco de dados o while roda **/
+            while (rs.next()) {
+                /**
+                 Criando um novo obj. CidadeVO
+                 * */
+                CidadeVO p = new CidadeVO();
+
+                /** Mapeando a tabela do banco para objeto
+                 chamado pVO **/
+                jComboBoxCidade.addItem(rs.getString("cidade"));
+                              
+
+                /** 
+                 Inserindo o objeto pVO no ArrayList 
+                 **/
+                prod.add(p);
+            }
+            //Retornando o ArrayList com todos objetos
+            //fecha while
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao buscar cidade! " + e.getMessage());
+        } finally {
+            con.close();
+            stat.close();
+        }
+    }    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,17 +106,15 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jtEndereco_nr = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jtCidades = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jtBairro = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jtCep = new javax.swing.JFormattedTextField();
-        jLabel8 = new javax.swing.JLabel();
         jtTelefone = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
-        jtCelular = new javax.swing.JFormattedTextField();
         jLabel10 = new javax.swing.JLabel();
         jtNome = new javax.swing.JTextField();
+        jComboBoxCidade = new javax.swing.JComboBox<>();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableFornecedor = new javax.swing.JTable();
@@ -70,8 +125,7 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
         jAlterar = new javax.swing.JButton();
 
         jFAlterar.setTitle("Atualizar");
-        jFAlterar.setMinimumSize(new java.awt.Dimension(550, 450));
-        jFAlterar.setPreferredSize(new java.awt.Dimension(500, 400));
+        jFAlterar.setMinimumSize(new java.awt.Dimension(550, 650));
 
         jbAtualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jbAtualizar.setText("Atualizar");
@@ -121,13 +175,6 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
         jLabel5.setText("Bairro:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 177, -1, 24));
 
-        jtCidades.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtCidadesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtCidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 216, 208, -1));
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Cep:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 247, -1, 24));
@@ -150,10 +197,6 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
         }
         jPanel1.add(jtCep, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 251, 208, -1));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Celular:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 317, -1, 24));
-
         try {
             jtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("## ####-####")));
         } catch (java.text.ParseException ex) {
@@ -165,13 +208,6 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
         jLabel9.setText("Telefone:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 282, -1, 24));
 
-        try {
-            jtCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("## # ####-####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jPanel1.add(jtCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 317, 207, -1));
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel10.setText("Nome:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 49, -1, -1));
@@ -182,6 +218,8 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(jtNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(89, 49, 208, -1));
+
+        jPanel1.add(jComboBoxCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 200, -1));
 
         javax.swing.GroupLayout jFAlterarLayout = new javax.swing.GroupLayout(jFAlterar.getContentPane());
         jFAlterar.getContentPane().setLayout(jFAlterarLayout);
@@ -221,11 +259,11 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Codigo", "Nome", "Endereço", "Número", "Complemento", "Bairro", "Cidade", "Cep", "Telefone", "Celular"
+                "Codigo", "Nome", "Endereço", "Número", "Bairro", "Cidade", "Cep", "Telefone"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -448,10 +486,10 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
             prod.get(i).setEndereco_nr(jtEndereco_nr.getText());
             prod.get(i).setEndereco_complemento(jtEndereco_complemento.getText());
             prod.get(i).setBairro(jtBairro.getText());
-            prod.get(i).setCidades(jtCidades.getText());
+            prod.get(i).setCidades((String) jComboBoxCidade.getSelectedItem());
             prod.get(i).setCep(jtCep.getText());
             prod.get(i).setTelefone(jtTelefone.getText());
-            prod.get(i).setCelular(jtCelular.getText());
+            
             
             
             
@@ -484,10 +522,10 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
             jtEndereco_nr.setText(String.valueOf(prod.get(i).getEndereco_nr()));
             jtEndereco_complemento.setText(String.valueOf(prod.get(i).getEndereco_complemento()));
             jtBairro.setText(String.valueOf(prod.get(i).getBairro()));
-            jtCidades.setText(String.valueOf(prod.get(i).getCidades()));
+            jComboBoxCidade.setSelectedItem(String.valueOf(prod.get(i).getCidades()));
             jtCep.setText(String.valueOf(prod.get(i).getCep()));
             jtTelefone.setText(String.valueOf(prod.get(i).getTelefone()));
-            jtCelular.setText(String.valueOf(prod.get(i).getCelular()));
+            
             
             
             
@@ -505,10 +543,10 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
         jtEndereco_nr.setText(null);
         jtEndereco_complemento.setText(null);
         jtBairro.setText(null);
-        jtCidades.setText(null);
+        jComboBoxCidade.setSelectedItem(null);
         jtCep.setText(null);
         jtTelefone.setText(null);
-        jtCelular.setText(null);
+        
 
     }
 
@@ -556,10 +594,6 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtEndereco_nrActionPerformed
 
-    private void jtCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCidadesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtCidadesActionPerformed
-
     private void jtBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtBairroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtBairroActionPerformed
@@ -600,7 +634,11 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIManutencaoFornecedor().setVisible(true);
+                try {
+                    new GUIManutencaoFornecedor().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUIManutencaoFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -611,6 +649,7 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAlterar;
+    private javax.swing.JComboBox<String> jComboBoxCidade;
     private javax.swing.JButton jDeletar;
     private javax.swing.JFrame jFAlterar;
     private javax.swing.JLabel jLabel10;
@@ -620,7 +659,6 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
@@ -630,9 +668,7 @@ public class GUIManutencaoFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbLimpar;
     private javax.swing.JButton jbPreencher;
     private javax.swing.JTextField jtBairro;
-    private javax.swing.JFormattedTextField jtCelular;
     private javax.swing.JFormattedTextField jtCep;
-    private javax.swing.JTextField jtCidades;
     private javax.swing.JTextField jtEndereco;
     private javax.swing.JTextField jtEndereco_complemento;
     private javax.swing.JTextField jtEndereco_nr;

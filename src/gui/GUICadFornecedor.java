@@ -6,10 +6,16 @@
 package gui;
 import modelo.FornecedorVO;
 import dao.FornecedorDAO;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import modelo.CidadeVO;
+import persistencia.ConexaoBanco;
 
 /**
  *
@@ -20,11 +26,60 @@ public class GUICadFornecedor extends javax.swing.JFrame {
     /**
      * Creates new form FornecedorGUI
      */
-    public GUICadFornecedor() {
+    public GUICadFornecedor() throws SQLException {
         initComponents();
+        this.populaJComboBoxCidade();
         setBounds (200, 100, 400, 550);
     }
+    
+     public void populaJComboBoxCidade() throws SQLException{
+        Connection con = ConexaoBanco.getConexao();
+        Statement stat = con.createStatement();
 
+        try {
+            String sql;
+            /**
+            Montando o sql
+            **/
+            sql = "select * from cidade ORDER BY cidade";
+
+            /** Executando o SQL  e armazenando
+             o ResultSet em um objeto do tipo
+             ResultSet chamado rs **/
+            ResultSet rs = stat.executeQuery(sql);
+
+            /** Criando ArrayList para armazenar 
+             objetos do tipo produto **/
+            ArrayList<CidadeVO> prod = new ArrayList<>();
+
+            /** Enquanto houver uma próxima linha no 
+             banco de dados o while roda **/
+            while (rs.next()) {
+                /**
+                 Criando um novo obj. CidadeVO
+                 * */
+                CidadeVO p = new CidadeVO();
+
+                /** Mapeando a tabela do banco para objeto
+                 chamado pVO **/
+                jComboBoxCidade.addItem(rs.getString("cidade"));
+                              
+
+                /** 
+                 Inserindo o objeto pVO no ArrayList 
+                 **/
+                prod.add(p);
+            }
+            //Retornando o ArrayList com todos objetos
+            //fecha while
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao buscar cidade! " + e.getMessage());
+        } finally {
+            con.close();
+            stat.close();
+        }
+    }    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,12 +106,12 @@ public class GUICadFornecedor extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         TextField5 = new javax.swing.JTextField();
-        TextField6 = new javax.swing.JTextField();
         TextField7 = new javax.swing.JFormattedTextField();
         TextField3 = new javax.swing.JFormattedTextField();
         TextField8 = new javax.swing.JFormattedTextField();
         TextField9 = new javax.swing.JFormattedTextField();
         TextField4 = new javax.swing.JTextField();
+        jComboBoxCidade = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -287,12 +342,12 @@ public class GUICadFornecedor extends javax.swing.JFrame {
                             .addComponent(TextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(TextField2)
                             .addComponent(TextField5)
-                            .addComponent(TextField6)
                             .addComponent(TextField7)
                             .addComponent(TextField3)
                             .addComponent(TextField8)
                             .addComponent(TextField9)
-                            .addComponent(TextField4, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(TextField4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jComboBoxCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -325,13 +380,12 @@ public class GUICadFornecedor extends javax.swing.JFrame {
                     .addComponent(TextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(TextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -371,7 +425,7 @@ public class GUICadFornecedor extends javax.swing.JFrame {
         TextField3.setText("");
         TextField4.setText("");
         TextField5.setText("");
-        TextField6.setText("");
+        jComboBoxCidade.setSelectedItem("");
         TextField7.setText("");
         TextField8.setText("");
         TextField9.setText("");
@@ -384,13 +438,13 @@ fornecedor.setEndereco(TextField2.getText());
 fornecedor.setEndereco_nr(TextField3.getText());
 fornecedor.setEndereco_complemento(TextField4.getText());
 fornecedor.setBairro(TextField5.getText());
-fornecedor.setCidades(TextField6.getText());
+fornecedor.setCidades((String) jComboBoxCidade.getSelectedItem());
 fornecedor.setCep(TextField7.getText());
 fornecedor.setTelefone(TextField8.getText());
 fornecedor.setCelular(TextField9.getText());
 
 // fazendo a validação dos dados
-if ((TextField1.getText().isEmpty()) || (TextField2.getText().isEmpty()) || (TextField3.getText().isEmpty()) || (TextField4.getText().isEmpty())|| (TextField5.getText().isEmpty())|| (TextField6.getText().isEmpty())|| (TextField7.getText().isEmpty())|| (TextField8.getText().isEmpty())|| (TextField9.getText().isEmpty())) {
+if ((TextField1.getText().isEmpty()) || (TextField2.getText().isEmpty()) || (TextField3.getText().isEmpty()) || (TextField4.getText().isEmpty())|| (TextField5.getText().isEmpty())|| (TextField7.getText().isEmpty())|| (TextField8.getText().isEmpty())|| (TextField9.getText().isEmpty())) {
    JOptionPane.showMessageDialog(null, "Os campos não podem retornar vazios");
 }
 else {
@@ -405,16 +459,7 @@ else {
      JOptionPane.showMessageDialog(null, "Fornecedor "+TextField1.getText()+" inserido com sucesso! ");
 }
 
-// apaga os dados preenchidos nos campos de texto
-TextField1.setText("");
-TextField2.setText("");
-TextField3.setText("");
-TextField4.setText("");
-TextField5.setText("");
-TextField6.setText("");
-TextField7.setText("");
-TextField8.setText("");
-TextField9.setText("");
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void TextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField8ActionPerformed
@@ -458,7 +503,11 @@ TextField9.setText("");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUICadFornecedor().setVisible(true);
+                try {
+                    new GUICadFornecedor().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUICadFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -469,13 +518,13 @@ TextField9.setText("");
     private javax.swing.JFormattedTextField TextField3;
     private javax.swing.JTextField TextField4;
     private javax.swing.JTextField TextField5;
-    private javax.swing.JTextField TextField6;
     private javax.swing.JFormattedTextField TextField7;
     private javax.swing.JFormattedTextField TextField8;
     private javax.swing.JFormattedTextField TextField9;
     private javax.swing.JButton fechar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBoxCidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;

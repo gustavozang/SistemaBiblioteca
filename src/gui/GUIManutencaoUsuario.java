@@ -5,10 +5,18 @@
 package gui;
 
 import dao.UsuarioDAO;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.CidadeVO;
 import modelo.UsuarioVO;
+import persistencia.ConexaoBanco;
 import servicos.UsuarioServicos;
 import servicos.ServicosFactory;
 
@@ -25,14 +33,63 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
     /**
      * Creates new form GUIManutencaoUsuario
      */
-    public GUIManutencaoUsuario() {
+    public GUIManutencaoUsuario() throws SQLException {
         initComponents();
+        this.populaJComboBoxCidade();
         
         /* Chamando o método preencherTabela 
          no construtor */
         preencherTabela();
     }
 
+    public void populaJComboBoxCidade() throws SQLException{
+        Connection con = ConexaoBanco.getConexao();
+        Statement stat = con.createStatement();
+
+        try {
+            String sql;
+            /**
+            Montando o sql
+            **/
+            sql = "select * from cidade ORDER BY cidade";
+
+            /** Executando o SQL  e armazenando
+             o ResultSet em um objeto do tipo
+             ResultSet chamado rs **/
+            ResultSet rs = stat.executeQuery(sql);
+
+            /** Criando ArrayList para armazenar 
+             objetos do tipo produto **/
+            ArrayList<CidadeVO> prod = new ArrayList<>();
+
+            /** Enquanto houver uma próxima linha no 
+             banco de dados o while roda **/
+            while (rs.next()) {
+                /**
+                 Criando um novo obj. CidadeVO
+                 * */
+                CidadeVO p = new CidadeVO();
+
+                /** Mapeando a tabela do banco para objeto
+                 chamado pVO **/
+                jComboBoxCidade.addItem(rs.getString("cidade"));
+                              
+
+                /** 
+                 Inserindo o objeto pVO no ArrayList 
+                 **/
+                prod.add(p);
+            }
+            //Retornando o ArrayList com todos objetos
+            //fecha while
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao buscar cidade! " + e.getMessage());
+        } finally {
+            con.close();
+            stat.close();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,7 +109,6 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jtEndereco_nr = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jtCidades = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jtBairro = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -73,6 +129,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         jLabel15 = new javax.swing.JLabel();
         jtCpf = new javax.swing.JFormattedTextField();
         jtSenha = new javax.swing.JPasswordField();
+        jComboBoxCidade = new javax.swing.JComboBox<>();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableUsuario = new javax.swing.JTable();
@@ -132,13 +189,6 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Bairro:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, 24));
-
-        jtCidades.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtCidadesActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jtCidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 208, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Cep:");
@@ -246,6 +296,8 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
 
         jtSenha.setText("jPasswordField1");
         jPanel1.add(jtSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 210, -1));
+
+        jPanel1.add(jComboBoxCidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 210, -1));
 
         javax.swing.GroupLayout jFAlterarLayout = new javax.swing.GroupLayout(jFAlterar.getContentPane());
         jFAlterar.getContentPane().setLayout(jFAlterarLayout);
@@ -520,7 +572,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
             prod.get(i).setEndereco_nr(jtEndereco_nr.getText());
             prod.get(i).setEndereco_complemento(jtEndereco_complemento.getText());
             prod.get(i).setBairro(jtBairro.getText());
-            prod.get(i).setCidades(jtCidades.getText());
+            prod.get(i).setCidades((String) jComboBoxCidade.getSelectedItem());
             prod.get(i).setCep(jtCep.getText());
             prod.get(i).setTelefone(jtTelefone.getText());
             prod.get(i).setCelular(jtCelular.getText());
@@ -562,7 +614,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
             jtEndereco_nr.setText(String.valueOf(prod.get(i).getEndereco_nr()));
             jtEndereco_complemento.setText(String.valueOf(prod.get(i).getEndereco_complemento()));
             jtBairro.setText(String.valueOf(prod.get(i).getBairro()));
-            jtCidades.setText(String.valueOf(prod.get(i).getCidades()));
+            jComboBoxCidade.setSelectedItem(String.valueOf(prod.get(i).getCidades()));
             jtCep.setText(String.valueOf(prod.get(i).getCep()));
             jtTelefone.setText(String.valueOf(prod.get(i).getTelefone()));
             jtCelular.setText(String.valueOf(prod.get(i).getCelular()));
@@ -588,7 +640,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         jtEndereco_nr.setText(null);
         jtEndereco_complemento.setText(null);
         jtBairro.setText(null);
-        jtCidades.setText(null);
+        jComboBoxCidade.setSelectedItem(null);
         jtCep.setText(null);
         jtTelefone.setText(null);
         jtCelular.setText(null);
@@ -643,10 +695,6 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtEndereco_nrActionPerformed
 
-    private void jtCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCidadesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtCidadesActionPerformed
-
     private void jtBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtBairroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtBairroActionPerformed
@@ -699,7 +747,11 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIManutencaoUsuario().setVisible(true);
+                try {
+                    new GUIManutencaoUsuario().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUIManutencaoUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -710,6 +762,7 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAlterar;
+    private javax.swing.JComboBox<String> jComboBoxCidade;
     private javax.swing.JButton jDeletar;
     private javax.swing.JFrame jFAlterar;
     private javax.swing.JLabel jLabel10;
@@ -736,7 +789,6 @@ public class GUIManutencaoUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtBairro;
     private javax.swing.JFormattedTextField jtCelular;
     private javax.swing.JFormattedTextField jtCep;
-    private javax.swing.JTextField jtCidades;
     private javax.swing.JFormattedTextField jtCpf;
     private javax.swing.JTextField jtEndereco;
     private javax.swing.JTextField jtEndereco_complemento;

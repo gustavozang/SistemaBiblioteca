@@ -18,6 +18,8 @@ public class ServicosFactory {
    private static LivroServicos livroServicos= new LivroServicos();
    private static DepartamentoServicos departamentoServicos= new DepartamentoServicos();
    private static AutorServicos autorServicos= new AutorServicos();
+   private static CidadeServicos cidadeServicos= new CidadeServicos();
+   private static CategoriaServicos categoriaServicos= new CategoriaServicos();
 
    public static UsuarioServicos getUsuarioServicos(){
           
@@ -50,6 +52,13 @@ public class ServicosFactory {
     
     public static AutorServicos getAutorServicos() {
         return autorServicos;
+    }
+    public static CidadeServicos getCidadeServicos() {
+        return cidadeServicos;
+    }
+    
+     public static CategoriaServicos getCategoriaServicos() {
+        return categoriaServicos;
     }
    
 }//fecha classe

@@ -6,10 +6,16 @@
 package gui;
 import modelo.UsuarioVO;
 import dao.UsuarioDAO;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import modelo.CidadeVO;
+import persistencia.ConexaoBanco;
 
 /**
  *
@@ -20,11 +26,60 @@ public class GUICadUsuario extends javax.swing.JFrame {
     /**
      * Creates new form UsuarioGUI
      */
-    public GUICadUsuario() {
+    public GUICadUsuario() throws SQLException {
         initComponents();
+        this.populaJComboBoxCidade();
         setBounds (200, 100, 400, 750);
     }
 
+    public void populaJComboBoxCidade() throws SQLException{
+        Connection con = ConexaoBanco.getConexao();
+        Statement stat = con.createStatement();
+
+        try {
+            String sql;
+            /**
+            Montando o sql
+            **/
+            sql = "select * from cidade ORDER BY cidade";
+
+            /** Executando o SQL  e armazenando
+             o ResultSet em um objeto do tipo
+             ResultSet chamado rs **/
+            ResultSet rs = stat.executeQuery(sql);
+
+            /** Criando ArrayList para armazenar 
+             objetos do tipo produto **/
+            ArrayList<CidadeVO> prod = new ArrayList<>();
+
+            /** Enquanto houver uma próxima linha no 
+             banco de dados o while roda **/
+            while (rs.next()) {
+                /**
+                 Criando um novo obj. CidadeVO
+                 * */
+                CidadeVO p = new CidadeVO();
+
+                /** Mapeando a tabela do banco para objeto
+                 chamado pVO **/
+                jComboBoxCidade.addItem(rs.getString("cidade"));
+                              
+
+                /** 
+                 Inserindo o objeto pVO no ArrayList 
+                 **/
+                prod.add(p);
+            }
+            //Retornando o ArrayList com todos objetos
+            //fecha while
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao buscar cidade! " + e.getMessage());
+        } finally {
+            con.close();
+            stat.close();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,7 +106,6 @@ public class GUICadUsuario extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         TextField6 = new javax.swing.JTextField();
-        TextField7 = new javax.swing.JTextField();
         TextField8 = new javax.swing.JFormattedTextField();
         TextField4 = new javax.swing.JFormattedTextField();
         TextField9 = new javax.swing.JFormattedTextField();
@@ -67,6 +121,7 @@ public class GUICadUsuario extends javax.swing.JFrame {
         TextField2 = new javax.swing.JFormattedTextField();
         TextField5 = new javax.swing.JTextField();
         TextField13 = new javax.swing.JPasswordField();
+        jComboBoxCidade = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -381,7 +436,6 @@ public class GUICadUsuario extends javax.swing.JFrame {
                             .addComponent(TextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(TextField3)
                             .addComponent(TextField6)
-                            .addComponent(TextField7)
                             .addComponent(TextField8)
                             .addComponent(TextField4)
                             .addComponent(TextField9)
@@ -390,7 +444,8 @@ public class GUICadUsuario extends javax.swing.JFrame {
                             .addComponent(TextField12)
                             .addComponent(TextField2)
                             .addComponent(TextField5)
-                            .addComponent(TextField13)))
+                            .addComponent(TextField13)
+                            .addComponent(jComboBoxCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -429,9 +484,9 @@ public class GUICadUsuario extends javax.swing.JFrame {
                     .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -487,7 +542,7 @@ public class GUICadUsuario extends javax.swing.JFrame {
         TextField4.setText("");
         TextField5.setText("");
         TextField6.setText("");
-        TextField7.setText("");
+        jComboBoxCidade.setSelectedItem("");
         TextField8.setText("");
         TextField9.setText("");
         TextField10.setText("");
@@ -505,7 +560,7 @@ usuario.setEndereco(TextField3.getText());
 usuario.setEndereco_nr(TextField4.getText());
 usuario.setEndereco_complemento(TextField5.getText());
 usuario.setBairro(TextField6.getText());
-usuario.setCidades(TextField7.getText());
+usuario.setCidades((String) jComboBoxCidade.getSelectedItem());
 usuario.setCep(TextField8.getText());
 usuario.setTelefone(TextField9.getText());
 usuario.setCelular(TextField10.getText());
@@ -516,7 +571,7 @@ usuario.setPermissaouser((String) TextField14.getSelectedItem());
 
 
 // fazendo a validação dos dados
-if ((TextField1.getText().isEmpty()) || (TextField2.getText().isEmpty()) || (TextField3.getText().isEmpty()) || (TextField4.getText().isEmpty()) || (TextField5.getText().isEmpty())|| (TextField6.getText().isEmpty())|| (TextField7.getText().isEmpty())|| (TextField8.getText().isEmpty())|| (TextField9.getText().isEmpty())|| (TextField10.getText().isEmpty())|| (TextField11.getText().isEmpty())|| (TextField12.getText().isEmpty())|| (TextField13.getText().isEmpty())) {
+if ((TextField1.getText().isEmpty()) || (TextField2.getText().isEmpty()) || (TextField3.getText().isEmpty()) || (TextField4.getText().isEmpty()) || (TextField5.getText().isEmpty())|| (TextField6.getText().isEmpty())|| (TextField8.getText().isEmpty())|| (TextField10.getText().isEmpty())|| (TextField11.getText().isEmpty())|| (TextField12.getText().isEmpty())|| (TextField13.getText().isEmpty())) {
    JOptionPane.showMessageDialog(null, "Os campos não podem retornar vazios");
 }
 else {
@@ -531,21 +586,7 @@ else {
      JOptionPane.showMessageDialog(null, "Usuário "+TextField1.getText()+" inserido com sucesso! ");
 }
 
-// apaga os dados preenchidos nos campos de texto
-TextField1.setText("");
-TextField2.setText("");
-TextField3.setText("");
-TextField4.setText("");
-TextField5.setText("");
-TextField6.setText("");
-TextField7.setText("");
-TextField8.setText("");
-TextField9.setText("");
-TextField10.setText("");
-TextField11.setText("");
-TextField12.setText("");
-TextField13.setText("");
-TextField14.setSelectedItem("");
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void TextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextField9ActionPerformed
@@ -587,7 +628,11 @@ TextField14.setSelectedItem("");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUICadUsuario().setVisible(true);
+                try {
+                    new GUICadUsuario().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUICadUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -604,12 +649,12 @@ TextField14.setSelectedItem("");
     private javax.swing.JFormattedTextField TextField4;
     private javax.swing.JTextField TextField5;
     private javax.swing.JTextField TextField6;
-    private javax.swing.JTextField TextField7;
     private javax.swing.JFormattedTextField TextField8;
     private javax.swing.JFormattedTextField TextField9;
     private javax.swing.JButton fechar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBoxCidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;

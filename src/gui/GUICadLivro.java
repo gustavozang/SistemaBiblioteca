@@ -7,8 +7,10 @@ package gui;
 import modelo.Livro;
 import modelo.AutorVO;
 import modelo.EditoraVO;
+import modelo.CategoriaVO;
 import dao.DAOLivro;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,6 +20,8 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.DepartamentoVO;
 import persistencia.ConexaoBanco;
+import servicos.AutorServicos;
+import servicos.ServicosFactory;
 
 /**
  *
@@ -32,8 +36,29 @@ public class GUICadLivro extends javax.swing.JFrame {
         initComponents();
         this.populaJComboBoxEditora();
         this.populaJComboBoxAutor();
-        setBounds (200, 100, 400, 550);
+        this.populaJComboBoxCategoria();
+        setBounds (200, 100, 550, 550);
     }
+    
+    public void Update() throws SQLException {  
+    
+     Connection con = ConexaoBanco.getConexao();
+        PreparedStatement p = con.prepareStatement("reload livro set nome=?,editora=?,edicao=?,autor=?,categoria=?,quantidade=? where codigo=?");
+        Livro livro = new Livro();
+        
+        p.setString(1, livro.getNome());
+        p.setString(2, livro.getEditora());
+        p.setString(3, livro.getEdicao());
+        p.setString(4, livro.getAutor());
+        p.setString(5, livro.getCategoria());
+        p.setInt(6, livro.getQuantidade());
+        p.setInt(7, livro.getCodigo());
+        p.execute();
+        p.close();
+        }
+    
+     
+        
     public void populaJComboBoxEditora() throws SQLException{
         Connection con = ConexaoBanco.getConexao();
         Statement stat = con.createStatement();
@@ -131,6 +156,116 @@ public class GUICadLivro extends javax.swing.JFrame {
             stat.close();
         }
     }
+    
+    public void populaJComboBoxCategoria() throws SQLException{
+        Connection con = ConexaoBanco.getConexao();
+        Statement stat = con.createStatement();
+
+        try {
+            String sql;
+            /**
+            Montando o sql
+            **/
+            sql = "select * from categoria ORDER BY nome";
+
+            /** Executando o SQL  e armazenando
+             o ResultSet em um objeto do tipo
+             ResultSet chamado rs **/
+            ResultSet rs = stat.executeQuery(sql);
+
+            /** Criando ArrayList para armazenar 
+             objetos do tipo produto **/
+            ArrayList<CategoriaVO> prod = new ArrayList<>();
+
+            /** Enquanto houver uma próxima linha no 
+             banco de dados o while roda **/
+            
+            while (rs.next()) {
+                /**
+                 Criando um novo obj. CategoriaVO
+                 * */
+                CategoriaVO p = new CategoriaVO();
+
+                /** Mapeando a tabela do banco para objeto
+                 chamado pVO **/
+                jComboBoxCategoria.addItem(rs.getString("nome"));
+                              
+
+                /** 
+                 Inserindo o objeto pVO no ArrayList 
+                 **/
+                prod.add(p);
+            }
+            //Retornando o ArrayList com todos objetos
+            //fecha while
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao buscar categoria! " + e.getMessage());
+        } finally {
+            con.close();
+            stat.close();
+        }
+    }
+    
+        public ArrayList<AutorVO> buscarAutores() throws SQLException {
+
+        Connection con = ConexaoBanco.getConexao();
+        Statement stat = con.createStatement();
+
+        try {
+            String sql;
+
+            //Montando o sql            
+            sql = "select * from autor";
+
+            /**
+             Executando o SQL  e armazenando
+             o ResultSet em um objeto do tipo
+             ResultSet chamado rs 
+             **/
+            ResultSet rs = stat.executeQuery(sql);
+
+            /**
+             Criando ArrayList para armazenar 
+             objetos do tipo produto 
+             **/
+            ArrayList<AutorVO> prod = new ArrayList<>();
+
+            /**
+             Enquanto houver uma próxima linha no 
+             banco de dados o while roda 
+             **/
+            jComboBoxAutor.removeAllItems();
+            while (rs.next()) {
+                //Criando um novo obj. AutorVO
+                AutorVO p = new AutorVO();
+
+                /** Mapeando a tabela do banco para objeto
+                 chamado pVO 
+                 **/
+               
+                p.setNome(rs.getString("nome"));
+                
+                                             
+
+                /** 
+                 Inserindo o objeto pVO no ArrayList 
+                **/
+                prod.add(p);
+            }//fecha while
+
+            /**
+             Retornando o ArrayList com todos objetos
+             * */
+            return prod;
+
+        } catch (SQLException e) {
+            throw new SQLException("Erro ao buscar autor! " + e.getMessage());
+        } finally {
+            con.close();
+            stat.close();
+        }//fecha finally
+    }//fecha método
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -152,11 +287,15 @@ public class GUICadLivro extends javax.swing.JFrame {
         fechar = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
-        TextField5 = new javax.swing.JTextField();
         TextField3 = new javax.swing.JTextField();
         TextField6 = new javax.swing.JTextField();
         jComboBoxEditora = new javax.swing.JComboBox<>();
         jComboBoxAutor = new javax.swing.JComboBox<>();
+        jComboBoxCategoria = new javax.swing.JComboBox<>();
+        jCadastroEditora = new javax.swing.JToggleButton();
+        jCadastroAutor = new javax.swing.JToggleButton();
+        jCadastroCategoria = new javax.swing.JToggleButton();
+        Atualizar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -284,6 +423,29 @@ public class GUICadLivro extends javax.swing.JFrame {
             .addGap(0, 2, Short.MAX_VALUE)
         );
 
+        jCadastroEditora.setText("Cadastrar");
+        jCadastroEditora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCadastroEditoraActionPerformed(evt);
+            }
+        });
+
+        jCadastroAutor.setText("Cadastrar");
+        jCadastroAutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCadastroAutorActionPerformed(evt);
+            }
+        });
+
+        jCadastroCategoria.setText("Cadastrar");
+
+        Atualizar.setText("Atualizar");
+        Atualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AtualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -301,21 +463,31 @@ public class GUICadLivro extends javax.swing.JFrame {
                                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(TextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(TextField3)
+                                    .addComponent(TextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBoxEditora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxAutor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCadastroEditora)
+                                    .addComponent(jCadastroAutor)
+                                    .addComponent(jCadastroCategoria)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(fechar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(TextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(TextField5)
-                            .addComponent(TextField3)
-                            .addComponent(TextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxEditora, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxAutor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Atualizar)
+                                .addGap(14, 14, 14)
+                                .addComponent(fechar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jLabel1)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -332,7 +504,9 @@ public class GUICadLivro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBoxEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCadastroEditora)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -340,11 +514,15 @@ public class GUICadLivro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBoxAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCadastroAutor)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jCadastroCategoria)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -353,7 +531,8 @@ public class GUICadLivro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(fechar))
+                    .addComponent(fechar)
+                    .addComponent(Atualizar))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
 
@@ -374,7 +553,7 @@ public class GUICadLivro extends javax.swing.JFrame {
         jComboBoxEditora.setSelectedItem("");
         TextField3.setText("");
         jComboBoxAutor.setSelectedItem("");
-        TextField5.setText("");
+        jComboBoxCategoria.setSelectedItem("");
         TextField6.setText("");
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -385,12 +564,12 @@ livro.setNome(TextField1.getText());
 livro.setEditora((String) jComboBoxEditora.getSelectedItem());
 livro.setEdicao(TextField3.getText());
 livro.setAutor((String) jComboBoxAutor.getSelectedItem());
-livro.setCategoria(TextField5.getText());
+livro.setCategoria((String) jComboBoxCategoria.getSelectedItem());
 livro.setQuantidade(Integer.parseInt(TextField6.getText()));
 
 
 // fazendo a validação dos dados
-if ((TextField1.getText().isEmpty()) ||  (TextField3.getText().isEmpty()) ||  (TextField5.getText().isEmpty())|| (TextField6.getText().isEmpty())) {
+if ((TextField1.getText().isEmpty()) ||  (TextField3.getText().isEmpty()) || (TextField6.getText().isEmpty())) {
    JOptionPane.showMessageDialog(null, "Os campos não podem retornar vazios");
 }
 else {
@@ -405,14 +584,44 @@ else {
      JOptionPane.showMessageDialog(null, "Livro "+TextField1.getText()+" inserido com sucesso! ");
 }
 
-// apaga os dados preenchidos nos campos de texto
-TextField1.setText("");
-jComboBoxEditora.setSelectedItem("");
-TextField3.setText("");
-jComboBoxAutor.setSelectedItem("");
-TextField5.setText("");
-TextField6.setText("");
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCadastroEditoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCadastroEditoraActionPerformed
+               
+        GUICadEditora frameGUICadEditora = null;
+        try {
+            this.populaJComboBoxEditora();
+        } catch (SQLException ex) {
+            Logger.getLogger(GUICadLivro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            frameGUICadEditora = new GUICadEditora();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        frameGUICadEditora.setVisible(true);
+    }//GEN-LAST:event_jCadastroEditoraActionPerformed
+
+    private void jCadastroAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCadastroAutorActionPerformed
+        GUICadAutor frameGUICadAutor = null;
+        try {
+            this.populaJComboBoxAutor();
+        } catch (SQLException ex) {
+            Logger.getLogger(GUICadLivro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            frameGUICadAutor = new GUICadAutor();
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        frameGUICadAutor.setVisible(true);
+    }//GEN-LAST:event_jCadastroAutorActionPerformed
+
+    private void AtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AtualizarActionPerformed
+        
+       
+    }//GEN-LAST:event_AtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -461,14 +670,18 @@ TextField6.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton Atualizar;
     private javax.swing.JTextField TextField1;
     private javax.swing.JTextField TextField3;
-    private javax.swing.JTextField TextField5;
     private javax.swing.JTextField TextField6;
     private javax.swing.JButton fechar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JToggleButton jCadastroAutor;
+    private javax.swing.JToggleButton jCadastroCategoria;
+    private javax.swing.JToggleButton jCadastroEditora;
     private javax.swing.JComboBox<String> jComboBoxAutor;
+    private javax.swing.JComboBox<String> jComboBoxCategoria;
     private javax.swing.JComboBox<String> jComboBoxEditora;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
