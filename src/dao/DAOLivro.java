@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.Livro;
 import persistencia.ConexaoBanco;
@@ -49,7 +50,46 @@ public class DAOLivro {
         } 
         
     } 
+// SELECT - Retorna uma lista com o resultado da consulta
+    public List<Livro> getLista(String exemplar) throws SQLException{
+        // Prepara conexão p/ receber o comando SQL
+        Connection con = ConexaoBanco.getConexao();
+        String sql = "SELECT * FROM livro WHERE exemplar like ?";
+        PreparedStatement stmt = this.con.prepareStatement(sql);
+        stmt.setString(1, exemplar);
+        
+        // Recebe o resultado da consulta SQL
+        ResultSet rs = stmt.executeQuery();
+        
+        List<Livro> lista = new ArrayList<>();
+        
+        // Enquanto existir registros, pega os valores do ReultSet e vai adicionando na lista
+        while (rs.next()) {
+                //Criando um novo obj. Livro
+                Livro p = new Livro();
 
+                /** Mapeando a tabela do banco para objeto
+                 chamado pVO 
+                 **/
+                p.setCodigo(rs.getInt("codigo"));
+                p.setNome(rs.getString("nome"));
+                p.setEditora(rs.getString("editora"));
+                p.setEdicao(rs.getString("edicao"));
+                p.setAutor(rs.getString("autor"));
+                p.setCategoria(rs.getString("categoria"));
+                p.setQuantidade(rs.getInt("quantidade"));
+            
+            // Adiciona o registro na lista
+            lista.add(p);            
+        }
+        
+        // Fecha a conexão com o BD
+        rs.close();
+        stmt.close();
+        
+        // Retorna a lista de registros, gerados pela consulta
+        return lista;          
+    }
         
 
     public ArrayList<Livro> buscarLivros() throws SQLException {
@@ -236,3 +276,6 @@ private Connection con;
             
     }
 }//fecha classe
+
+
+    

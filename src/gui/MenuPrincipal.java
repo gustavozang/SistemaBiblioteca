@@ -101,7 +101,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Sistema Exemplo");
+        setTitle("Sistema de Biblioteca");
         setMinimumSize(new java.awt.Dimension(300, 300));
 
         jAreaTrabalho.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Sistema de Biblioteca", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 18))); // NOI18N

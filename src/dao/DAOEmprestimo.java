@@ -62,6 +62,8 @@ public class DAOEmprestimo {
                 Emprestimo emprestimo = new Emprestimo();
                 emprestimo.setCpf(rs.getString("CPF"));
                 emprestimo.setCodlivro(rs.getString("CODLIVRO"));
+                emprestimo.setNomelivro(rs.getString("NOMELIVRO"));
+                emprestimo.setData_emprestimo(rs.getString("DATA_EMPRESTIMO"));
                 listaEmprestimo.add(emprestimo);
             }
             fechar();
@@ -77,15 +79,19 @@ public class DAOEmprestimo {
      
 
      
-       public boolean insereEmprestimo(String cpf,String codlivro) throws SQLException{
+       public boolean insereEmprestimo(String cpf,String codlivro,String nomelivro, String data_emprestimo,String data_devolucao) throws SQLException{
         
         conectar();
-        String sql = "INSERT INTO emprestimo(cpf, codlivro) VALUES(?,?)";
+        String sql = "INSERT INTO emprestimo(cpf, codlivro,nomelivro,data_emprestimo,data_devolucao) VALUES(?,?,?,?,?)";
         
         try{
             comando = con.prepareStatement(sql);
             comando.setString(1, cpf);
             comando.setString(2, codlivro);
+            comando.setString(3, nomelivro);
+            comando.setString(4,data_emprestimo );
+            comando.setString(5,data_devolucao );
+            
             comando.execute();
             return true;
         }catch(SQLException e){

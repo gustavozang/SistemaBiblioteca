@@ -9,8 +9,12 @@
 	<queryString>
 		<![CDATA[SELECT * FROM emprestimo;]]>
 	</queryString>
+	<field name="id_emprestimo" class="java.lang.Integer"/>
 	<field name="cpf" class="java.lang.String"/>
 	<field name="codlivro" class="java.lang.String"/>
+	<field name="nomelivro" class="java.lang.String"/>
+	<field name="data_emprestimo" class="java.lang.String"/>
+	<field name="data_devolucao" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -44,11 +48,23 @@
 		<band height="20" splitType="Stretch">
 			<staticText>
 				<reportElement x="100" y="0" width="100" height="20" uuid="26b1a879-93bb-41d0-ab01-c281a9ef58cd"/>
-				<text><![CDATA[CPF]]></text>
+				<text><![CDATA[Nome do Livro]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="0" width="100" height="20" uuid="45404e06-bfba-4e2b-bbb2-625c135bbc6f"/>
 				<text><![CDATA[Código do Livro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="20" uuid="768032af-fd26-4847-aa03-16e0b4c3a9b1"/>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="20" uuid="3cdf9ec3-ab52-4196-b248-ab234bb36cfb"/>
+				<text><![CDATA[Data empréstimo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="130" height="20" uuid="9b49f4bd-6f20-45a7-a4c7-98133a0ff1ca"/>
+				<text><![CDATA[Data prevista devolução]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -56,11 +72,23 @@
 		<band height="26" splitType="Stretch">
 			<textField>
 				<reportElement x="100" y="0" width="100" height="20" uuid="a4a88c53-e324-4f61-9a92-8a03c2af32d1"/>
-				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nomelivro}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="0" width="89" height="20" uuid="fb58fc03-bd8b-4c36-9cde-2d54bb2b429e"/>
 				<textFieldExpression><![CDATA[$F{codlivro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="20" uuid="542b7a05-a056-41a3-8665-66274c5dca99"/>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="20" uuid="54141a31-d45a-49ae-a3d3-1d664e54c68f"/>
+				<textFieldExpression><![CDATA[$F{data_emprestimo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="20" uuid="61123635-dfd8-4ab3-9a6f-abc5a1875f25"/>
+				<textFieldExpression><![CDATA[$F{data_devolucao}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

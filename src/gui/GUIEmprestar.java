@@ -8,9 +8,14 @@ package gui;
 import dao.DAOEmprestimo;
 import dao.DAOLivro;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import modelo.Emprestimo;
 import modelo.Livro;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -27,6 +32,10 @@ public class GUIEmprestar extends javax.swing.JFrame {
      */
     public GUIEmprestar() throws SQLException {
         initComponents();
+        // Mostra a data atual como data do empréstimo        
+        dataEmprestimo();
+        // Mostra a data atual como data do empréstimo        
+        mostraDataDevolucao();
         DAOLivro dadosLivro = new DAOLivro();
         ArrayList<Livro> listaLivros = new ArrayList();
         listaLivros = dadosLivro.selecionarTodosRegistros();
@@ -118,6 +127,84 @@ public class GUIEmprestar extends javax.swing.JFrame {
             Logger.getLogger(GUIEmprestar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+        /* ----DATAS-> */
+    
+    // Exibe a data do empréstimo(data atual) no formulário
+    private void dataEmprestimo() {
+        Date data = new Date();  
+        
+        SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");  
+        String s = formataData.format( data ); 
+        
+        jT3DataEmprestimo.setText(formataData.format(data));      
+    }   
+    // Retorna a data de empréstimo
+    private String salvaDataEmprestimo() {
+        Date data = new Date();  
+        
+        SimpleDateFormat formataData = new SimpleDateFormat("yyyy-MM-dd");  
+        String dataEmprestimoFormatada = formataData.format(data); 
+        
+        return dataEmprestimoFormatada;   
+    }  
+    
+    // Exibe a data de devolução no formulário
+    private void mostraDataDevolucao() {        
+        // Recebe a data do sistema
+        Date dataDevolucao = new Date();
+        // Adiciona + 10 à data atual
+        dataDevolucao.setDate(dataDevolucao.getDate() + 7);
+        
+        // Formata a data recebida
+        SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");        
+        String dataDevolucaoFormatada = formataData.format(dataDevolucao);
+                
+        jT4DataDevolucao.setText(dataDevolucaoFormatada);
+    }    
+    // Retorna a data de devolução, pronta p/ ser salva no BD
+    public String salvaDataDevolucao() {
+        // Recebe a data do sistema
+        Date dataDevolucao = new Date();
+        // Adiciona + 10 à data atual
+        dataDevolucao.setDate(dataDevolucao.getDate() + 7);
+        
+        // Formata a data recebida
+        SimpleDateFormat formataData = new SimpleDateFormat("yyyy-MM-dd");        
+        String dataDevolucaoFormatada = formataData.format(dataDevolucao);
+        
+        return dataDevolucaoFormatada;
+    }
+    
+    // Pega a data de devolução no registro selecionado na tebela de emprestimo
+    public String pegaDataDevolucaoTabela() throws ParseException {
+        
+        int linhaSelecionada = tabelaDados.getSelectedRow();   
+        String dataTabela = (tabelaDados.getValueAt(linhaSelecionada, 4)).toString();
+        
+        SimpleDateFormat formataData = new SimpleDateFormat ("yyyy-MM-dd"); 
+        Date dataDevolucao = new Date();
+        
+        dataDevolucao = formataData.parse(dataTabela); 
+        
+        return formataData.format(dataDevolucao);
+    }
+    
+    // Calcula a diferença entre a data prevista para devolução e a data atual
+    private long diferencaData() throws ParseException {
+        LocalDate atual = LocalDate.now();
+        LocalDate dataDevolucao = LocalDate.parse(pegaDataDevolucaoTabela());
+        
+        long diferenca = 0;
+        
+        if (dataDevolucao.compareTo(atual) < 0) {
+            diferenca = ChronoUnit.DAYS.between(dataDevolucao, atual);
+        }
+        
+        return diferenca;       
+    }
+    
+    /* <-DATAS---- */ 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -129,6 +216,12 @@ public class GUIEmprestar extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         campocpf = new javax.swing.JFormattedTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jT3DataEmprestimo = new javax.swing.JTextField();
+        jT4DataDevolucao = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Emprestar");
@@ -156,14 +249,18 @@ public class GUIEmprestar extends javax.swing.JFrame {
 
         jLabel1.setText("CPF :");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/voltar.png"))); // NOI18N
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/back.png"))); // NOI18N
+        jButton1.setText("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/confirma.jpg"))); // NOI18N
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/accept.png"))); // NOI18N
+        jButton2.setText("Confirma");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -176,49 +273,111 @@ public class GUIEmprestar extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecionar o livro, após informar o cpf confirmando o empréstimo."));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jLabel4.setText("Data do emprestimo:(dd/mm/aaaa)");
+
+        jLabel5.setText("Data de Devolução: (dd/mm/aaaa)");
+
+        jT3DataEmprestimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jT3DataEmprestimoActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Empréstimo de obra:");
+        jLabel2.setToolTipText("Cadastro de Usuário");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(83, 83, 83)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(73, 73, 73)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel5)
+                                .addGap(10, 10, 10))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(130, 130, 130)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jT3DataEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                            .addComponent(jT4DataDevolucao))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(campocpf, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 218, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(18, 18, 18)
+                                .addComponent(campocpf, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(104, 104, 104))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(campocpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(campocpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jT3DataEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jT4DataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,30 +397,38 @@ public class GUIEmprestar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     
+    private void jT3DataEmprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT3DataEmprestimoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jT3DataEmprestimoActionPerformed
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       if(Valida())
-       {
-           try {
-               if(Validacao())
-               {
-                   DAOEmprestimo insereDados = new DAOEmprestimo();
-                   int linha=tabelaDados.getSelectedRow();
-                   if(insereDados.insereEmprestimo(campocpf.getText(),""+tabelaDados.getValueAt(linha, 6)))
-                   {
-                       JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso!");
-                       campocpf.setText("");
-                       Decresce();
-                   }
-                   else
-                   {
-                       JOptionPane.showMessageDialog(null, "Erro ao cadastrar registro, tente novamente.");
-                       campocpf.setText("");
-                   }
-               }
-           } catch (SQLException ex) {
-               Logger.getLogger(GUIEmprestar.class.getName()).log(Level.SEVERE, null, ex);
-           }
-       }
+        if(Valida())
+        {
+            try {
+                if(Validacao())
+                {
+                    DAOEmprestimo insereDados = new DAOEmprestimo();
+                    int linha=tabelaDados.getSelectedRow();
+                    if(insereDados.insereEmprestimo(campocpf.getText(),""+tabelaDados.getValueAt(linha, 6),""+tabelaDados.getValueAt(linha, 0),jT3DataEmprestimo.getText(),jT4DataDevolucao.getText()))
+                    {
+                        JOptionPane.showMessageDialog(null, "Registro cadastrado com sucesso!");
+                        campocpf.setText("");
+                        jT3DataEmprestimo.setText("");
+                        jT4DataDevolucao.setText("");
+                        Decresce();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Erro ao cadastrar registro, tente novamente.");
+                        campocpf.setText("");
+                        jT3DataEmprestimo.setText("");
+                        jT4DataDevolucao.setText("");
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(GUIEmprestar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -309,8 +476,14 @@ public class GUIEmprestar extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jT3DataEmprestimo;
+    private javax.swing.JTextField jT4DataDevolucao;
     private javax.swing.JTable tabelaDados;
     // End of variables declaration//GEN-END:variables
 }
