@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import modelo.UsuarioVO;
 import persistencia.ConexaoBanco;
 
@@ -164,6 +165,56 @@ public class UsuarioDAO {
         p.close();
 
     }
-
+    
+    private Connection con;
+    //Pre-compila a query para o banco de dados
+    private PreparedStatement comando;
+    
+    public void imprimeErro(String msg1, String errorSystem){
+        JOptionPane.showMessageDialog(null, msg1, "Erro", JOptionPane.ERROR_MESSAGE, null);
+        System.err.println(""+errorSystem);
+    }
+    
+     private void conectar() throws SQLException{
+        con = ConexaoBanco.getConexao();
+    }
+    
+     private void fechar(){
+        try{
+            comando.close();
+            con.close();
+        }catch(SQLException e){
+            imprimeErro("Erro ao fechar conexão", e.getMessage());
+        }
+    }
+     
+    
+ public  ArrayList<UsuarioVO> selecionarTodosRegistrosCPF() throws SQLException
+    {
+        conectar();
+        //interface utilizada pra guardar dados vindos de um banco de dados
+        ResultSet rs;
+        String sql = "SELECT * FROM USUARIO";
+        //lista que conterá todas as informações de livros no banco de dados
+        ArrayList<UsuarioVO> listaEmprestimo = new ArrayList();
+        try{
+            comando = con.prepareStatement(sql);
+            rs = comando.executeQuery();
+            while(rs.next())
+            {
+                UsuarioVO usuario = new UsuarioVO();
+                usuario.setCpf(rs.getString("CPF"));
+                
+                listaEmprestimo.add(usuario);
+            }
+            fechar();
+            return listaEmprestimo;
+        }catch(SQLException e){
+            imprimeErro("Erro ao buscar CPF(s)", e.getMessage());
+            fechar();
+            return null;
+        }
+        
+    }
     
 }//fecha classe

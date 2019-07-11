@@ -6,6 +6,8 @@
 package gui;
 
 import dao.DAOEmprestimo;
+import dao.UsuarioDAO;
+import modelo.UsuarioVO;
 import dao.DAOLivro;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -62,7 +64,23 @@ public class GUIEmprestar extends javax.swing.JFrame {
             }
         }
         return false;
-    }
+        }
+   
+     public boolean verificaCpfcadastrado() throws SQLException
+    {
+        UsuarioDAO dadosEmprestimo = new UsuarioDAO();
+        ArrayList<UsuarioVO> listaEmprestimos = new ArrayList();
+        listaEmprestimos = dadosEmprestimo.selecionarTodosRegistrosCPF();
+        for(UsuarioVO emprestimo : listaEmprestimos)
+        {
+            if(emprestimo.getCpf().equals(campocpf.getText()))
+            {
+                return true;
+            }
+        }
+        return false;
+        }
+
     public boolean Valida()
     {
         if(tabelaDados.getSelectedRow()!=-1)
@@ -79,17 +97,25 @@ public class GUIEmprestar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha o campo de CPF.", "Erro", 0);
             return false;
         }
-        else if(campocpf.getText().length()!=11)
+        
+                
+        else if(campocpf.getText().length()!=14)
         {
             JOptionPane.showMessageDialog(null, "Preencha o campo de CPF corretamente.", "Erro", 0);
             return false;
         }
+        
+                
         else if(verificaCpf())
         {
             JOptionPane.showMessageDialog(null, "Devolva o livro antes de pegar outro emprestado.", "Erro", 0);
             return false;
         }
         return true;
+        
+        
+        
+       
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -214,7 +240,7 @@ public class GUIEmprestar extends javax.swing.JFrame {
         tabelaDados = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jConfirmaemprestimo = new javax.swing.JButton();
         campocpf = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -258,17 +284,17 @@ public class GUIEmprestar extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/accept.png"))); // NOI18N
-        jButton2.setText("Confirma");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jConfirmaemprestimo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jConfirmaemprestimo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utils/accept.png"))); // NOI18N
+        jConfirmaemprestimo.setText("Confirma");
+        jConfirmaemprestimo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jConfirmaemprestimoActionPerformed(evt);
             }
         });
 
         try {
-            campocpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
+            campocpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -306,7 +332,7 @@ public class GUIEmprestar extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 1, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -325,16 +351,15 @@ public class GUIEmprestar extends javax.swing.JFrame {
                             .addComponent(jT3DataEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                             .addComponent(jT4DataDevolucao))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jConfirmaemprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(campocpf, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(104, 104, 104))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(campocpf, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -348,17 +373,17 @@ public class GUIEmprestar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(campocpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addGap(27, 27, 27)
+                        .addGap(36, 36, 36)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jConfirmaemprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -377,7 +402,7 @@ public class GUIEmprestar extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,12 +426,13 @@ public class GUIEmprestar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jT3DataEmprestimoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jConfirmaemprestimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConfirmaemprestimoActionPerformed
         if(Valida())
         {
             try {
                 if(Validacao())
                 {
+                    
                     DAOEmprestimo insereDados = new DAOEmprestimo();
                     int linha=tabelaDados.getSelectedRow();
                     if(insereDados.insereEmprestimo(campocpf.getText(),""+tabelaDados.getValueAt(linha, 6),""+tabelaDados.getValueAt(linha, 0),jT3DataEmprestimo.getText(),jT4DataDevolucao.getText()))
@@ -429,7 +455,7 @@ public class GUIEmprestar extends javax.swing.JFrame {
                 Logger.getLogger(GUIEmprestar.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jConfirmaemprestimoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -474,7 +500,7 @@ public class GUIEmprestar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField campocpf;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jConfirmaemprestimo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

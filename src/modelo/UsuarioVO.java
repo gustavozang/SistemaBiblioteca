@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 public class UsuarioVO {
     
  private int codigo;
@@ -242,4 +244,6 @@ public class UsuarioVO {
     public String toString() {
         return "UsuarioVO{" + "Codigo=" + getCodigo() + " nomeuser=" + getNomeuser()+ "cpf=" + getCpf()+ " endereco=" + getEndereco() + "endereco_nr=" + getEndereco_nr() + " endereco_complemento=" + getEndereco_complemento() + "bairro=" + getBairro() + "cidades=" + getCidades() + "cep=" + getCep() + "telefone=" + getTelefone() + "celular=" + getCelular() + "matriculauser=" + getMatriculauser () + "loginunico=" + getLoginunico() + "senhauser=" + getSenhauser() + "permissaouser=" + getPermissaouser() +'}';
     }
+
+   
 }//fecha classe

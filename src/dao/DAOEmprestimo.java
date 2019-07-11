@@ -6,6 +6,7 @@
 package dao;
 
 import modelo.Emprestimo;
+import modelo.UsuarioVO;
 import modelo.Livro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -73,7 +74,38 @@ public class DAOEmprestimo {
             fechar();
             return null;
         }
-            
+        }
+    /**
+     *
+     * @return
+     * @throws SQLException
+     */
+    public  ArrayList<UsuarioVO> selecionarTodosRegistrosCPF() throws SQLException
+    {
+        conectar();
+        //interface utilizada pra guardar dados vindos de um banco de dados
+        ResultSet rs;
+        String sql = "SELECT * FROM USUARIO";
+        //lista que conterá todas as informações de livros no banco de dados
+        ArrayList<UsuarioVO> listaEmprestimo = new ArrayList();
+        try{
+            comando = con.prepareStatement(sql);
+            rs = comando.executeQuery();
+            while(rs.next())
+            {
+                UsuarioVO emprestimo = new UsuarioVO();
+                emprestimo.setCpf(rs.getString("CPF"));
+                
+                listaEmprestimo.add(emprestimo);
+            }
+            fechar();
+            return listaEmprestimo;
+        }catch(SQLException e){
+            imprimeErro("CPF não cadastrado, digite novamente)", e.getMessage());
+            fechar();
+            return null;
+        }
+        
     }
     
      
@@ -95,7 +127,7 @@ public class DAOEmprestimo {
             comando.execute();
             return true;
         }catch(SQLException e){
-            imprimeErro("Erro ao inserir Livro", e.getMessage());
+            imprimeErro("Erro ao inserir Livro, CPF NÃO CADASTRADO!", e.getMessage());
         }finally{
             fechar();
         }
